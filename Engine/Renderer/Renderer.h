@@ -7,13 +7,11 @@
 
 class Renderer {
 private:
-    Scene* scene;
-    Camera* camera;
     Context* context;
 public:
-    explicit Renderer(Scene& scene, Camera& camera, Context& ctx);
+    explicit Renderer(Context& ctx);
 
-    auto render() -> void;
+    auto render(Scene& scene, Camera& camera) -> void;
 };
 
 

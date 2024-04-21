@@ -8,6 +8,7 @@
 #include "Engine/Camera/Camera.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Rect/Rect.h"
+#include "Engine/PhysicsEngine/PhysicsEngine.h"
 
 auto main() -> int {
 
@@ -18,17 +19,19 @@ auto main() -> int {
     auto ctx = Context(window);
 
     auto scene = Scene(sf::Color(255, 255, 255));
+
     auto camera = Camera();
 
-    auto renderer = Renderer(scene, camera, ctx);
+    auto renderer = Renderer(ctx);
 
-    auto rect = Rect();
+    auto obj = PhysicalObject();
+    auto rect = Rect(obj);
     scene.add(rect);
 
     camera.setPos(sf::Vector2f(-100, 0));
 
     while (window.isOpen()) {
-        renderer.render();
+        renderer.render(scene, camera);
         auto event = sf::Event();
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)

@@ -1,12 +1,12 @@
 #include "Renderer.h"
 
-Renderer::Renderer(Scene &scene, Camera &camera, Context &ctx) : scene(&scene), camera(&camera), context(&ctx) {
+Renderer::Renderer(Context &ctx) : context(&ctx) {
 
 }
 
-auto Renderer::render() -> void {
-    auto cameraPos = camera->getPos();
+auto Renderer::render(Scene& scene, Camera& camera) -> void {
+    auto cameraPos = camera.getPos();
     context->globalPos = -cameraPos;
 
-    scene->render(*context);
+    scene.render(*context);
 }

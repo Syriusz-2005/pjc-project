@@ -1,8 +1,10 @@
+
+#pragma once
+
 #include <fmt/core.h>
 #include <SFML/Graphics.hpp>
 #include "../Context/Context.h"
-
-#pragma once
+#include "../PhysicalObject/PhysicalObject.h"
 
 enum Layer {
     FOREGROUND,
@@ -11,15 +13,24 @@ enum Layer {
 
 class Object {
 protected:
-    explicit Object(Layer layer);
+    explicit Object(PhysicalObject *physicsModule, Layer layer = FOREGROUND);
 
     sf::Vector2f pos;
     sf::Vector2f vel;
     Layer layer;
     float zDistance{};
 public:
+    PhysicalObject physicsModule;
+
     auto getPos() -> sf::Vector2f;
+    auto setPos(sf::Vector2f p) -> void;
+    auto move(sf::Vector2f delta) -> void;
+
     auto getVel() -> sf::Vector2f;
+    auto setVel(sf::Vector2f v) -> void;
+
+    auto getLayer() -> Layer;
     virtual auto render(Context ctx) -> void = 0;
+
 };
 

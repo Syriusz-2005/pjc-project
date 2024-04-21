@@ -1,18 +1,23 @@
 
 #include "Scene.h"
 
+Scene::Scene(sf::Color clearColor): clearColor(clearColor), physicsEngine(PhysicsEngine(objects)) {
+
+}
 
 auto Scene::add(Object &o) -> void {
     objects.push_back(&o);
 }
 
 auto Scene::render(Context ctx) -> void {
+    physicsEngine.step();
     ctx.window->clear(clearColor);
     for (auto object : objects) {
         object->render(ctx);
     }
 }
 
-Scene::Scene(sf::Color clearColor): clearColor(clearColor) {
 
+auto Scene::getObjects() -> std::vector<Object *> & {
+    return objects;
 }

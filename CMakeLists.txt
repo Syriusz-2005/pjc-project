@@ -35,6 +35,10 @@ add_executable(pjc_project main.cpp
         Engine/Renderer/Renderer.cpp
         Engine/Renderer/Renderer.h
         Engine/Rect/Rect.cpp
-        Engine/Rect/Rect.h)
+        Engine/Rect/Rect.h
+        Engine/PhysicsEngine/PhysicsEngine.cpp
+        Engine/PhysicsEngine/PhysicsEngine.h
+        Engine/PhysicalObject/PhysicalObject.cpp
+        Engine/PhysicalObject/PhysicalObject.h)
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

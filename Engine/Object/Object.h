@@ -28,9 +28,11 @@ public:
 
     auto getVel() -> sf::Vector2f;
     auto setVel(sf::Vector2f v) -> void;
+    auto setVelX(float x) -> void;
+    auto setVelY(float y) -> void;
 
     auto getLayer() -> Layer;
     virtual auto render(Context ctx) -> void = 0;
-
+    virtual auto getBoundingBox() -> sf::Rect<float> = 0;
 };
 

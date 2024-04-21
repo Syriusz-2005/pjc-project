@@ -32,3 +32,10 @@ auto Object::move(sf::Vector2f delta) -> void {
     this->pos += delta;
 }
 
+auto Object::setVelX(float x) -> void {
+    vel.x = x;
+}
+
+auto Object::setVelY(float y) -> void {
+    vel.y = y;
+}

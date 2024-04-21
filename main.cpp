@@ -28,6 +28,12 @@ auto main() -> int {
     auto rect = Rect(obj);
     scene.add(rect);
 
+    auto floorObj = PhysicsModule();
+    floorObj.isImmovable = true;
+    auto floor = Rect(floorObj, sf::Vector2f(800, 100));
+    floor.setPos(sf::Vector2f(0, 550));
+    scene.add(floor);
+
     camera.setPos(sf::Vector2f(-100, 0));
 
     while (window.isOpen()) {

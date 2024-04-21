@@ -19,6 +19,7 @@ public:
     );
 
     auto render(Context ctx) -> void override;
+    auto getBoundingBox() -> sf::Rect<float> override;
 };
 
 

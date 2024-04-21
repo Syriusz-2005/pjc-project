@@ -9,6 +9,10 @@ public:
     const float gravity = 0.001;
 
     bool isImmovable = false;
+    /**
+     * Does it interact with other objects?
+     */
+    bool isEthereal = false;
 
     explicit PhysicsModule(float mass = 1, float gravity = 0.01);
 };

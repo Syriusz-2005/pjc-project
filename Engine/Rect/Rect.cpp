@@ -9,3 +9,8 @@ auto Rect::render(Context ctx) -> void {
     s.setPosition(globalPos);
     ctx.window->draw(s);
 }
+
+auto Rect::getBoundingBox() -> sf::Rect<float> {
+    auto box = sf::Rect<float>(pos, s.getSize());
+    return box;
+}

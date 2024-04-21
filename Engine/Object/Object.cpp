@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-Object::Object(PhysicalObject *physicsModule, Layer layer) : layer(layer), physicsModule(*physicsModule) {
+Object::Object(PhysicsModule *physicsModule, Layer layer) : layer(layer), physicsModule(*physicsModule) {
 
 }
 

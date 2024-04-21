@@ -24,7 +24,7 @@ auto main() -> int {
 
     auto renderer = Renderer(ctx);
 
-    auto obj = PhysicalObject();
+    auto obj = PhysicsModule();
     auto rect = Rect(obj);
     scene.add(rect);
 

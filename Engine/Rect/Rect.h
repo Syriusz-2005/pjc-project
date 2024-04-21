@@ -3,7 +3,7 @@
 #define PJC_PROJECT_RECT_H
 
 #include "../Object/Object.h"
-#include "../PhysicalObject/PhysicalObject.h"
+#include "../PhysicalObject/PhysicsModule.h"
 
 class Rect : public Object {
 protected:
@@ -12,7 +12,7 @@ protected:
 public:
 
     explicit Rect(
-            PhysicalObject& physicsModule,
+            PhysicsModule& physicsModule,
             sf::Vector2f size = sf::Vector2f(40, 40),
             Layer layer = FOREGROUND,
             sf::Color color = sf::Color(0, 0, 0)

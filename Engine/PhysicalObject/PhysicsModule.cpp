@@ -1,7 +1,7 @@
 
-#include "PhysicalObject.h"
+#include "PhysicsModule.h"
 
-PhysicalObject::PhysicalObject(
+PhysicsModule::PhysicsModule(
         const float mass,
         const float gravity): mass(mass), gravity(gravity) {
 

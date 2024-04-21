@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/14574143/syntax-of-declaring-a-constructor-in-header-h-and-then-defining-in-a-class-fi
+https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean
+https://cplusplus.com/doc/tutorial/pointers/

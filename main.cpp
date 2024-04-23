@@ -37,7 +37,11 @@ auto main() -> int {
 
     camera.setPos(sf::Vector2f(-100, 0));
 
+    auto clock = sf::Clock();
     while (window.isOpen()) {
+        auto timeDelta = clock.getElapsedTime();
+        scene.getPhysicsEngine().step( std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
+        clock.restart();
         renderer.render(scene, camera);
         auto event = sf::Event();
         while (window.pollEvent(event)) {

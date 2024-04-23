@@ -9,15 +9,16 @@ PhysicsEngine::PhysicsEngine(std::vector<Object *> &objects): objects(&objects) 
 
 }
 
-auto PhysicsEngine::step() -> void {
+auto PhysicsEngine::step(long long timeElapsed) const -> void {
+    auto deltaMs = ((float) timeElapsed) / 1000;
     for (auto object: *objects) {
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;
         if (module.isImmovable) continue;
         auto vel = object->getVel();
-        vel.y += module.gravity;
+        vel.y += module.gravity * deltaMs;
         object->setVel(vel);
-        object->move(vel);
+        object->move(vel * deltaMs);
         applyCollision(object);
     }
 }
@@ -36,14 +37,13 @@ auto PhysicsEngine::getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) ->
     float y2 = std::min(bottomRightA.y, bottomRightB.y);
 
     if (x2 - x1 > 0 && y2 - y1 > 0) {
-        fmt::println("{}", y2 - y1);
         return new sf::Rect<float>(sf::Vector2f(x1, y1), sf::Vector2f(x2 - x1, y1 - y2));
     }
 
     return nullptr;
 }
 
-auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) -> void {
+auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) const -> void {
     auto mA = a->physicsModule;
     auto mB = b->physicsModule;
     float aCommitment = mB.isImmovable ? 1 : (mA.mass < mB.mass ? 1 - (mA.mass / mB.mass) : mB.mass - mA.mass);
@@ -83,7 +83,7 @@ auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect con
  * Based on my previous implementation of the collision system in java: https://github.com/Syriusz-2005/java-ping-pong-poc/blob/main/src/main/java/Physics/PhysicsScene.java
  * @param o
  */
-auto PhysicsEngine::applyCollision(Object *o) -> void {
+auto PhysicsEngine::applyCollision(Object *o) const -> void {
     auto module = o->physicsModule;
     if (module.isEthereal || module.isImmovable) return;
 
@@ -96,16 +96,23 @@ auto PhysicsEngine::applyCollision(Object *o) -> void {
             if (intersectionArea) {
                 applyCollisionForces(o, neighbour, *intersectionArea);
                 delete intersectionArea;
+                if (nModule.isImmovable && std::abs(o->getVel().y) < .01) {
+                    module.isOnGround = true;
+                }
             }
         }
     }
+
+    if (std::abs(o->getVel().y) > .01) {
+        module.isOnGround = false;
+    }
 }
 
-auto PhysicsEngine::getMiddlePos(Object *o) -> sf::Vector2f {
+auto PhysicsEngine::getMiddlePos(Object *o) const -> sf::Vector2f {
     return getMiddlePos(o->getBoundingBox());
 }
 
-auto PhysicsEngine::getMiddlePos(sf::FloatRect rect) -> sf::Vector2f {
+auto PhysicsEngine::getMiddlePos(sf::FloatRect rect) const -> sf::Vector2f {
     return rect.getPosition() + (sf::Vector2f(rect.width / 2, rect.height / 2));
 }
 

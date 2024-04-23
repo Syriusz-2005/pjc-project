@@ -10,7 +10,6 @@ auto Scene::add(Object &o) -> void {
 }
 
 auto Scene::render(Context ctx) -> void {
-    physicsEngine.step();
     ctx.window->clear(clearColor);
     for (auto object : objects) {
         object->render(ctx);
@@ -20,4 +19,8 @@ auto Scene::render(Context ctx) -> void {
 
 auto Scene::getObjects() -> std::vector<Object *> & {
     return objects;
+}
+
+auto Scene::getPhysicsEngine() -> PhysicsEngine const & {
+    return physicsEngine;
 }

@@ -17,6 +17,7 @@ public:
     auto add(Object& o) -> void;
     auto render(Context ctx) -> void;
     auto getObjects() -> std::vector<Object*>&;
+    auto getPhysicsEngine() -> PhysicsEngine const&;
 };
 
 

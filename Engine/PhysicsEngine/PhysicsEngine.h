@@ -7,16 +7,16 @@
 class PhysicsEngine {
 private:
     std::vector<Object *>* objects;
-    auto getMiddlePos(Object *o) -> sf::Vector2f;
-    auto getMiddlePos(sf::FloatRect rect) -> sf::Vector2f;
-    auto applyCollision(Object * o) -> void;
+    auto getMiddlePos(Object *o) const -> sf::Vector2f;
+    auto getMiddlePos(sf::FloatRect rect) const -> sf::Vector2f;
+    auto applyCollision(Object * o) const -> void;
     static auto getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) -> sf::Rect<float>*;
-    auto applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) -> void;
+    auto applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) const -> void;
 
 public:
     explicit PhysicsEngine(std::vector<Object *> &objects);
 
-    auto step() -> void;
+    auto step(long long timeElapsed) const -> void;
 };
 
 

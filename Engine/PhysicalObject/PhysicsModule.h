@@ -6,7 +6,7 @@
 class PhysicsModule {
 public:
     const float mass;
-    const float gravity = 0.001;
+    const float gravity;
 
     bool isImmovable = false;
     /**
@@ -15,7 +15,9 @@ public:
     bool isEthereal = false;
     float bounciness = 1;
 
-    explicit PhysicsModule(float mass = 1, float gravity = 0.01);
+    bool isOnGround = false;
+
+    explicit PhysicsModule(float mass = 1, float gravity = 0.0003);
 };
 
 

@@ -12,7 +12,7 @@ protected:
 public:
 
     explicit Rect(
-            PhysicsModule& physicsModule,
+            PhysicsModule const& physicsModule,
             sf::Vector2f size = sf::Vector2f(40, 40),
             Layer layer = FOREGROUND,
             sf::Color color = sf::Color(0, 0, 0)

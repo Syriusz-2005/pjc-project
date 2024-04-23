@@ -13,6 +13,7 @@ public:
      * Does it interact with other objects?
      */
     bool isEthereal = false;
+    float bounciness = 1;
 
     explicit PhysicsModule(float mass = 1, float gravity = 0.01);
 };

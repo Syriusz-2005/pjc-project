@@ -25,6 +25,7 @@ auto main() -> int {
     auto renderer = Renderer(ctx);
 
     auto obj = PhysicsModule();
+    obj.bounciness = 0;
     auto rect = Rect(obj);
     scene.add(rect);
 

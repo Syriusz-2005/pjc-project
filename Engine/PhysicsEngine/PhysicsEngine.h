@@ -11,7 +11,7 @@ private:
     auto getMiddlePos(sf::FloatRect rect) -> sf::Vector2f;
     auto applyCollision(Object * o) -> void;
     static auto getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) -> sf::Rect<float>*;
-    auto applyCollisionForces(Object *a, Object *b, sf::FloatRect &i) -> void;
+    auto applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) -> void;
 
 public:
     explicit PhysicsEngine(std::vector<Object *> &objects);

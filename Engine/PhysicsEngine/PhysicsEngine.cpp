@@ -43,10 +43,10 @@ auto PhysicsEngine::getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) ->
     return nullptr;
 }
 
-auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect &i) -> void {
+auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) -> void {
     auto mA = a->physicsModule;
     auto mB = b->physicsModule;
-    float aCommitment = mA.isImmovable ? 1 : (mA.mass < mB.mass ? 1 - (mA.mass / mB.mass) : mB.mass - mA.mass);
+    float aCommitment = mB.isImmovable ? 1 : (mA.mass < mB.mass ? 1 - (mA.mass / mB.mass) : mB.mass - mA.mass);
     float bCommitment = 1 - aCommitment;
 
     auto aPos = getMiddlePos(a);
@@ -60,15 +60,15 @@ auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect &i)
         float direction = iPos.x < aPos.x ? 1 : -1;
         aNewPos.x += i.width * direction * aCommitment;
         bNewPos.x += i.width * direction * bCommitment;
-        a->setVelX(-rvx * aCommitment);
-        b->setVelX(rvx * bCommitment);
+        a->setVelX(-rvx * aCommitment * mA.bounciness);
+        b->setVelX(rvx * bCommitment * mB.bounciness);
     } else {
         auto rvy = (a->getVel().y + b->getVel().y);
-        float direction = iPos.y < aPos.y ? 1 : -1;
+        float direction = iPos.y < aPos.y ? -1 : 1;
         aNewPos.y += i.height * aCommitment * direction;
         bNewPos.y += i.height * bCommitment * direction;
-        a->setVelX(-rvy * aCommitment);
-        b->setVelY(rvy * bCommitment);
+        a->setVelY(-rvy * aCommitment * mA.bounciness);
+        b->setVelY(rvy * bCommitment * mB.bounciness);
     }
 
     a->setPos(aNewPos);

@@ -21,6 +21,7 @@ protected:
     float zDistance{};
 public:
     PhysicsModule physicsModule;
+    std::string name;
 
     auto getPos() -> sf::Vector2f;
     auto setPos(sf::Vector2f p) -> void;

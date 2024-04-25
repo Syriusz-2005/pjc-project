@@ -8,7 +8,7 @@
 #include "Engine/Camera/Camera.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Rect/Rect.h"
-#include "Engine/PhysicsEngine/PhysicsEngine.h"
+#include "Game/Player/Player.h"
 
 auto main() -> int {
 
@@ -24,18 +24,17 @@ auto main() -> int {
 
     auto renderer = Renderer(ctx);
 
-    auto obj = PhysicsModule();
-    obj.bounciness = 0;
-    auto rect = Rect(obj);
-    scene.add(rect);
-
     auto floorObj = PhysicsModule();
     floorObj.isImmovable = true;
     auto floor = Rect(floorObj, sf::Vector2f(800, 100));
+    floor.name = "Floor";
     floor.setPos(sf::Vector2f(0, 550));
     scene.add(floor);
 
     camera.setPos(sf::Vector2f(-100, 0));
+
+    auto player = Player(PhysicsModule());
+    scene.add(player);
 
     auto clock = sf::Clock();
     while (window.isOpen()) {
@@ -43,11 +42,7 @@ auto main() -> int {
         scene.getPhysicsEngine().step( std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
         clock.restart();
         renderer.render(scene, camera);
-        auto event = sf::Event();
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        player.dispatchEvents(window);
         window.display();
     }
 }

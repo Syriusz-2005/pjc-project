@@ -39,6 +39,10 @@ add_executable(pjc_project main.cpp
         Engine/PhysicsEngine/PhysicsEngine.cpp
         Engine/PhysicsEngine/PhysicsEngine.h
         Engine/PhysicalObject/PhysicsModule.cpp
-        Engine/PhysicalObject/PhysicsModule.h)
+        Engine/PhysicalObject/PhysicsModule.h
+        Engine/Group/Group.cpp
+        Engine/Group/Group.h
+        Game/Player/Player.cpp
+        Game/Player/Player.h)
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

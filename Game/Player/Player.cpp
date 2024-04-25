@@ -1,0 +1,58 @@
+
+#include "Player.h"
+#include "../../Engine/Rect/Rect.h"
+
+Player::Player(PhysicsModule const& module) : Group(&module, FOREGROUND) {
+    pRect.physicsModule.isImmovable = true;
+    pRect.physicsModule.bounciness = 0;
+    pRect.physicsModule.isEthereal = true;
+    pRect.name = "Player rect";
+    add(pRect);
+    setBoundingBox(sf::FloatRect(pos, sf::Vector2f(40, 40)));
+
+    name = "Player object";
+}
+
+auto Player::dispatchEvents(sf::RenderWindow& window) -> void {
+    auto event = sf::Event();
+    while (window.pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::Closed: {
+                window.close();
+                break;
+            }
+            case sf::Event::KeyPressed: onKeyPress(event); break;
+            case sf::Event::KeyReleased: onKeyRelease(event); break;
+            default: {}
+        }
+    }
+}
+
+auto Player::onKeyPress(sf::Event event) -> void {
+    switch (event.key.code) {
+        case sf::Keyboard::A: {
+            horizontalMovement = -1;
+            fmt::println("Moving to the left!");
+            break;
+        }
+        case sf::Keyboard::D: {
+            horizontalMovement = 1;
+            break;
+        }
+        default: {}
+    }
+}
+
+auto Player::onKeyRelease(sf::Event event) -> void {
+    switch (event.key.code) {
+        case sf::Keyboard::A: {
+            horizontalMovement = 0;
+            break;
+        }
+        case sf::Keyboard::D: {
+            horizontalMovement = 0;
+            break;
+        }
+        default: {}
+    }
+}

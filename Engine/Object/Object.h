@@ -13,7 +13,7 @@ enum Layer {
 
 class Object {
 protected:
-    explicit Object(const PhysicsModule *physicsModule, Layer layer = FOREGROUND);
+    explicit Object(PhysicsModule const& physicsModule, Layer layer = FOREGROUND);
 
     sf::Vector2f pos;
     sf::Vector2f vel;

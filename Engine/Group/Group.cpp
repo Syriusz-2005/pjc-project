@@ -1,7 +1,7 @@
 
 #include "Group.h"
 
-Group::Group(const PhysicsModule *module, Layer layer) : Object(module, layer) {
+Group::Group(PhysicsModule &module, Layer layer) : Object(module, layer) {
 
 }
 

@@ -2,14 +2,11 @@
 #include "Player.h"
 #include "../../Engine/Rect/Rect.h"
 
-Player::Player(PhysicsModule const& module) : Group(&module, FOREGROUND) {
+Player::Player(): Object(PhysicsModule(1, 0.0003, 0), FOREGROUND) {
     pRect.physicsModule.isImmovable = true;
     pRect.physicsModule.bounciness = 0;
     pRect.physicsModule.isEthereal = true;
     pRect.name = "Player rect";
-    add(pRect);
-    setBoundingBox(sf::FloatRect(pos, sf::Vector2f(40, 40)));
-
     name = "Player object";
 }
 
@@ -55,4 +52,13 @@ auto Player::onKeyRelease(sf::Event event) -> void {
         }
         default: {}
     }
+}
+
+auto Player::getBoundingBox() -> sf::FloatRect {
+    return sf::FloatRect{pos, sf::Vector2f(40, 40)};
+}
+
+auto Player::render(Context ctx) -> void {
+    ctx.globalPos += pos;
+    pRect.render(ctx);
 }

@@ -5,7 +5,7 @@
 #include "../../Engine/Group/Group.h"
 #include "../../Engine/Rect/Rect.h"
 
-class Player : public Group {
+class Player : public Object {
 private:
     short horizontalMovement = 0;
     Rect pRect = Rect(PhysicsModule(0, 0));
@@ -13,9 +13,11 @@ private:
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
 public:
-    explicit Player(PhysicsModule const& module);
+    explicit Player();
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
+    auto getBoundingBox() -> sf::FloatRect override;
+    auto render(Context ctx) -> void override;
 };
 
 

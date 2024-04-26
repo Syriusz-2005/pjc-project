@@ -33,7 +33,7 @@ auto main() -> int {
 
     camera.setPos(sf::Vector2f(-100, 0));
 
-    auto player = Player(PhysicsModule());
+    auto player = Player();
     scene.add(player);
 
     auto clock = sf::Clock();

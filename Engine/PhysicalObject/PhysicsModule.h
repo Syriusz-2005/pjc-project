@@ -17,7 +17,7 @@ public:
 
     bool isOnGround = false;
 
-    explicit PhysicsModule(float mass = 1, float gravity = 0.0003);
+    explicit PhysicsModule(float mass = 1, float gravity = 0.0003, float bounciness = 1);
 };
 
 

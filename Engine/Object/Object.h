@@ -35,5 +35,7 @@ public:
     auto getLayer() -> Layer;
     virtual auto render(Context ctx) -> void = 0;
     virtual auto getBoundingBox() -> sf::Rect<float> = 0;
+    virtual auto onAfterStep() -> void {}
+    virtual auto onBeforeStep() -> void {}
 };
 

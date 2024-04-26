@@ -12,6 +12,7 @@ PhysicsEngine::PhysicsEngine(std::vector<Object *> &objects): objects(&objects) 
 auto PhysicsEngine::step(long long timeElapsed) const -> void {
     auto deltaMs = ((float) timeElapsed) / 1000;
     for (auto object: *objects) {
+        object->onBeforeStep();
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;
         if (module.isImmovable) continue;
@@ -20,6 +21,7 @@ auto PhysicsEngine::step(long long timeElapsed) const -> void {
         object->setVel(vel);
         object->move(vel * deltaMs);
         applyCollision(object);
+        object->onAfterStep();
     }
 }
 
@@ -84,8 +86,8 @@ auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect con
  * @param o
  */
 auto PhysicsEngine::applyCollision(Object *o) const -> void {
-    auto module = o->physicsModule;
-    if (module.isEthereal || module.isImmovable) return;
+    auto module = &o->physicsModule;
+    if (module->isEthereal || module->isImmovable) return;
 
     auto oBox = o->getBoundingBox();
     for (auto neighbour : *objects) {
@@ -96,15 +98,15 @@ auto PhysicsEngine::applyCollision(Object *o) const -> void {
             if (intersectionArea) {
                 applyCollisionForces(o, neighbour, *intersectionArea);
                 delete intersectionArea;
-                if (nModule.isImmovable && std::abs(o->getVel().y) < .01) {
-                    module.isOnGround = true;
+                if (std::abs(o->getVel().y) < .01) {
+                    module->isOnGround = true;
                 }
             }
         }
     }
 
     if (std::abs(o->getVel().y) > .01) {
-        module.isOnGround = false;
+        module->isOnGround = false;
     }
 }
 

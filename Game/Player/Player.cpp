@@ -29,7 +29,6 @@ auto Player::onKeyPress(sf::Event event) -> void {
     switch (event.key.code) {
         case sf::Keyboard::A: {
             horizontalMovement = -1;
-            fmt::println("Moving to the left!");
             break;
         }
         case sf::Keyboard::D: {
@@ -61,4 +60,10 @@ auto Player::getBoundingBox() -> sf::FloatRect {
 auto Player::render(Context ctx) -> void {
     ctx.globalPos += pos;
     pRect.render(ctx);
+}
+
+void Player::onBeforeStep() {
+//    fmt::println("{}, {}", physicsModule.isOnGround, horizontalMovement);
+    if (horizontalMovement != 0 and not physicsModule.isOnGround) return;
+    vel.x = (float) horizontalMovement * 0.1;
 }

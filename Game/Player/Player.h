@@ -18,6 +18,7 @@ public:
     auto dispatchEvents(sf::RenderWindow& window) -> void;
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;
+    void onBeforeStep() override;
 };
 
 

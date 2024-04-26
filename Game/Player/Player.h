@@ -9,6 +9,7 @@ class Player : public Object {
 private:
     short horizontalMovement = 0;
     Rect pRect = Rect(PhysicsModule(0, 0));
+    bool willJump = false;
 
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;

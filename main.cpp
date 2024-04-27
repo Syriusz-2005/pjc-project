@@ -12,12 +12,10 @@
 #include "Game/GameManager/GameManager.h"
 
 auto main() -> int {
-
     auto window = sf::RenderWindow(
-            sf::VideoMode({800, 600}), "Pjc_project",
+            sf::VideoMode({1700, 1000}), "Pjc_project",
             sf::Style::Default, sf::ContextSettings(0, 0, 8)
     );
-
     auto manager = GameManager(window);
     manager.startGameLoop();
 }

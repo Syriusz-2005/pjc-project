@@ -1,3 +1,6 @@
 https://stackoverflow.com/questions/14574143/syntax-of-declaring-a-constructor-in-header-h-and-then-defining-in-a-class-fi
 https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean
 https://cplusplus.com/doc/tutorial/pointers/
+
+https://www.gnome-look.org/p/1106454
+https://www.sfml-dev.org/tutorials/2.0/graphics-shader.php

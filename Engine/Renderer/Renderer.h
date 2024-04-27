@@ -1,6 +1,7 @@
 
 #include "../Scene/Scene.h"
 #include "../Camera/Camera.h"
+#include "../../Game/BackgroundShader/BackgroundShader.h"
 
 #ifndef PJC_PROJECT_RENDERER_H
 #define PJC_PROJECT_RENDERER_H
@@ -8,6 +9,7 @@
 class Renderer {
 private:
     Context* context;
+    BackgroundShader shader{BackgroundShader()};
 public:
     explicit Renderer(Context& ctx);
 

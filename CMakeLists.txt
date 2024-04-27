@@ -47,6 +47,12 @@ add_executable(pjc_project main.cpp
         Game/GameManager/GameManager.cpp
         Game/GameManager/GameManager.h
         Game/SceneInitializer/SceneInitializer.cpp
-        Game/SceneInitializer/SceneInitializer.h)
+        Game/SceneInitializer/SceneInitializer.h
+        Game/Tree/Tree.cpp
+        Game/Tree/Tree.h
+        Game/Ground/Ground.cpp
+        Game/Ground/Ground.h
+        Game/BackgroundShader/BackgroundShader.cpp
+        Game/BackgroundShader/BackgroundShader.h)
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

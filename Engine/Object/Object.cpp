@@ -43,3 +43,7 @@ auto Object::setVelY(float y) -> void {
 Object::~Object() {
     fmt::println("{}: Destroyed", name);
 }
+
+auto Object::getZDistance() const -> float {
+    return zDistance;
+}

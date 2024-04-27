@@ -9,7 +9,7 @@ Tree::Tree(float posX): Object(PhysicsModule(0, 0, 0), BACKGROUND) {
     sprite = sf::Sprite(txt);
     std::srand((int) posX);
     auto s = txt.getSize();
-    float distance = ((float) (std::rand() % 4)) + 1;
+    float distance = ((float) (std::rand() % 40)) / 10 + 1.2;
     pos = sf::Vector2f(posX, (float) -730);
     zDistance = distance;
 }

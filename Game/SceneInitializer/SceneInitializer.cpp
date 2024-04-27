@@ -16,9 +16,20 @@ auto initializeTestScene() -> Scene * {
 
 
     std::srand(70);
-    for (int i = 0; i < 4; i++) {
-        auto spread = (std::rand() % 500) + 200;
+
+    auto trees = std::vector<Tree*>();
+
+    for (int i = 0; i < 60; i++) {
+        auto spread = (std::rand() % 400) + 200;
         auto tree = new Tree((float) i * spread);
+        trees.push_back(tree);
+    }
+    auto compare = [](Tree const* a, Tree const* b) -> bool {
+        return a->getZDistance() > b->getZDistance();
+    };
+    std::ranges::sort(trees.begin(), trees.end(), compare);
+
+    for (auto tree : trees) {
         scene->add(*tree);
     }
 

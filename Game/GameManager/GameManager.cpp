@@ -1,11 +1,20 @@
 
 
 #include "GameManager.h"
+#include "../InitContext/InitContext.h"
 
 GameManager::GameManager(sf::RenderWindow &window)
-        : window(&window), drawContext(Context(window)), renderer(Renderer(this->drawContext)), player(Player()) {
+    : window(&window),
+    drawContext(Context(window)),
+    renderer(Renderer(this->drawContext)),
+    player(Player()) {
+    textureLoader.registerTexture(GROUND, "../assets/grass.png");
+    textureLoader.registerTexture(TREE, "../assets/tree.png");
+
+    auto initContext = InitContext{&textureLoader};
+    currentScene = initializeTestScene(initContext);
+
     currentScene->add(player);
-    camera.setPos(sf::Vector2f(0, 0));
 }
 
 auto GameManager::startGameLoop() -> void {

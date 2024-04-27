@@ -55,6 +55,9 @@ add_executable(pjc_project main.cpp
         Game/BackgroundShader/BackgroundShader.cpp
         Game/BackgroundShader/BackgroundShader.h
         Engine/VecUtils/VecUtils.h
+        Engine/TextureLoader/TextureLoader.h
+        Game/InitContext/InitContext.cpp
+        Game/InitContext/InitContext.h
 )
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

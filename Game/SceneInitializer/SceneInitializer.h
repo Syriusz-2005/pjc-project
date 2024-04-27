@@ -4,7 +4,8 @@
 
 
 #include "../../Engine/Scene/Scene.h"
+#include "../InitContext/InitContext.h"
 
-auto initializeTestScene() -> Scene *;
+auto initializeTestScene(InitContext const& ctx) -> Scene *;
 
 #endif //PJC_PROJECT_SCENEINITIALIZER_H

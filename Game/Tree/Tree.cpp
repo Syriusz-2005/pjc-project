@@ -3,19 +3,19 @@
 #include <cmath>
 #include "../../Engine/VecUtils/VecUtils.h"
 
-Tree::Tree(float posX): Object(PhysicsModule(0, 0, 0), BACKGROUND) {
+Tree::Tree(float posX, InitContext const& ctx): Object(PhysicsModule(0, 0, 0), BACKGROUND) {
     name = "tree";
-    txt.loadFromFile("../assets/tree.png");
-    sprite = sf::Sprite(txt);
+    txt = ctx.textureLoader->getTexture(TREE);
+    sprite = sf::Sprite(*txt);
     std::srand((int) posX);
-    auto s = txt.getSize();
+    auto s = txt->getSize();
     float distance = ((float) (std::rand() % 40)) / 10 + 1.2;
     pos = sf::Vector2f(posX, (float) -730);
     zDistance = distance;
 }
 
 void Tree::render(Context ctx) {
-    auto globalPos = pos + ctx.globalPos + sf::Vector2f(0,  zDistance * txt.getSize().y / 4);
+    auto globalPos = pos + ctx.globalPos + sf::Vector2f(0,  zDistance * txt->getSize().y / 4);
     globalPos = vec::multiply(globalPos, 1 / zDistance);
     sprite.setPosition(globalPos);
     sprite.setScale(1 / zDistance, 1 / zDistance);

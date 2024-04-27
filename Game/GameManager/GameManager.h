@@ -8,15 +8,17 @@
 #include "../../Engine/Renderer/Renderer.h"
 #include "../SceneInitializer/SceneInitializer.h"
 #include "../Player/Player.h"
+#include "../../Engine/TextureLoader/TextureLoader.h"
 
 class GameManager {
 private:
-    Scene * testScene = initializeTestScene();
+    Scene * testScene;
     Camera camera = Camera();
     sf::RenderWindow * window;
     Context drawContext;
     Renderer renderer;
     Player player;
+    TextureLoader<TextureId> textureLoader{};
 
     Scene * currentScene = testScene;
 public:

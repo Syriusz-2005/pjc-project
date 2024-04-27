@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-Player::Player(): Object(PhysicsModule(1, 0.0003, 0), FOREGROUND) {
+Player::Player(): Object(PhysicsModule(1, 0.00043, 0), FOREGROUND) {
     pRect.physicsModule.isImmovable = true;
     pRect.physicsModule.bounciness = 0;
     pRect.physicsModule.isEthereal = true;
@@ -71,7 +71,7 @@ void Player::onBeforeStep() {
     if (willJump) {
         willJump = false;
         if (physicsModule.isOnGround) {
-            vel.y -= .2;
+            vel.y -= .3;
         }
     }
 

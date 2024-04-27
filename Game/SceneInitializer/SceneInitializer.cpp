@@ -4,7 +4,7 @@
 #include <random>
 
 auto initializeTestScene(InitContext const& ctx) -> Scene * {
-    auto scene = new Scene(sf::Color(220, 220, 220));
+    auto scene = new Scene(sf::Color(150, 150, 150));
 
     std::srand(70);
 

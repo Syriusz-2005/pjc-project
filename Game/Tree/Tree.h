@@ -14,7 +14,7 @@ class Tree : public Object {
     sf::Sprite sprite;
 
 public:
-    Tree();
+    Tree(float posX);
 
     void render(Context ctx) override;
     sf::Rect<float> getBoundingBox() override;

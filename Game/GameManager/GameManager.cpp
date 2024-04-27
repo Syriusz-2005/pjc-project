@@ -14,6 +14,8 @@ auto GameManager::startGameLoop() -> void {
         auto timeDelta = clock.getElapsedTime();
         currentScene->getPhysicsEngine().step( std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
         clock.restart();
+        auto size = window->getSize();
+        camera.setPos(player.getPos() - sf::Vector2f(size.x / 2, size.y / 2));
         renderer.render(*currentScene, camera);
         player.dispatchEvents(*window);
         window->display();

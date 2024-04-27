@@ -6,5 +6,11 @@ varying out vec4 fragColor;
 
 void main() {
     vec4 txt = texture2D(texture, gl_TexCoord[0].xy);
-    fragColor = vec4(txt.rgb, txt.a * (1 / zDistance));
+    vec3 scatteringTarget = vec3(.9, .9, .9);
+
+    vec3 delta = scatteringTarget - txt;
+
+    fragColor.rgb = txt.rgb + delta * min(1, zDistance / 10);
+
+    fragColor.a = txt.a;
 }

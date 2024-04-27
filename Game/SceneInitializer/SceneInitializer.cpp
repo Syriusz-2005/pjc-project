@@ -2,7 +2,7 @@
 #include "../../Engine/Rect/Rect.h"
 #include "../Tree/Tree.h"
 #include "../Ground/Ground.h"
-
+#include <random>
 
 auto initializeTestScene() -> Scene * {
     auto scene = new Scene(sf::Color(220, 220, 220));
@@ -14,13 +14,18 @@ auto initializeTestScene() -> Scene * {
 //    floor->setPos(sf::Vector2f(0, 850));
 //    scene->add(*floor);
 
+
+    std::srand(70);
+    for (int i = 0; i < 4; i++) {
+        auto spread = (std::rand() % 500) + 200;
+        auto tree = new Tree((float) i * spread);
+        scene->add(*tree);
+    }
+
     auto floor = new Ground();
     floor->physicsModule.isImmovable = true;
     floor->setPos(sf::Vector2f(0, 850));
     scene->add(*floor);
-
-    auto tree = new Tree();
-    scene->add(*tree);
 
     return scene;
 };

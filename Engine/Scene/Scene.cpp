@@ -24,3 +24,9 @@ auto Scene::getObjects() -> std::vector<Object *> & {
 auto Scene::getPhysicsEngine() -> PhysicsEngine const & {
     return physicsEngine;
 }
+
+Scene::~Scene() {
+    for (auto o : objects) {
+        delete o;
+    }
+}

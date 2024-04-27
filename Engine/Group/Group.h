@@ -17,6 +17,8 @@ public:
     auto getObjects() -> std::vector<Object*> const&;
 
     auto setBoundingBox(sf::FloatRect const& box) -> void;
+
+    ~Group() override;
 };
 
 

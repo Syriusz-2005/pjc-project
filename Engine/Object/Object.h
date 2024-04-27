@@ -37,5 +37,7 @@ public:
     virtual auto getBoundingBox() -> sf::Rect<float> = 0;
     virtual auto onAfterStep() -> void {}
     virtual auto onBeforeStep() -> void {}
+
+    virtual ~Object();
 };
 

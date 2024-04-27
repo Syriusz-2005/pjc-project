@@ -18,6 +18,8 @@ public:
     auto render(Context ctx) -> void;
     auto getObjects() -> std::vector<Object*>&;
     auto getPhysicsEngine() -> PhysicsEngine const&;
+
+    ~Scene();
 };
 
 

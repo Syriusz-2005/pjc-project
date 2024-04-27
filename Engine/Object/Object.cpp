@@ -39,3 +39,7 @@ auto Object::setVelX(float x) -> void {
 auto Object::setVelY(float y) -> void {
     vel.y = y;
 }
+
+Object::~Object() {
+    fmt::println("{}: Destroyed", name);
+}

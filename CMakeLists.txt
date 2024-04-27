@@ -43,6 +43,10 @@ add_executable(pjc_project main.cpp
         Engine/Group/Group.cpp
         Engine/Group/Group.h
         Game/Player/Player.cpp
-        Game/Player/Player.h)
+        Game/Player/Player.h
+        Game/GameManager/GameManager.cpp
+        Game/GameManager/GameManager.h
+        Game/SceneInitializer/SceneInitializer.cpp
+        Game/SceneInitializer/SceneInitializer.h)
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

@@ -80,9 +80,8 @@ void Player::onBeforeStep() {
     } else {
         auto finalVel = (double) vel.x;
         auto sign = vel.x > 0 ? 1 : -1;
-        auto xSpeed = std::abs(vel.x == 0 ? 0.00000001 : vel.x) * 100;
+        auto xSpeed = std::abs(vel.x == 0 ? 0.1 : vel.x) * 140;
         auto multiplier =  0.0004 * (1 / xSpeed);
-        fmt::println("{}", multiplier);
         finalVel += horizontalMovement * multiplier;
 
         if (horizontalMovement == 0) {
@@ -93,3 +92,5 @@ void Player::onBeforeStep() {
     }
 
 }
+
+Player::~Player() = default;

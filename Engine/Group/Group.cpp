@@ -31,4 +31,6 @@ auto Group::getBoundingBox() -> sf::FloatRect {
     return *area;
 }
 
+Group::~Group() = default;
+
 

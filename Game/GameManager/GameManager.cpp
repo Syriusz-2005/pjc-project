@@ -10,7 +10,8 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(TREE, "../assets/tree.png");
 
     auto initContext = InitContext{&textureLoader};
-    currentScene = initializeTestScene(initContext);
+    testScene = initializeTestScene(initContext);
+    currentScene = testScene;
 
     currentScene->add(player);
 }
@@ -25,8 +26,8 @@ auto GameManager::startGameLoop() -> void {
         auto size = window->getSize();
         camera.setPos(player->getPos() - sf::Vector2f(size.x / 2, size.y / 1.3));
         renderer.render(*currentScene, camera);
-        player->dispatchEvents(*window);
         window->display();
+        player->dispatchEvents(*window);
     }
 }
 

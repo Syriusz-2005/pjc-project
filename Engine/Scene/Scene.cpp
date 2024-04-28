@@ -54,3 +54,7 @@ auto Scene::getBackgroundShader() -> sf::Shader & {
 auto Scene::setBackgroundSource(BackgroundSource source) -> void {
     backgroundSource = source;
 }
+
+Scene::~Scene() {
+    fmt::println("Disposing scene");
+}

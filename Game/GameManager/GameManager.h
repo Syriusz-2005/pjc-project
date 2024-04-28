@@ -27,7 +27,10 @@ public:
     explicit GameManager(sf::RenderWindow & window);
 
     ~GameManager() {
+        fmt::println("Disposing game manager");
         delete testScene;
+        fmt::println("{}", player.use_count());
+        player.reset();
     }
 
     auto switchScene() -> void;

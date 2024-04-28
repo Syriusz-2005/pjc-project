@@ -17,8 +17,6 @@ public:
     explicit PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects);
 
     auto step(long long timeElapsed) const -> void;
-
-    ~PhysicsEngine();
 };
 
 

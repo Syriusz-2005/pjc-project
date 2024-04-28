@@ -92,7 +92,3 @@ void Player::onBeforeStep() {
     }
 
 }
-
-Player::~Player() {
-    fmt::println("Player destroyed");
-}

@@ -8,3 +8,4 @@ https://stackoverflow.com/questions/63705115/is-it-ok-to-keep-simple-c-method-de
 https://stackoverflow.com/questions/19522926/c-deleting-a-pointer-when-there-are-2-pointers-pointing-to-the-same-memory-loc
 
 https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83
+https://fonts.google.com/selection?classification=Handwriting

@@ -31,7 +31,7 @@ public:
     auto setVel(sf::Vector2f v) -> void;
     auto setVelX(float x) -> void;
     auto setVelY(float y) -> void;
-    auto getZDistance() const -> float;
+    [[nodiscard]] auto getZDistance() const -> float;
 
     auto getLayer() -> Layer;
     virtual auto render(Context ctx) -> void = 0;

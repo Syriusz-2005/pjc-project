@@ -117,8 +117,3 @@ auto PhysicsEngine::getMiddlePos(Object &o) const -> sf::Vector2f {
 auto PhysicsEngine::getMiddlePos(sf::FloatRect rect) const -> sf::Vector2f {
     return rect.getPosition() + (sf::Vector2f(rect.width / 2, rect.height / 2));
 }
-
-PhysicsEngine::~PhysicsEngine() {
-    delete objects;
-}
-

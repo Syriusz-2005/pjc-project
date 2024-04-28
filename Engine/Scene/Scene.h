@@ -32,6 +32,8 @@ public:
     auto setBackgroundSource(BackgroundSource source) -> void;
 
     auto getBackgroundShader() -> sf::Shader&;
+
+    ~Scene();
 };
 
 

@@ -6,3 +6,5 @@ https://www.gnome-look.org/p/1106454
 https://www.sfml-dev.org/tutorials/2.0/graphics-shader.php
 https://stackoverflow.com/questions/63705115/is-it-ok-to-keep-simple-c-method-definitions-inside-of-a-header-file
 https://stackoverflow.com/questions/19522926/c-deleting-a-pointer-when-there-are-2-pointers-pointing-to-the-same-memory-loc
+
+https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83

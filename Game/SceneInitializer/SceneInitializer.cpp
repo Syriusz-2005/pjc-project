@@ -6,6 +6,9 @@
 
 auto initializeTestScene(InitContext const& ctx) -> Scene * {
     auto scene = new Scene(sf::Color(150, 150, 150));
+    auto shader = &scene->getBackgroundShader();
+    shader->loadFromFile("../shaders/paper.vert", "../shaders/paper.frag");
+    scene->setBackgroundSource(SHADER);
     scene->setBackground("../assets/background.png");
     std::srand(70);
 

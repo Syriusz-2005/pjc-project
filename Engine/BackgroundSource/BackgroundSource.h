@@ -1,0 +1,12 @@
+
+
+#ifndef PJC_PROJECT_BACKGROUNDSOURCE_H
+#define PJC_PROJECT_BACKGROUNDSOURCE_H
+
+enum BackgroundSource {
+    COLOR,
+    TEXTURE,
+    SHADER,
+};
+
+#endif //PJC_PROJECT_BACKGROUNDSOURCE_H

@@ -20,7 +20,6 @@ public:
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;
     void onBeforeStep() override;
-
     ~Player() override;
 };
 

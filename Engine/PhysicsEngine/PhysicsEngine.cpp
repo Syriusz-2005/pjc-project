@@ -5,13 +5,13 @@
 #include <fmt/core.h>
 #include <cmath>
 
-PhysicsEngine::PhysicsEngine(std::vector<Object *> &objects): objects(&objects) {
+PhysicsEngine::PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects): objects(&objects) {
 
 }
 
 auto PhysicsEngine::step(long long timeElapsed) const -> void {
     auto deltaMs = ((float) timeElapsed) / 1000;
-    for (auto object: *objects) {
+    for (const auto& object: *objects) {
         object->onBeforeStep();
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;
@@ -45,36 +45,36 @@ auto PhysicsEngine::getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) ->
     return nullptr;
 }
 
-auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect const&i) const -> void {
-    auto mA = a->physicsModule;
-    auto mB = b->physicsModule;
+auto PhysicsEngine::applyCollisionForces(Object& a, Object& b, sf::FloatRect const&i) const -> void {
+    auto mA = a.physicsModule;
+    auto mB = b.physicsModule;
     float aCommitment = mB.isImmovable ? 1 : (mA.mass < mB.mass ? 1 - (mA.mass / mB.mass) : mB.mass - mA.mass);
     float bCommitment = 1 - aCommitment;
 
     auto aPos = getMiddlePos(a);
     auto iPos = getMiddlePos(i);
 
-    auto aNewPos = a->getPos();
-    auto bNewPos = b->getPos();
+    auto aNewPos = a.getPos();
+    auto bNewPos = b.getPos();
 
     if (i.width < i.height) {
-        auto rvx = (a->getVel().x + b->getVel().x);
+        auto rvx = (a.getVel().x + b.getVel().x);
         float direction = iPos.x < aPos.x ? 1 : -1;
         aNewPos.x += i.width * direction * aCommitment;
         bNewPos.x += i.width * direction * bCommitment;
-        a->setVelX(-rvx * aCommitment * mA.bounciness);
-        b->setVelX(rvx * bCommitment * mB.bounciness);
+        a.setVelX(-rvx * aCommitment * mA.bounciness);
+        b.setVelX(rvx * bCommitment * mB.bounciness);
     } else {
-        auto rvy = (a->getVel().y + b->getVel().y);
+        auto rvy = (a.getVel().y + b.getVel().y);
         float direction = iPos.y < aPos.y ? -1 : 1;
         aNewPos.y += i.height * aCommitment * direction;
         bNewPos.y += i.height * bCommitment * direction;
-        a->setVelY(-rvy * aCommitment * mA.bounciness);
-        b->setVelY(rvy * bCommitment * mB.bounciness);
+        a.setVelY(-rvy * aCommitment * mA.bounciness);
+        b.setVelY(rvy * bCommitment * mB.bounciness);
     }
 
-    a->setPos(aNewPos);
-    b->setPos(bNewPos);
+    a.setPos(aNewPos);
+    b.setPos(bNewPos);
 }
 
 
@@ -85,18 +85,18 @@ auto PhysicsEngine::applyCollisionForces(Object *a, Object *b, sf::FloatRect con
  * Based on my previous implementation of the collision system in java: https://github.com/Syriusz-2005/java-ping-pong-poc/blob/main/src/main/java/Physics/PhysicsScene.java
  * @param o
  */
-auto PhysicsEngine::applyCollision(Object *o) const -> void {
+auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
     auto module = &o->physicsModule;
     if (module->isEthereal || module->isImmovable) return;
 
     auto oBox = o->getBoundingBox();
-    for (auto neighbour : *objects) {
+    for (const auto& neighbour : *objects) {
         auto nModule = neighbour->physicsModule;
         if (!nModule.isEthereal && neighbour != o) {
             auto nBox = neighbour->getBoundingBox();
             auto intersectionArea = getIntersectionArea(oBox, nBox);
             if (intersectionArea) {
-                applyCollisionForces(o, neighbour, *intersectionArea);
+                applyCollisionForces(*o, *neighbour, *intersectionArea);
                 delete intersectionArea;
                 if (std::abs(o->getVel().y) < .01) {
                     module->isOnGround = true;
@@ -110,11 +110,15 @@ auto PhysicsEngine::applyCollision(Object *o) const -> void {
     }
 }
 
-auto PhysicsEngine::getMiddlePos(Object *o) const -> sf::Vector2f {
-    return getMiddlePos(o->getBoundingBox());
+auto PhysicsEngine::getMiddlePos(Object &o) const -> sf::Vector2f {
+    return getMiddlePos(o.getBoundingBox());
 }
 
 auto PhysicsEngine::getMiddlePos(sf::FloatRect rect) const -> sf::Vector2f {
     return rect.getPosition() + (sf::Vector2f(rect.width / 2, rect.height / 2));
+}
+
+PhysicsEngine::~PhysicsEngine() {
+    delete objects;
 }
 

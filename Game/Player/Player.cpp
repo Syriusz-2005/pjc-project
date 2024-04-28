@@ -93,4 +93,6 @@ void Player::onBeforeStep() {
 
 }
 
-Player::~Player() = default;
+Player::~Player() {
+    fmt::println("Player destroyed");
+}

@@ -7,9 +7,9 @@ Tree::Tree(float posX, InitContext const& ctx): Object(PhysicsModule(0, 0, 0), B
     name = "tree";
     txt = ctx.textureLoader->getTexture(TREE);
     sprite = sf::Sprite(*txt);
-    std::srand((int) posX);
+    std::srand((int) (posX * 2.8));
     auto s = txt->getSize();
-    float distance = ((float) (std::rand() % 40)) / 10 + 1.2;
+    float distance = ((float) (std::rand() % 35)) / 10 + 1.1;
     pos = sf::Vector2f(posX, (float) -730);
     zDistance = distance;
 }

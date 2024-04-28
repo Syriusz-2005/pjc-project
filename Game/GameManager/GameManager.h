@@ -3,6 +3,8 @@
 #define PJC_PROJECT_GAMEMANAGER_H
 
 
+#include <memory>
+
 #include "../../Engine/Scene/Scene.h"
 #include "../../Engine/Camera/Camera.h"
 #include "../../Engine/Renderer/Renderer.h"
@@ -12,15 +14,15 @@
 
 class GameManager {
 private:
-    Scene * testScene;
+    Scene* testScene;
     Camera camera = Camera();
-    sf::RenderWindow * window;
+    sf::RenderWindow* window;
     Context drawContext;
     Renderer renderer;
-    Player player;
+    std::shared_ptr<Player> player = std::make_shared<Player>(Player());
     TextureLoader<TextureId> textureLoader{};
 
-    Scene * currentScene = testScene;
+    Scene* currentScene = testScene;
 public:
     explicit GameManager(sf::RenderWindow & window);
 

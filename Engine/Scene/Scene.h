@@ -8,18 +8,20 @@
 
 class Scene {
 private:
-    std::vector<Object*> objects = std::vector<Object*>();
+    std::vector<std::shared_ptr<Object>> objects = std::vector<std::shared_ptr<Object>>();
     sf::Color clearColor;
     PhysicsEngine physicsEngine;
 
 public:
     explicit Scene(sf::Color clearColor);
-    auto add(Object& o) -> void;
+    template <typename T>
+    auto add(std::shared_ptr<T> o) -> void {
+        objects.push_back(o);
+    }
     auto render(Context ctx) -> void;
-    auto getObjects() -> std::vector<Object*>&;
+    auto getObjects() -> std::vector<std::shared_ptr<Object>>& ;
     auto getPhysicsEngine() -> PhysicsEngine const&;
 
-    ~Scene();
 };
 
 

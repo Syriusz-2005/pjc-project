@@ -19,7 +19,7 @@ private:
     sf::RenderWindow* window;
     Context drawContext;
     Renderer renderer;
-    std::shared_ptr<Player> player = std::make_shared<Player>(Player());
+    std::shared_ptr<Player> player = std::make_shared<Player>();
     TextureLoader<TextureId> textureLoader{};
 
     Scene* currentScene = testScene;

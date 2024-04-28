@@ -6,7 +6,7 @@
 
 auto initializeTestScene(InitContext const& ctx) -> Scene * {
     auto scene = new Scene(sf::Color(150, 150, 150));
-
+    scene->setBackground("../assets/background.png");
     std::srand(70);
 
     auto trees = std::vector<std::shared_ptr<Tree>>();

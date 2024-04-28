@@ -4,6 +4,7 @@
 
 vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
 
+// Simplex noise
 float noise(vec2 v){
     const vec4 C = vec4(0.211324865405187, 0.366025403784439,
                         -0.577350269189626, 0.024390243902439);
@@ -34,6 +35,7 @@ float noise(vec2 v){
 //
 #define NUM_OCTAVES 5
 
+// Fraction brownian motion
 float fbm(float x) {
     float v = 0.0;
     float a = 0.5;

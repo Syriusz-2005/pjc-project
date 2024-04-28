@@ -4,17 +4,18 @@
 
 #include "../../Engine/Group/Group.h"
 #include "../../Engine/Rect/Rect.h"
+#include "../InitContext/InitContext.h"
 
 class Player : public Object {
 private:
     short horizontalMovement = 0;
-    Rect pRect = Rect(PhysicsModule(0, 0));
+    sf::Sprite sprite;
     bool willJump = false;
 
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
 public:
-    explicit Player();
+    explicit Player(InitContext ctx);
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
     auto getBoundingBox() -> sf::FloatRect override;

@@ -1,15 +1,14 @@
 
 #include "Player.h"
-#include "../../Engine/Rect/Rect.h"
+#include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
-#include <cmath>
 
-Player::Player(): Object(PhysicsModule(1, 0.00043, 0), FOREGROUND) {
-    pRect.physicsModule.isImmovable = true;
-    pRect.physicsModule.bounciness = 0;
-    pRect.physicsModule.isEthereal = true;
-    pRect.name = "Player rect";
+Player::Player(InitContext ctx): Object(PhysicsModule(1, 0.00043, 0), FOREGROUND) {
     name = "Player object";
+    auto texture = ctx.textureLoader->getTexture(PLAYER_STILL);
+    sprite = sf::Sprite(*texture);
+    sprite.setScale(0.068, 0.068);
+//    sprite.setScale(vec::multiply(vec::toFloat(texture->getSize()), 0.9));
 }
 
 auto Player::dispatchEvents(sf::RenderWindow& window) -> void {
@@ -59,12 +58,13 @@ auto Player::onKeyRelease(sf::Event event) -> void {
 }
 
 auto Player::getBoundingBox() -> sf::FloatRect {
-    return sf::FloatRect{pos, sf::Vector2f(40, 40)};
+    return sf::FloatRect{pos, sf::Vector2f(40, 80)};
 }
 
 auto Player::render(Context ctx) -> void {
-    ctx.globalPos += pos;
-    pRect.render(ctx);
+    auto screenPos = ctx.globalPos + pos;
+    sprite.setPosition(screenPos);
+    ctx.window->draw(sprite);
 }
 
 void Player::onBeforeStep() {

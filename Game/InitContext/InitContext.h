@@ -8,6 +8,7 @@
 enum TextureId {
     TREE,
     GROUND,
+    PLAYER_STILL,
 };
 
 

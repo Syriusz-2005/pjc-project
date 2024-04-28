@@ -8,10 +8,13 @@ GameManager::GameManager(sf::RenderWindow &window)
     renderer(Renderer(this->drawContext)) {
     textureLoader.registerTexture(GROUND, "../assets/grass.png");
     textureLoader.registerTexture(TREE, "../assets/tree.png");
+    textureLoader.registerTexture(PLAYER_STILL, "../assets/player_still.png");
 
     auto initContext = InitContext{&textureLoader};
     testScene = initializeTestScene(initContext);
     currentScene = testScene;
+
+    player = std::make_shared<Player>(initContext);
 
     currentScene->add(player);
 }

@@ -6,9 +6,10 @@
 #include <SFML/Graphics.hpp>
 
  namespace vec {
-    auto length(sf::Vector2f& vec) -> float;
-    auto multiply(sf::Vector2f& vec, float s) -> sf::Vector2f;
-    auto divide(sf::Vector2u& v1, sf::Vector2u v2) -> sf::Vector2f;
+    auto toFloat(sf::Vector2u const& vec) -> sf::Vector2f;
+    auto length(sf::Vector2f const& vec) -> float;
+    auto multiply(sf::Vector2f const& vec, float s) -> sf::Vector2f;
+    auto divide(sf::Vector2u const& v1, sf::Vector2u const& v2) -> sf::Vector2f;
 }
 
 #endif //PJC_PROJECT_VECUTILS_H

@@ -3,10 +3,12 @@
 #define PJC_PROJECT_PHYSICSMODULE_H
 
 
-class PhysicsModule {
+#include "../Savable/Savable.h"
+
+class PhysicsModule : public Savable {
 public:
-    const float mass;
-    const float gravity;
+    float mass;
+    float gravity;
 
     bool isImmovable = false;
     /**
@@ -21,6 +23,9 @@ public:
             float mass = 1,
             float gravity = 0.0003,
             float bounciness = 1);
+
+    void load(nlohmann::json json) override;
+    nlohmann::json save() override;
 };
 
 

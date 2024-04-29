@@ -16,7 +16,7 @@ private:
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
 public:
-    explicit Player(InitContext ctx);
+    explicit Player(InitContext ctx, std::string uid);
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
     auto setSpawnPoint() -> void;
@@ -25,6 +25,9 @@ public:
     auto render(Context ctx) -> void override;
     void onBeforeStep() override;
     void applyDamage(float damageValue) override;
+
+    void load(nlohmann::json json) override;
+    nlohmann::json save() override;
 };
 
 

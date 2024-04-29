@@ -9,7 +9,7 @@ private:
     std::vector<Object*> objects{std::vector<Object*>()};
     sf::FloatRect const* area;
 public:
-    explicit Group(PhysicsModule &module, Layer layer);
+    explicit Group(PhysicsModule &module, std::string uid, Layer layer);
 
     auto add(Object& o) -> void;
     auto render(Context ctx) -> void override;

@@ -10,7 +10,7 @@
 
 class GroundPlatformSmall : public TexturedRect {
 public:
-    explicit GroundPlatformSmall(TextureLoader<TextureId> const& loader);
+    explicit GroundPlatformSmall(TextureLoader<TextureId> const& loader, std::string uid);
 };
 
 

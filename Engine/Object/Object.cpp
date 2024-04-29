@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-Object::Object(PhysicsModule const& physicsModule, Layer layer) : layer(layer), physicsModule(physicsModule) {
+Object::Object(PhysicsModule const& physicsModule, std::string uid, Layer layer) : layer(layer), physicsModule(physicsModule), uid(uid) {
 
 }
 
@@ -46,4 +46,30 @@ Object::~Object() {
 
 auto Object::getZDistance() const -> float {
     return zDistance;
+}
+
+auto Object::load(nlohmann::json json) -> void {
+    // Probably could've serialised the whole object right?
+    pos.x = json["pos"]["x"];
+    pos.y = json["pos"]["y"];
+    vel.x = json["vel"]["x"];
+    vel.y = json["vel"]["y"];
+    layer = json["layer"];
+    zDistance = json["zDistance"];
+    name = json["name"];
+    physicsModule.load(json["physicsModule"]);
+}
+
+auto Object::save() -> nlohmann::json {
+    auto json = nlohmann::json();
+    json["physicsModule"] = physicsModule.save();
+    json["pos"]["x"] = pos.x;
+    json["pos"]["y"] = pos.y;
+    json["vel"]["x"] = vel.x;
+    json["vel"]["x"] = vel.x;
+    json["layer"] = layer;
+    json["zDistance"] = zDistance;
+    json["name"] = name;
+    json["uid"] = uid;
+    return json;
 }

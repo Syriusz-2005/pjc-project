@@ -12,7 +12,7 @@ class Tree : public Object {
     sf::Texture const* txt;
 
 public:
-    Tree(float posX, InitContext const& ctx);
+    Tree(float posX, std::string uid, InitContext const& ctx);
 
     void render(Context ctx) override;
     sf::Rect<float> getBoundingBox() override;

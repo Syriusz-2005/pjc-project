@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-Rect::Rect(PhysicsModule const& physicsModule, const sf::Vector2f size, Layer layer, sf::Color color) : Object(physicsModule, layer), s(size) {
+Rect::Rect(PhysicsModule const& physicsModule, std::string uid, const sf::Vector2f size, Layer layer, sf::Color color) : Object(physicsModule, uid, layer), s(size) {
     s.setFillColor(color);
 }
 

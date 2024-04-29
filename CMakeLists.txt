@@ -19,8 +19,14 @@ FetchContent_Declare(
         GIT_TAG         10.2.1
 )
 
-FetchContent_MakeAvailable(fmt)
+FetchContent_Declare(
+        json
+        GIT_REPOSITORY https://github.com/nlohmann/json
+        GIT_TAG      v3.11.3
+)
 
+FetchContent_MakeAvailable(fmt)
+FetchContent_MakeAvailable(json)
 FetchContent_MakeAvailable(SFML)
 
 add_executable(pjc_project main.cpp
@@ -66,6 +72,9 @@ add_executable(pjc_project main.cpp
         Game/SpikedGround/SpikedGround.h
         Game/GroundPlatformSmall/GroundPlatformSmall.cpp
         Game/GroundPlatformSmall/GroundPlatformSmall.h
+        Engine/Savable/Savable.cpp
+        Engine/Savable/Savable.h
 )
-target_link_libraries(pjc_project sfml-graphics)
-target_link_libraries(pjc_project fmt)
+target_link_libraries(pjc_project PRIVATE sfml-graphics)
+target_link_libraries(pjc_project PRIVATE fmt)
+target_link_libraries(pjc_project PRIVATE nlohmann_json::nlohmann_json)

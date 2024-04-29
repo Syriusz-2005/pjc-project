@@ -2,9 +2,10 @@
 
 #include "SpikedGround.h"
 
-SpikedGround::SpikedGround(TextureLoader<TextureId> const& loader)
+SpikedGround::SpikedGround(TextureLoader<TextureId> const& loader, std::string uid)
         : TexturedRect(
         PhysicsModule(),
+        uid,
         *loader.getTexture(SPIKES_GROUND),
         sf::Vector2f(0, -190),
         FOREGROUND) {

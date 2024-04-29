@@ -11,7 +11,7 @@
 
 class SpikedGround: public TexturedRect {
 public:
-    explicit SpikedGround(TextureLoader<TextureId> const& loader);
+    explicit SpikedGround(TextureLoader<TextureId> const& loader, std::string uid);
 
     bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
 };

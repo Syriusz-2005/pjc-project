@@ -13,6 +13,7 @@ public:
 
     explicit Rect(
             PhysicsModule const& physicsModule,
+            std::string uid,
             sf::Vector2f size = sf::Vector2f(40, 40),
             Layer layer = FOREGROUND,
             sf::Color color = sf::Color(0, 0, 0)

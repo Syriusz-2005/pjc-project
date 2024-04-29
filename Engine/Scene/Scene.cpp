@@ -4,7 +4,7 @@
 #include "../VecUtils/VecUtils.h"
 
 
-Scene::Scene(sf::Color clearColor): clearColor(clearColor), physicsEngine(PhysicsEngine(objects)) {
+Scene::Scene(sf::Color clearColor, std::string uid): clearColor(clearColor), physicsEngine(PhysicsEngine(objects)), uid(uid) {
 
 }
 
@@ -57,4 +57,14 @@ auto Scene::setBackgroundSource(BackgroundSource source) -> void {
 
 Scene::~Scene() {
     fmt::println("Disposing scene");
+}
+
+void Scene::load(nlohmann::json json) {
+    for (auto objectData : json["object"]) {
+
+    }
+}
+
+nlohmann::json Scene::save() {
+    return nlohmann::json();
 }

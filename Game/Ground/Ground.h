@@ -11,7 +11,7 @@
 
 class Ground : public TexturedRect {
 public:
-    explicit Ground(TextureLoader<TextureId> const& loader);
+    explicit Ground(TextureLoader<TextureId> const& loader, std::string uid);
 };
 
 

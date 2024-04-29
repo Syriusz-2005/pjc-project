@@ -3,12 +3,11 @@
 #include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
 
-Player::Player(InitContext ctx): Object(PhysicsModule(1, 0.00043, 0), FOREGROUND) {
+Player::Player(InitContext ctx, std::string uid): Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND) {
     name = "Player object";
     auto texture = ctx.textureLoader->getTexture(PLAYER_STILL);
     sprite = sf::Sprite(*texture);
     sprite.setScale(0.068, 0.068);
-//    sprite.setScale(vec::multiply(vec::toFloat(texture->getSize()), 0.9));
 }
 
 auto Player::dispatchEvents(sf::RenderWindow& window) -> void {
@@ -100,4 +99,17 @@ auto Player::setSpawnPoint() -> void {
 void Player::applyDamage(float damageValue) {
     fmt::println("The player died");
     pos = spawnPoint;
+}
+
+void Player::load(nlohmann::json json) {
+    Object::load(json);
+    spawnPoint.x = json["spawnPoint"]["x"];
+    spawnPoint.y = json["spawnPoint"]["y"];
+}
+
+nlohmann::json Player::save() {
+    auto json = Object::save();
+    json["spawnPoint"]["x"] = spawnPoint.x;
+    json["spawnPoint"]["y"] = spawnPoint.y;
+    return json;
 }

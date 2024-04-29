@@ -3,17 +3,22 @@
 
 #include <fmt/core.h>
 #include <SFML/Graphics.hpp>
+#include <nlohmann/json.hpp>
 #include "../Context/Context.h"
 #include "../PhysicalObject/PhysicsModule.h"
+#include "../Savable/Savable.h"
+
 
 enum Layer {
     FOREGROUND,
     BACKGROUND,
 };
 
-class Object {
+class Object : public Savable {
+private:
+    std::string uid;
 protected:
-    explicit Object(PhysicsModule const& physicsModule, Layer layer = FOREGROUND);
+    explicit Object(PhysicsModule const& physicsModule, std::string uid,  Layer layer = FOREGROUND);
 
     sf::Vector2f pos;
     sf::Vector2f vel;
@@ -40,6 +45,9 @@ public:
     virtual auto onBeforeStep() -> void {}
     virtual auto onBeforeCollision(std::shared_ptr<Object> const& collisionTarget) -> bool {return true;}
     virtual auto applyDamage(float damageValue) -> void {};
+
+    auto load(nlohmann::json json) -> void override;
+    auto save() -> nlohmann::json override;
 
     virtual ~Object();
 };

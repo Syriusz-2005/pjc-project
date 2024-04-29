@@ -12,6 +12,7 @@ private:
 public:
     explicit TexturedRect(
             PhysicsModule const& physicsModule,
+            std::string uid,
             sf::Texture const& txt,
             sf::Vector2f const& shift,
             Layer const& layer = FOREGROUND

@@ -60,6 +60,8 @@ add_executable(pjc_project main.cpp
         Game/InitContext/InitContext.h
         Engine/VecUtils/VecUtils.cpp
         Engine/BackgroundSource/BackgroundSource.h
+        Engine/TexturedRect/TexturedRect.cpp
+        Engine/TexturedRect/TexturedRect.h
 )
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

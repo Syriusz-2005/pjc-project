@@ -24,8 +24,8 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      inkscape:zoom="0.63720486"
-     inkscape:cx="86.31447"
-     inkscape:cy="541.42713"
+     inkscape:cx="327.99499"
+     inkscape:cy="649.71256"
      inkscape:window-width="2560"
      inkscape:window-height="1369"
      inkscape:window-x="1672"
@@ -39,7 +39,10 @@
        height="308.99112"
        id="page7"
        margin="0 0 0 0"
-       bleed="0" />
+       bleed="0"
+       inkscape:export-filename="player_still.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </sodipodi:namedview>
   <defs
      id="defs1" />

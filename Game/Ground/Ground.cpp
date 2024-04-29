@@ -4,19 +4,7 @@
 
 #include "Ground.h"
 
-Ground::Ground(): Object(PhysicsModule(), FOREGROUND) {
+Ground::Ground(sf::Texture const& txt, sf::Vector2f const& shift): TexturedRect(PhysicsModule(), txt, shift, FOREGROUND) {
+    physicsModule.isImmovable = true;
     name = "Ground";
-    txt.loadFromFile("../assets/grass.png");
-    sprite = sf::Sprite(txt);
-//    pos = sf::Vector2f(200, -400);
-}
-
-void Ground::render(Context ctx) {
-    auto globalPos = pos + ctx.globalPos - sf::Vector2f(0, 190);
-    sprite.setPosition(globalPos);
-    ctx.window->draw(sprite);
-}
-
-sf::Rect<float> Ground::getBoundingBox() {
-    return sf::Rect<float>{pos, sf::Vector2f{2600, 800}};
 }

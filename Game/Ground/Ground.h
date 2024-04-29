@@ -4,17 +4,12 @@
 #define PJC_PROJECT_GROUND_H
 #include <SFML/Graphics.hpp>
 #include "../../Engine/Object/Object.h"
+#include "../../Engine/TexturedRect/TexturedRect.h"
 
 
-class Ground : public Object {
-    sf::Texture txt = sf::Texture();
-    sf::Sprite sprite;
-
+class Ground : public TexturedRect {
 public:
-    Ground();
-
-    void render(Context ctx) override;
-    sf::Rect<float> getBoundingBox() override;
+    explicit Ground(sf::Texture const& txt, sf::Vector2f const& shift);
 };
 
 

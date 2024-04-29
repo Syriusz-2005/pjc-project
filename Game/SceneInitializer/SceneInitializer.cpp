@@ -28,9 +28,11 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
         scene->add(tree);
     }
 
-    auto floor = std::make_shared<Ground>();
-    floor->physicsModule.isImmovable = true;
+    auto floor = std::make_shared<Ground>(
+            *ctx.textureLoader->getTexture(GROUND),
+            sf::Vector2f{0, -190});
     floor->setPos(sf::Vector2f(0, 850));
+    fmt::println("{}", floor->getBoundingBox().top);
     scene->add(floor);
 
     return scene;

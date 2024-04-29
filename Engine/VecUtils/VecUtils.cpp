@@ -3,7 +3,7 @@
 #include "VecUtils.h"
 
 auto vec::toFloat(sf::Vector2u const& vec) -> sf::Vector2f {
-    return sf::Vector2f((float) vec.x, (float) vec.y);
+    return sf::Vector2f{(float) vec.x, (float) vec.y};
 }
 
 auto vec::length(sf::Vector2f const&vec) -> float  {

@@ -23,15 +23,19 @@ GameManager::GameManager(sf::RenderWindow &window)
 
 auto GameManager::startGameLoop() -> void {
     auto clock = sf::Clock();
+    auto tickClock = sf::Clock();
     while (window->isOpen()) {
         auto timeDelta = clock.getElapsedTime();
 //        fmt::println("{}", timeDelta.asMilliseconds());
+        tickClock.restart();
         currentScene->getPhysicsEngine().step( std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
         clock.restart();
         auto size = window->getSize();
         camera.setPos(player->getPos() - sf::Vector2f(size.x / 2, size.y / 1.3));
         renderer.render(*currentScene, camera);
         window->display();
+        auto tickDelta = tickClock.getElapsedTime();
+//        fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
         player->dispatchEvents(*window);
     }
 }

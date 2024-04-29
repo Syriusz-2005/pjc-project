@@ -17,3 +17,8 @@ auto vec::multiply(sf::Vector2f const&vec, float s) -> sf::Vector2f {
 auto vec::divide(sf::Vector2u const&v1, sf::Vector2u const& v2) -> sf::Vector2f {
     return sf::Vector2f{(float) v1.x / (float) v2.x, (float) v2.y / (float) v2.y};
 }
+
+auto vec::mix(sf::Vector2f const& v1, sf::Vector2f const& v2, float t) -> sf::Vector2f {
+    auto d = v2 - v1;
+    return sf::Vector2f(v1) + d * t;
+}

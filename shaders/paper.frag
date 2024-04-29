@@ -35,7 +35,7 @@ float noise(vec2 v){
 //
 #define NUM_OCTAVES 5
 
-// Fraction brownian motion
+// Fractional brownian motion
 float fbm(float x) {
     float v = 0.0;
     float a = 0.5;

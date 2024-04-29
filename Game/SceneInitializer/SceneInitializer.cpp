@@ -1,6 +1,7 @@
 #include "../../Engine/Scene/Scene.h"
 #include "../Tree/Tree.h"
 #include "../Ground/Ground.h"
+#include "../SpikedGround/SpikedGround.h"
 #include <memory>
 #include <random>
 
@@ -40,8 +41,8 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     floor2->setPos(sf::Vector2f(2000, 850));
     scene->add(floor2);
 
-    auto floor3 = std::make_shared<Ground>(*ctx.textureLoader);
-    floor3->setPos(sf::Vector2f(1000, 1050));
+    auto floor3 = std::make_shared<SpikedGround>(*ctx.textureLoader);
+    floor3->setPos(sf::Vector2f(1800, 1050));
     scene->add(floor3);
 
     return scene;

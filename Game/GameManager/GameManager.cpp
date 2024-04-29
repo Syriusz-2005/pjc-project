@@ -9,6 +9,7 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(GROUND, "../assets/grass.png");
     textureLoader.registerTexture(TREE, "../assets/tree.png");
     textureLoader.registerTexture(PLAYER_STILL, "../assets/player_still.png");
+    textureLoader.registerTexture(SPIKES_GROUND, "../assets/spikes.png");
 
     auto initContext = InitContext{&textureLoader};
     testScene = initializeTestScene(initContext);

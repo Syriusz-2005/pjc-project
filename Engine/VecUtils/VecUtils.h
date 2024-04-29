@@ -10,6 +10,7 @@
     auto length(sf::Vector2f const& vec) -> float;
     auto multiply(sf::Vector2f const& vec, float s) -> sf::Vector2f;
     auto divide(sf::Vector2u const& v1, sf::Vector2u const& v2) -> sf::Vector2f;
+    auto mix(sf::Vector2f const& v1, sf::Vector2f const& v2, float t) -> sf::Vector2f;
 }
 
 #endif //PJC_PROJECT_VECUTILS_H

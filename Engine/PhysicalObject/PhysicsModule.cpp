@@ -1,5 +1,6 @@
 
 #include "PhysicsModule.h"
+#include "fmt/core.h"
 
 PhysicsModule::PhysicsModule(
         const float mass,
@@ -18,7 +19,7 @@ void PhysicsModule::load(nlohmann::json const& json) {
 }
 
 std::unique_ptr<nlohmann::json> PhysicsModule::save() {
-    auto json = std::unique_ptr<nlohmann::json>();
+    auto json = std::make_unique<nlohmann::json>();
     (*json)["mass"] = mass;
     (*json)["gravity"] = gravity;
     (*json)["isImmovable"] = isImmovable;

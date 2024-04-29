@@ -18,4 +18,7 @@ auto main() -> int {
     );
     auto manager = GameManager(window);
     manager.startGameLoop();
+    fmt::println("Quitting gracefully...");
+    manager.saveGame();
+    fmt::println("Game saved");
 }

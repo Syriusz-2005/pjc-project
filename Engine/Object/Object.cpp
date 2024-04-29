@@ -61,12 +61,12 @@ auto Object::load(nlohmann::json const& json) -> void {
 }
 
 auto Object::save() -> std::unique_ptr<nlohmann::json> {
-    auto json = std::unique_ptr<nlohmann::json>();
+    auto json = std::make_unique<nlohmann::json>();
     (*json)["physicsModule"] = *physicsModule.save();
     (*json)["pos"]["x"] = pos.x;
     (*json)["pos"]["y"] = pos.y;
     (*json)["vel"]["x"] = vel.x;
-    (*json)["vel"]["x"] = vel.x;
+    (*json)["vel"]["y"] = vel.y;
     (*json)["layer"] = layer;
     (*json)["zDistance"] = zDistance;
     (*json)["name"] = name;

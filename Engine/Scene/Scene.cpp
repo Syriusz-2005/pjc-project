@@ -71,7 +71,7 @@ void Scene::load(nlohmann::json const& json) {
 }
 
 std::unique_ptr<nlohmann::json> Scene::save() {
-    auto json = std::unique_ptr<nlohmann::json>();
+    auto json = std::make_unique<nlohmann::json>();
     (*json)["uid"] = uid;
     for (const auto& o : objects) {
         auto val = o->save();

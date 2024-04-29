@@ -20,6 +20,8 @@ GameManager::GameManager(sf::RenderWindow &window)
     player->setPos(sf::Vector2f{50, 700});
     player->setSpawnPoint();
     currentScene->add(player);
+
+    gameStateController.loadIfExists();
 }
 
 auto GameManager::startGameLoop() -> void {
@@ -56,8 +58,13 @@ void GameManager::load(const nlohmann::json &json) {
 }
 
 std::unique_ptr<nlohmann::json> GameManager::save() {
-    auto json = std::unique_ptr<nlohmann::json>();
+    auto json = std::make_unique<nlohmann::json>();
     (*json)["player"] = *player->save();
+    fmt::println("Player saved");
     (*json)["scenes"].push_back(*testScene->save());
     return json;
+}
+
+auto GameManager::saveGame() -> void {
+    gameStateController.saveToFile();
 }

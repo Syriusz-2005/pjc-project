@@ -28,6 +28,10 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
         scene->add(tree);
     }
 
+    auto wall1 = std::make_shared<Ground>(*ctx.textureLoader);
+    wall1->setPos(sf::Vector2f(-1800, 600));
+    scene->add(wall1);
+
     auto floor = std::make_shared<Ground>(*ctx.textureLoader);
     floor->setPos(sf::Vector2f(0, 850));
     scene->add(floor);

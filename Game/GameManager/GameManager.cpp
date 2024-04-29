@@ -15,7 +15,7 @@ GameManager::GameManager(sf::RenderWindow &window)
     currentScene = testScene;
 
     player = std::make_shared<Player>(initContext);
-
+    player->setPos(sf::Vector2f{50, 700});
     currentScene->add(player);
 }
 

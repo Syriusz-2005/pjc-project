@@ -11,6 +11,7 @@ private:
     short horizontalMovement = 0;
     sf::Sprite sprite;
     bool willJump = false;
+    sf::Vector2f spawnPoint;
 
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
@@ -18,9 +19,12 @@ public:
     explicit Player(InitContext ctx);
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
+    auto setSpawnPoint() -> void;
+
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;
     void onBeforeStep() override;
+    void applyDamage(float damageValue) override;
 };
 
 

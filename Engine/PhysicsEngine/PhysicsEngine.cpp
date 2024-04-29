@@ -96,6 +96,10 @@ auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
             auto nBox = neighbour->getBoundingBox();
             auto intersectionArea = getIntersectionArea(oBox, nBox);
             if (intersectionArea) {
+                auto prevented = o->onBeforeCollision(neighbour);
+                if (!prevented) continue;
+                auto neighborPrevented = neighbour->onBeforeCollision(o);
+                if (!neighborPrevented) continue;
                 applyCollisionForces(*o, *neighbour, *intersectionArea);
                 delete intersectionArea;
                 if (std::abs(o->getVel().y) < .01) {

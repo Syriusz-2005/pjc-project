@@ -11,3 +11,8 @@ SpikedGround::SpikedGround(TextureLoader<TextureId> const& loader)
     physicsModule.isImmovable = true;
     name = "Spiked ground";
 }
+
+bool SpikedGround::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
+    collisionTarget->applyDamage(1);
+    return true;
+}

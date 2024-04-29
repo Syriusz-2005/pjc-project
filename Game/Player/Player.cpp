@@ -92,3 +92,12 @@ void Player::onBeforeStep() {
     }
 
 }
+
+auto Player::setSpawnPoint() -> void {
+    spawnPoint = pos;
+}
+
+void Player::applyDamage(float damageValue) {
+    fmt::println("The player died");
+    pos = spawnPoint;
+}

@@ -38,6 +38,8 @@ public:
     virtual auto getBoundingBox() -> sf::Rect<float> = 0;
     virtual auto onAfterStep() -> void {}
     virtual auto onBeforeStep() -> void {}
+    virtual auto onBeforeCollision(std::shared_ptr<Object> const& collisionTarget) -> bool {return true;}
+    virtual auto applyDamage(float damageValue) -> void {};
 
     virtual ~Object();
 };

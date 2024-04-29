@@ -64,6 +64,8 @@ add_executable(pjc_project main.cpp
         Engine/TexturedRect/TexturedRect.h
         Game/SpikedGround/SpikedGround.cpp
         Game/SpikedGround/SpikedGround.h
+        Game/GroundPlatformSmall/GroundPlatformSmall.cpp
+        Game/GroundPlatformSmall/GroundPlatformSmall.h
 )
 target_link_libraries(pjc_project sfml-graphics)
 target_link_libraries(pjc_project fmt)

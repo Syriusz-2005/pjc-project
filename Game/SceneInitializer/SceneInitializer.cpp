@@ -2,6 +2,7 @@
 #include "../Tree/Tree.h"
 #include "../Ground/Ground.h"
 #include "../SpikedGround/SpikedGround.h"
+#include "../GroundPlatformSmall/GroundPlatformSmall.h"
 #include <memory>
 #include <random>
 
@@ -44,6 +45,10 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     auto floor3 = std::make_shared<SpikedGround>(*ctx.textureLoader);
     floor3->setPos(sf::Vector2f(1800, 1050));
     scene->add(floor3);
+
+    auto platform = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader);
+    platform->setPos(sf::Vector2f(2600, 820));
+    scene->add(platform);
 
     return scene;
 };

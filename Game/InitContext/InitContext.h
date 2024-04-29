@@ -8,6 +8,8 @@
 enum TextureId {
     TREE,
     GROUND,
+    GROUND_PLATFORM_SMALL,
+
     PLAYER_STILL,
     SPIKES_GROUND,
 };

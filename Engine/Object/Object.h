@@ -46,8 +46,9 @@ public:
     virtual auto onBeforeCollision(std::shared_ptr<Object> const& collisionTarget) -> bool {return true;}
     virtual auto applyDamage(float damageValue) -> void {};
 
-    auto load(nlohmann::json json) -> void override;
-    auto save() -> nlohmann::json override;
+    auto load(nlohmann::json const& json) -> void override;
+    auto save() -> std::unique_ptr<nlohmann::json> override;
+    bool isUidMatch(std::string& id) override;
 
     virtual ~Object();
 };

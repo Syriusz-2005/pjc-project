@@ -101,15 +101,15 @@ void Player::applyDamage(float damageValue) {
     pos = spawnPoint;
 }
 
-void Player::load(nlohmann::json json) {
+void Player::load(nlohmann::json const& json) {
     Object::load(json);
     spawnPoint.x = json["spawnPoint"]["x"];
     spawnPoint.y = json["spawnPoint"]["y"];
 }
 
-nlohmann::json Player::save() {
+std::unique_ptr<nlohmann::json> Player::save() {
     auto json = Object::save();
-    json["spawnPoint"]["x"] = spawnPoint.x;
-    json["spawnPoint"]["y"] = spawnPoint.y;
+    (*json)["spawnPoint"]["x"] = spawnPoint.x;
+    (*json)["spawnPoint"]["y"] = spawnPoint.y;
     return json;
 }

@@ -48,7 +48,7 @@ auto Object::getZDistance() const -> float {
     return zDistance;
 }
 
-auto Object::load(nlohmann::json json) -> void {
+auto Object::load(nlohmann::json const& json) -> void {
     // Probably could've serialised the whole object right?
     pos.x = json["pos"]["x"];
     pos.y = json["pos"]["y"];
@@ -60,16 +60,20 @@ auto Object::load(nlohmann::json json) -> void {
     physicsModule.load(json["physicsModule"]);
 }
 
-auto Object::save() -> nlohmann::json {
-    auto json = nlohmann::json();
-    json["physicsModule"] = physicsModule.save();
-    json["pos"]["x"] = pos.x;
-    json["pos"]["y"] = pos.y;
-    json["vel"]["x"] = vel.x;
-    json["vel"]["x"] = vel.x;
-    json["layer"] = layer;
-    json["zDistance"] = zDistance;
-    json["name"] = name;
-    json["uid"] = uid;
+auto Object::save() -> std::unique_ptr<nlohmann::json> {
+    auto json = std::unique_ptr<nlohmann::json>();
+    (*json)["physicsModule"] = *physicsModule.save();
+    (*json)["pos"]["x"] = pos.x;
+    (*json)["pos"]["y"] = pos.y;
+    (*json)["vel"]["x"] = vel.x;
+    (*json)["vel"]["x"] = vel.x;
+    (*json)["layer"] = layer;
+    (*json)["zDistance"] = zDistance;
+    (*json)["name"] = name;
+    (*json)["uid"] = uid;
     return json;
+}
+
+bool Object::isUidMatch(std::string& id) {
+    return id == uid;
 }

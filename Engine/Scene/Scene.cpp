@@ -59,12 +59,27 @@ Scene::~Scene() {
     fmt::println("Disposing scene");
 }
 
-void Scene::load(nlohmann::json json) {
-    for (auto objectData : json["object"]) {
-
+void Scene::load(nlohmann::json const& json) {
+    for (auto objectData : json["objects"]) {
+        auto objectId = objectData["uid"].get<std::string>();
+        for (const auto& o : objects) {
+            if (o->isUidMatch(objectId)) {
+                o->load(objectData);
+            }
+        }
     }
 }
 
-nlohmann::json Scene::save() {
-    return nlohmann::json();
+std::unique_ptr<nlohmann::json> Scene::save() {
+    auto json = std::unique_ptr<nlohmann::json>();
+    (*json)["uid"] = uid;
+    for (const auto& o : objects) {
+        auto val = o->save();
+        (*json)["objects"].push_back(*val);
+    }
+    return json;
+}
+
+bool Scene::isUidMatch(std::string &id) {
+    return uid == id;
 }

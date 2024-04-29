@@ -24,8 +24,9 @@ public:
             float gravity = 0.0003,
             float bounciness = 1);
 
-    void load(nlohmann::json json) override;
-    nlohmann::json save() override;
+    void load(nlohmann::json const& json) override;
+    std::unique_ptr<nlohmann::json> save() override;
+    bool isUidMatch(std::string &id) override {return false;}
 };
 
 

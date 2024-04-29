@@ -11,9 +11,12 @@
 #include "../SceneInitializer/SceneInitializer.h"
 #include "../Player/Player.h"
 #include "../../Engine/TextureLoader/TextureLoader.h"
+#include "../../Engine/GameStateController/GameStateController.h"
 
-class GameManager {
+class GameManager : private Savable {
 private:
+    GameStateController gameStateController{this, "../state.splash.json"};
+
     Scene* testScene;
     Camera camera = Camera();
     sf::RenderWindow* window;
@@ -23,6 +26,9 @@ private:
     std::shared_ptr<Player> player;
 
     Scene* currentScene = testScene;
+    void load(const nlohmann::json &json) override;
+    std::unique_ptr<nlohmann::json> save() override;
+
 public:
     explicit GameManager(sf::RenderWindow & window);
 
@@ -35,6 +41,8 @@ public:
 
     auto switchScene() -> void;
     auto startGameLoop() -> void;
+
+    bool isUidMatch(std::string &id) override {return false;}
 };
 
 

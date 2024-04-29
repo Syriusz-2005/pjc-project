@@ -8,7 +8,7 @@ PhysicsModule::PhysicsModule(
 
 }
 
-void PhysicsModule::load(nlohmann::json json) {
+void PhysicsModule::load(nlohmann::json const& json) {
     mass = json["mass"];
     gravity = json["gravity"];
     isImmovable = json["isImmovable"];
@@ -17,13 +17,13 @@ void PhysicsModule::load(nlohmann::json json) {
     isOnGround = json["isOnGround"];
 }
 
-nlohmann::json PhysicsModule::save() {
-    auto json = nlohmann::json();
-    json["mass"] = mass;
-    json["gravity"] = gravity;
-    json["isImmovable"] = isImmovable;
-    json["isEthereal"] = isEthereal;
-    json["bounciness"] = bounciness;
-    json["isOnGround"] = isOnGround;
+std::unique_ptr<nlohmann::json> PhysicsModule::save() {
+    auto json = std::unique_ptr<nlohmann::json>();
+    (*json)["mass"] = mass;
+    (*json)["gravity"] = gravity;
+    (*json)["isImmovable"] = isImmovable;
+    (*json)["isEthereal"] = isEthereal;
+    (*json)["bounciness"] = bounciness;
+    (*json)["isOnGround"] = isOnGround;
     return json;
 }

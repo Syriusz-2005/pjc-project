@@ -34,8 +34,9 @@ public:
 
     auto getBackgroundShader() -> sf::Shader&;
 
-    void load(nlohmann::json json) override;
-    nlohmann::json save() override;
+    void load(nlohmann::json const& json) override;
+    std::unique_ptr<nlohmann::json> save() override;
+    bool isUidMatch(std::string &id) override;
 
     ~Scene();
 };

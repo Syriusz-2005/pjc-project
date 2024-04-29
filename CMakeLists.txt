@@ -74,6 +74,8 @@ add_executable(pjc_project main.cpp
         Game/GroundPlatformSmall/GroundPlatformSmall.h
         Engine/Savable/Savable.cpp
         Engine/Savable/Savable.h
+        Engine/GameStateController/GameStateController.cpp
+        Engine/GameStateController/GameStateController.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

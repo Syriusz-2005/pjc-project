@@ -44,3 +44,20 @@ auto GameManager::startGameLoop() -> void {
 auto GameManager::switchScene() -> void {
 //    currentScene = testScene;
 }
+
+void GameManager::load(const nlohmann::json &json) {
+    player->load(json["player"]);
+    for (auto sceneData : json["scenes"]) {
+        auto id = sceneData["uid"].get<std::string>();
+        if (testScene->isUidMatch(id)) {
+            testScene->load(sceneData);
+        }
+    }
+}
+
+std::unique_ptr<nlohmann::json> GameManager::save() {
+    auto json = std::unique_ptr<nlohmann::json>();
+    (*json)["player"] = *player->save();
+    (*json)["scenes"].push_back(*testScene->save());
+    return json;
+}

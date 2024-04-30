@@ -94,3 +94,11 @@ auto Object::setParent(CompositeParent<Object> *p) -> void {
 auto Object::isTheSame(Object const* o) const -> bool {
     return o->isUidMatch(uid);
 }
+
+auto Object::setType(int t) -> void {
+    type = t;
+}
+
+auto Object::getType() -> int {
+    return type;
+}

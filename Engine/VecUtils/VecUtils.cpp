@@ -22,3 +22,8 @@ auto vec::mix(sf::Vector2f const& v1, sf::Vector2f const& v2, float t) -> sf::Ve
     auto d = v2 - v1;
     return sf::Vector2f(v1) + d * t;
 }
+
+auto vec::distance(const sf::Vector2f &v1, const sf::Vector2f &v2) -> float {
+    auto d = v1 - v2;
+    return std::abs(d.x) + std::abs(d.y);
+}

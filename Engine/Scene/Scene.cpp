@@ -34,11 +34,6 @@ auto Scene::render(Context ctx) -> void {
     }
 }
 
-
-auto Scene::getObjects() -> std::vector<std::shared_ptr<Object>>& {
-    return objects;
-}
-
 auto Scene::getPhysicsEngine() -> PhysicsEngine const & {
     return physicsEngine;
 }
@@ -82,4 +77,8 @@ std::unique_ptr<nlohmann::json> Scene::save() {
 
 bool Scene::isUidMatch(std::string const&id) const {
     return uid == id;
+}
+
+const std::vector<std::shared_ptr<Object>> &Scene::getChildren() {
+    return objects;
 }

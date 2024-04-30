@@ -34,8 +34,8 @@ public:
             return val->isTheSame(o);
         });
     }
+    const std::vector<std::shared_ptr<Object>> & getChildren() override;
     auto render(Context ctx) -> void;
-    auto getObjects() -> std::vector<std::shared_ptr<Object>>& ;
     auto getPhysicsEngine() -> PhysicsEngine const&;
     auto setBackground(std::string textureFile) -> void;
 

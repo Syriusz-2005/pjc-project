@@ -20,6 +20,7 @@ class Object : public Savable {
 private:
     std::string uid;
     std::shared_ptr<EntityModule> entityModule;
+    int type;
 protected:
     explicit Object(
             PhysicsModule const &physicsModule,
@@ -27,6 +28,7 @@ protected:
     );
 
     auto setEntityModule(std::shared_ptr<EntityModule>& module) -> void;
+    auto setType(int t) -> void;
 
     sf::Vector2f pos;
     sf::Vector2f vel;
@@ -38,6 +40,8 @@ public:
     PhysicsModule physicsModule;
     std::string name;
 
+
+    auto getType() -> int;
     auto setParent(CompositeParent<Object>* p) -> void;
 
     auto getPos() -> sf::Vector2f;

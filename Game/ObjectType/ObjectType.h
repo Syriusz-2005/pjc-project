@@ -1,0 +1,12 @@
+
+#ifndef PJC_PROJECT_OBJECTTYPE_H
+#define PJC_PROJECT_OBJECTTYPE_H
+
+enum ObjectType {
+    ENVIRONMENT,
+    ENEMY,
+    PLAYER,
+};
+
+
+#endif //PJC_PROJECT_OBJECTTYPE_H

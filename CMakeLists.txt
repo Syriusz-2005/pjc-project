@@ -84,6 +84,8 @@ add_executable(pjc_project main.cpp
         Game/BallEnemy/BallEnemy.h
         Engine/CompositeParent/CompositeParent.cpp
         Engine/CompositeParent/CompositeParent.h
+        Game/ObjectType/ObjectType.cpp
+        Game/ObjectType/ObjectType.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

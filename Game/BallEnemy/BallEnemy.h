@@ -14,6 +14,8 @@ private:
     std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10);
 public:
     BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid);
+
+    void onBeforeStep() override;
 };
 
 

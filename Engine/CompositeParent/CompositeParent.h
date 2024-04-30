@@ -7,6 +7,7 @@
 
 
 #include <memory>
+#include <vector>
 
 template <typename T>
 class CompositeParent {
@@ -14,6 +15,7 @@ public:
     virtual auto add(std::shared_ptr<T> o) -> void = 0;
     virtual auto remove(std::shared_ptr<T> o) -> void = 0;
     virtual auto remove(T* o) -> void = 0;
+    virtual auto getChildren() -> std::vector<std::shared_ptr<T>> const& = 0;
 };
 
 

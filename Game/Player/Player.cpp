@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
+#include "../ObjectType/ObjectType.h"
 
 Player::Player(InitContext ctx, std::string uid)
         : Object(
@@ -13,6 +14,7 @@ Player::Player(InitContext ctx, std::string uid)
     sprite = sf::Sprite(*texture);
     sprite.setScale(0.068, 0.068);
     setEntityModule(entityModule);
+    setType(PLAYER);
 }
 
 auto Player::dispatchEvents(sf::RenderWindow &window) -> void {
@@ -82,7 +84,7 @@ void Player::onBeforeStep() {
     if (willJump) {
         willJump = false;
         if (physicsModule.isOnGround) {
-            vel.y -= .3;
+            vel.y -= .35;
         }
     }
 

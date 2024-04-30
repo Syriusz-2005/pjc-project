@@ -80,6 +80,6 @@ std::unique_ptr<nlohmann::json> Scene::save() {
     return json;
 }
 
-bool Scene::isUidMatch(std::string &id) {
+bool Scene::isUidMatch(std::string const&id) const {
     return uid == id;
 }

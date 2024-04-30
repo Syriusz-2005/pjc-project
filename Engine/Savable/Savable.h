@@ -9,7 +9,7 @@ class Savable {
 public:
     virtual auto load(nlohmann::json const& json) -> void = 0;
     virtual auto save() -> std::unique_ptr<nlohmann::json> = 0;
-    virtual auto isUidMatch(std::string& id) -> bool = 0;
+    virtual auto isUidMatch(std::string const& id) const -> bool = 0;
 };
 
 

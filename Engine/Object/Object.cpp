@@ -75,15 +75,22 @@ auto Object::save() -> std::unique_ptr<nlohmann::json> {
     return json;
 }
 
-bool Object::isUidMatch(std::string& id) {
+bool Object::isUidMatch(std::string const& id) const {
     return id == uid;
 }
 
 auto Object::applyDamage(float damageValue) -> void {
-    fmt::println("Damage applied {}", damageValue);
     entityModule->damage(damageValue);
 }
 
 auto Object::setEntityModule(std::shared_ptr<EntityModule>& module) -> void {
     entityModule = module;
-};
+}
+
+auto Object::setParent(CompositeParent<Object> *p) -> void {
+    parent = p;
+}
+
+auto Object::isTheSame(Object const* o) const -> bool {
+    return o->isUidMatch(uid);
+}

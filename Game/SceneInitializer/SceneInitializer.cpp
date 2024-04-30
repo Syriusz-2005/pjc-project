@@ -3,6 +3,7 @@
 #include "../Ground/Ground.h"
 #include "../SpikedGround/SpikedGround.h"
 #include "../GroundPlatformSmall/GroundPlatformSmall.h"
+#include "../BallEnemy/BallEnemy.h"
 #include <memory>
 #include <random>
 
@@ -49,6 +50,10 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     auto platform = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "platform");
     platform->setPos(sf::Vector2f(2600, 820));
     scene->add(platform);
+
+    auto enemy1 = std::make_shared<BallEnemy>(*ctx.textureLoader, "ball_enemy1");
+    enemy1->setPos(sf::Vector2f(2650, 700));
+    scene->add(enemy1);
 
     return scene;
 };

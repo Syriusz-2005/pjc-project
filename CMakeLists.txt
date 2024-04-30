@@ -80,6 +80,10 @@ add_executable(pjc_project main.cpp
         Engine/EntityModule/EntityModule.h
         Engine/MortalEntityModule/MortalEntityModule.cpp
         Engine/MortalEntityModule/MortalEntityModule.h
+        Game/BallEnemy/BallEnemy.cpp
+        Game/BallEnemy/BallEnemy.h
+        Engine/CompositeParent/CompositeParent.cpp
+        Engine/CompositeParent/CompositeParent.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

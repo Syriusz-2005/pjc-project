@@ -7,7 +7,6 @@ MortalEntityModule::MortalEntityModule(float hp, std::function<void()> const& on
 }
 
 void MortalEntityModule::damage(float val) {
-    fmt::println("Mortal entity applying damage");
     hp -= val;
     if (hp <= 0) {
         onDeath();

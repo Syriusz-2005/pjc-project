@@ -11,7 +11,7 @@ private:
     float hp;
     std::function<void()>const& onDeath;
 public:
-    explicit MortalEntityModule(float hp, std::function<void()> const& onDeath);
+    explicit MortalEntityModule(float hp, std::function<void()> const& onDeath = []() -> void {});
 
     void damage(float val) override;
 };

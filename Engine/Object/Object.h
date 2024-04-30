@@ -8,6 +8,7 @@
 #include "../PhysicalObject/PhysicsModule.h"
 #include "../Savable/Savable.h"
 #include "../EntityModule/EntityModule.h"
+#include "../CompositeParent/CompositeParent.h"
 
 
 enum Layer {
@@ -31,9 +32,13 @@ protected:
     sf::Vector2f vel;
     Layer layer;
     float zDistance{};
+
+    CompositeParent<Object>* parent;
 public:
     PhysicsModule physicsModule;
     std::string name;
+
+    auto setParent(CompositeParent<Object>* p) -> void;
 
     auto getPos() -> sf::Vector2f;
 
@@ -69,7 +74,8 @@ public:
 
     auto save() -> std::unique_ptr<nlohmann::json> override;
 
-    bool isUidMatch(std::string &id) override;
+    bool isUidMatch(std::string const&id) const override;
+    auto isTheSame(Object const* o) const -> bool;
 
     virtual ~Object();
 };

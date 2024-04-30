@@ -39,7 +39,7 @@ public:
     auto switchScene() -> void;
     auto startGameLoop() -> void;
 
-    bool isUidMatch(std::string &id) override {return false;}
+    bool isUidMatch(std::string const &id) const override {return false;}
     void load(const nlohmann::json &json) override;
     std::unique_ptr<nlohmann::json> save() override;
 

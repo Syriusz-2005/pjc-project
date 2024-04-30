@@ -76,6 +76,10 @@ add_executable(pjc_project main.cpp
         Engine/Savable/Savable.h
         Engine/GameStateController/GameStateController.cpp
         Engine/GameStateController/GameStateController.h
+        Engine/EntityModule/EntityModule.cpp
+        Engine/EntityModule/EntityModule.h
+        Engine/MortalEntityModule/MortalEntityModule.cpp
+        Engine/MortalEntityModule/MortalEntityModule.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

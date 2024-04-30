@@ -3,7 +3,8 @@
 
 #include "Object.h"
 
-Object::Object(PhysicsModule const& physicsModule, std::string uid, Layer layer) : layer(layer), physicsModule(physicsModule), uid(uid) {
+Object::Object(PhysicsModule const& physicsModule, std::string uid, Layer layer)
+    : layer(layer), physicsModule(physicsModule), uid(uid) {
 
 }
 
@@ -77,3 +78,12 @@ auto Object::save() -> std::unique_ptr<nlohmann::json> {
 bool Object::isUidMatch(std::string& id) {
     return id == uid;
 }
+
+auto Object::applyDamage(float damageValue) -> void {
+    fmt::println("Damage applied {}", damageValue);
+    entityModule->damage(damageValue);
+}
+
+auto Object::setEntityModule(std::shared_ptr<EntityModule>& module) -> void {
+    entityModule = module;
+};

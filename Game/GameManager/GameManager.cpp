@@ -11,6 +11,7 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(PLAYER_STILL, "../assets/player_still.png");
     textureLoader.registerTexture(SPIKES_GROUND, "../assets/spikes.png");
     textureLoader.registerTexture(GROUND_PLATFORM_SMALL, "../assets/ground_small_platform.png");
+    textureLoader.registerTexture(ENEMY_BALL, "../assets/enemy_ball.png");
 
     auto initContext = InitContext{&textureLoader};
     testScene = initializeTestScene(initContext);

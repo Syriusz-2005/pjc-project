@@ -14,6 +14,6 @@ SpikedGround::SpikedGround(TextureLoader<TextureId> const& loader, std::string u
 }
 
 bool SpikedGround::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
-    collisionTarget->applyDamage(1);
+    collisionTarget->applyDamage(20);
     return true;
 }

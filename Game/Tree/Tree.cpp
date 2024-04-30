@@ -3,7 +3,8 @@
 #include <cmath>
 #include "../../Engine/VecUtils/VecUtils.h"
 
-Tree::Tree(float posX, std::string uid, InitContext const& ctx): Object(PhysicsModule(0, 0, 0), uid, BACKGROUND) {
+Tree::Tree(float posX, std::string uid, InitContext const& ctx)
+    : Object(PhysicsModule(0, 0, 0), uid, BACKGROUND) {
     name = "tree";
     txt = ctx.textureLoader->getTexture(TREE);
     sprite = sf::Sprite(*txt);

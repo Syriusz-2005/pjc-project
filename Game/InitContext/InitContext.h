@@ -12,6 +12,8 @@ enum TextureId {
 
     PLAYER_STILL,
     SPIKES_GROUND,
+
+    ENEMY_BALL,
 };
 
 

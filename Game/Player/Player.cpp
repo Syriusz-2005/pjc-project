@@ -3,14 +3,19 @@
 #include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
 
-Player::Player(InitContext ctx, std::string uid): Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND) {
+Player::Player(InitContext ctx, std::string uid)
+        : Object(
+        PhysicsModule(1, 0.00043, 0),
+        uid,
+        FOREGROUND) {
     name = "Player object";
     auto texture = ctx.textureLoader->getTexture(PLAYER_STILL);
     sprite = sf::Sprite(*texture);
     sprite.setScale(0.068, 0.068);
+    setEntityModule(entityModule);
 }
 
-auto Player::dispatchEvents(sf::RenderWindow& window) -> void {
+auto Player::dispatchEvents(sf::RenderWindow &window) -> void {
     auto event = sf::Event();
     while (window.pollEvent(event)) {
         switch (event.type) {
@@ -18,9 +23,14 @@ auto Player::dispatchEvents(sf::RenderWindow& window) -> void {
                 window.close();
                 break;
             }
-            case sf::Event::KeyPressed: onKeyPress(event); break;
-            case sf::Event::KeyReleased: onKeyRelease(event); break;
-            default: {}
+            case sf::Event::KeyPressed:
+                onKeyPress(event);
+                break;
+            case sf::Event::KeyReleased:
+                onKeyRelease(event);
+                break;
+            default: {
+            }
         }
     }
 }
@@ -38,7 +48,8 @@ auto Player::onKeyPress(sf::Event event) -> void {
         case sf::Keyboard::Space: {
             willJump = true;
         }
-        default: {}
+        default: {
+        }
     }
 }
 
@@ -52,7 +63,8 @@ auto Player::onKeyRelease(sf::Event event) -> void {
             horizontalMovement = 0;
             break;
         }
-        default: {}
+        default: {
+        }
     }
 }
 
@@ -80,7 +92,7 @@ void Player::onBeforeStep() {
         auto finalVel = (double) vel.x;
         auto sign = vel.x > 0 ? 1 : -1;
         auto xSpeed = std::abs(vel.x == 0 ? 0.1 : vel.x) * 140;
-        auto multiplier =  0.0004 * (1 / xSpeed);
+        auto multiplier = 0.0004 * (1 / xSpeed);
         finalVel += horizontalMovement * multiplier;
 
         if (horizontalMovement == 0) {
@@ -96,12 +108,7 @@ auto Player::setSpawnPoint() -> void {
     spawnPoint = pos;
 }
 
-void Player::applyDamage(float damageValue) {
-    fmt::println("The player died");
-    pos = spawnPoint;
-}
-
-void Player::load(nlohmann::json const& json) {
+void Player::load(nlohmann::json const &json) {
     Object::load(json);
     spawnPoint.x = json["spawnPoint"]["x"];
     spawnPoint.y = json["spawnPoint"]["y"];

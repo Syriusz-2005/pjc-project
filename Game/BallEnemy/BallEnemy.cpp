@@ -19,7 +19,7 @@ BallEnemy::BallEnemy(TextureLoader<TextureId> const& loader, std::string const& 
 void BallEnemy::onBeforeStep() {
     Object::onBeforeStep();
     auto children = parent->getChildren();
-    for (auto child : children) {
+    for (const auto& child : children) {
         if (child->getType() == PLAYER) {
             auto distance = vec::distance(pos, child->getPos());
             if (distance < 650) {

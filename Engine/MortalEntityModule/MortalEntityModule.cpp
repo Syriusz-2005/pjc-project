@@ -10,5 +10,6 @@ void MortalEntityModule::damage(float val) {
     hp -= val;
     if (hp <= 0) {
         onDeath();
+        fmt::println("After calling onDeath");
     }
 }

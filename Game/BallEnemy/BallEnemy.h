@@ -9,9 +9,11 @@
 class BallEnemy : public TexturedRect {
 private:
     std::function<void()> onDeath = [this]() -> void {
-        parent->remove(this);
+        fmt::println("Trying to remove ball...");
+        parent->remove(getUid());
+        fmt::println("Ball removed");
     };
-    std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10);
+    std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10, onDeath);
 public:
     BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid);
 

@@ -102,3 +102,7 @@ auto Object::setType(int t) -> void {
 auto Object::getType() -> int {
     return type;
 }
+
+auto Object::getUid() -> std::string const & {
+    return uid;
+}

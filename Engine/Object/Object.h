@@ -36,12 +36,14 @@ protected:
     float zDistance{};
 
     CompositeParent<Object>* parent;
+    auto getUid() -> std::string const&;
 public:
     PhysicsModule physicsModule;
     std::string name;
 
 
     auto getType() -> int;
+
     auto setParent(CompositeParent<Object>* p) -> void;
 
     auto getPos() -> sf::Vector2f;

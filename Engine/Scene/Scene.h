@@ -8,6 +8,7 @@
 #include "../PhysicsEngine/PhysicsEngine.h"
 #include "../BackgroundSource/BackgroundSource.h"
 #include "../CompositeParent/CompositeParent.h"
+#include <algorithm>
 
 
 class Scene : public Savable, public CompositeParent<Object> {
@@ -27,12 +28,14 @@ public:
         objects.push_back(o);
     }
     void remove(std::shared_ptr<Object> o) override {
-        std::ranges::remove(objects.begin(), objects.end(), o);
+        const auto [first, last] = std::ranges::remove(objects.begin(), objects.end(), o);
+        objects.erase(first, last);
     }
-    void remove(Object *o) override {
-        std::ranges::remove_if(objects.begin(), objects.end(), [o](std::shared_ptr<Object>& val) -> bool {
-            return val->isTheSame(o);
+    void remove(std::string const& uid) override {
+        const auto [first, last] = std::ranges::remove_if(objects, [uid](std::shared_ptr<Object>& val) -> bool {
+            return val->isUidMatch(uid);
         });
+        objects.erase(first, last);
     }
     const std::vector<std::shared_ptr<Object>> & getChildren() override;
     auto render(Context ctx) -> void;

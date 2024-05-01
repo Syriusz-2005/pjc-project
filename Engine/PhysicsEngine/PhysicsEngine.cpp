@@ -11,7 +11,8 @@ PhysicsEngine::PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects): obj
 
 auto PhysicsEngine::step(long long timeElapsed) const -> void {
     auto deltaMs = ((float) timeElapsed) / 1000;
-    for (const auto& object: *objects) {
+    for (auto it = objects->begin(); it != objects->end(); it++) {
+        const auto object = *it;
         object->onBeforeStep();
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;
@@ -90,7 +91,12 @@ auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
     if (module->isEthereal || module->isImmovable) return;
 
     auto oBox = o->getBoundingBox();
-    for (const auto& neighbour : *objects) {
+    // Why not a range based loop?
+    // Because I don't understand c++
+    // Using a range-based loop may cause an undefined behaviour when one of the children removes something from the scene
+    // For example Spikes destroy an object that collides with them in the onBeforeCollision method. Range based loop will crash the program in such scenario.
+    for (auto it = objects->begin(); it != objects->end(); it++) {
+        const auto neighbour = *it;
         auto nModule = neighbour->physicsModule;
         if (!nModule.isEthereal && neighbour != o) {
             auto nBox = neighbour->getBoundingBox();

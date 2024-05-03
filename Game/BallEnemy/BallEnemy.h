@@ -17,7 +17,8 @@ private:
 public:
     BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid);
 
-    void onBeforeStep() override;
+    bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
+    void onAfterStep() override;
 };
 
 

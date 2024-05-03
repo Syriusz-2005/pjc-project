@@ -80,7 +80,9 @@ bool Object::isUidMatch(std::string const& id) const {
 }
 
 auto Object::applyDamage(float damageValue) -> void {
-    entityModule->damage(damageValue);
+    if (entityModule) {
+        entityModule->damage(damageValue);
+    }
 }
 
 auto Object::setEntityModule(std::shared_ptr<EntityModule>& module) -> void {

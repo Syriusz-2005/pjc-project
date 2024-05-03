@@ -4,11 +4,16 @@
 
 
 #include "../Object/Object.h"
+#include "../VecUtils/VecUtils.h"
 
 class TexturedRect : public Object {
 private:
-    sf::Sprite sprite;
     sf::Vector2f shift;
+
+protected:
+    sf::Sprite sprite;
+
+    sf::Vector2f boxSize;
 public:
     explicit TexturedRect(
             PhysicsModule const& physicsModule,

@@ -8,7 +8,7 @@ Player::Player(InitContext ctx, std::string uid)
         : Object(
         PhysicsModule(1, 0.00043, 0),
         uid,
-        FOREGROUND) {
+        FOREGROUND), EventEmitter<PlayerEventType>() {
     name = "Player object";
     auto texture = ctx.textureLoader->getTexture(PLAYER_STILL);
     sprite = sf::Sprite(*texture);
@@ -35,6 +35,7 @@ auto Player::dispatchEvents(sf::RenderWindow &window) -> void {
             }
         }
     }
+    emitScheduledMicrotasks();
 }
 
 auto Player::onKeyPress(sf::Event event) -> void {

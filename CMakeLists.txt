@@ -86,6 +86,8 @@ add_executable(pjc_project main.cpp
         Engine/CompositeParent/CompositeParent.h
         Game/ObjectType/ObjectType.cpp
         Game/ObjectType/ObjectType.h
+        Engine/EventEmitter/EventEmitter.cpp
+        Engine/EventEmitter/EventEmitter.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

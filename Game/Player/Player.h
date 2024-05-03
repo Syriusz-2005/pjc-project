@@ -6,8 +6,13 @@
 #include "../../Engine/Rect/Rect.h"
 #include "../InitContext/InitContext.h"
 #include "../../Engine/MortalEntityModule/MortalEntityModule.h"
+#include "../../Engine/EventEmitter/EventEmitter.h"
 
-class Player : public Object {
+enum PlayerEventType {
+        DEATH,
+};
+
+class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
     short horizontalMovement = 0;
     sf::Sprite sprite;
@@ -18,7 +23,7 @@ private:
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
     std::function<void()> onDeath = [this]() -> void {
-        fmt::println("The player died");
+        emit(DEATH);
         pos = spawnPoint;
     };
 public:

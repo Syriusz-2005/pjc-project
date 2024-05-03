@@ -15,3 +15,4 @@ https://stackoverflow.com/questions/191757/how-to-concatenate-a-stdstring-and-an
 https://refactoring.guru/design-patterns/composite/cpp/example
 https://cplusplus.com/forum/general/250013/
 https://medium.com/@simontoth/daily-bit-e-of-c-std-remove-std-remove-if-33876e864726
+https://stackoverflow.com/questions/30905487/how-can-i-pass-stdunique-ptr-into-a-function

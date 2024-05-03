@@ -14,15 +14,21 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(ENEMY_BALL, "../assets/enemy_ball.png");
 
     auto initContext = InitContext{&textureLoader};
-    testScene = initializeTestScene(initContext);
-    currentScene = testScene;
+
+   initScenes(initContext);
 
     player = std::make_shared<Player>(initContext, "player0");
     player->setPos(sf::Vector2f{50, 700});
     player->setSpawnPoint();
+    player->onMicrotask(DEATH, onPlayerDeath);
     currentScene->add(player);
-
     gameStateController.loadIfExists();
+}
+
+auto GameManager::initScenes(InitContext& initContext) -> void {
+    fmt::println("Initialising new scene");
+    testScene = initializeTestScene(initContext);
+    currentScene = testScene;
 }
 
 auto GameManager::startGameLoop() -> void {
@@ -69,3 +75,4 @@ std::unique_ptr<nlohmann::json> GameManager::save() {
 auto GameManager::saveGame() -> void {
     gameStateController.saveToFile();
 }
+

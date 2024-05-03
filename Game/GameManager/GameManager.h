@@ -23,16 +23,24 @@ private:
     Context drawContext;
     Renderer renderer;
     TextureLoader<TextureId> textureLoader{};
+    std::function<void()> onPlayerDeath = [this]() -> void {
+        fmt::println("Player died, resetting scene...");
+        delete testScene;
+        auto initContext = InitContext{&textureLoader};
+        initScenes(initContext);
+        currentScene->add(player);
+        gameStateController.loadIfExists();
+    };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;
 
+    auto initScenes(InitContext& initContext) -> void;
 public:
     explicit GameManager(sf::RenderWindow & window);
 
     ~GameManager() {
         fmt::println("Disposing game manager");
         delete testScene;
-        fmt::println("{}", player.use_count());
         player.reset();
     }
 

@@ -102,7 +102,7 @@ void Player::onBeforeStep() {
     }
 
     if (physicsModule.isOnGround) {
-        vel.x = (float) (horizontalMovement * 0.16);
+        vel.x = (float) (horizontalMovement * 0.2);
     } else {
         auto finalVel = (double) vel.x;
         auto sign = vel.x > 0 ? 1 : -1;
@@ -114,7 +114,7 @@ void Player::onBeforeStep() {
             finalVel -= sign * 0.00001; // air friction
         }
 
-        vel.x = (float) std::clamp(finalVel, -.16, .16);
+        vel.x = (float) std::clamp(finalVel, -.2, .2);
     }
 
 }

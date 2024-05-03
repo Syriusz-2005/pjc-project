@@ -64,11 +64,23 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     groundRect2->setPos(sf::Vector2f{-2000, 800});
     scene->add(groundRect2);
 
+    auto groundRect3 = std::make_shared<Rect>(
+            PhysicsModule(0, 0, 0),
+            "ground_rect_3",
+            sf::Vector2f{2000, 400},
+            BACKGROUND);
+    groundRect3->setPos(sf::Vector2f{3600, 900});
+    scene->add(groundRect3);
+
 
     auto platform = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "platform");
     platform->setPos(sf::Vector2f(2600, 820));
     scene->add(platform);
 
+
+    auto wallRight = std::make_shared<Ground>(*ctx.textureLoader, "wall_right");
+    wallRight->setPos(sf::Vector2f(3800, 650));
+    scene->add(wallRight);
 
     auto enemy1 = std::make_shared<BallEnemy>(*ctx.textureLoader, "ball_enemy1");
     enemy1->setPos(sf::Vector2f(2650, 700));

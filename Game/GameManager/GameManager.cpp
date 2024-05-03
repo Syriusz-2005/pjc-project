@@ -6,12 +6,21 @@ GameManager::GameManager(sf::RenderWindow &window)
     : window(&window),
     drawContext(Context(window)),
     renderer(Renderer(this->drawContext)) {
+    // A texture atlas would be more efficient
     textureLoader.registerTexture(GROUND, "../assets/grass.png");
     textureLoader.registerTexture(TREE, "../assets/tree.png");
     textureLoader.registerTexture(PLAYER_STILL, "../assets/player_still.png");
     textureLoader.registerTexture(SPIKES_GROUND, "../assets/spikes.png");
     textureLoader.registerTexture(GROUND_PLATFORM_SMALL, "../assets/ground_small_platform.png");
     textureLoader.registerTexture(ENEMY_BALL, "../assets/enemy_ball.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_4, "../assets/player_running_4.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_5, "../assets/player_running_5.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_6, "../assets/player_running_6.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_7, "../assets/player_running_7.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_8, "../assets/player_running_8.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_9, "../assets/player_running_9.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_10, "../assets/player_running_10.png");
+    textureLoader.registerTexture(PLAYER_RUNNING_11, "../assets/player_running_11.png");
 
     auto initContext = InitContext{&textureLoader};
 

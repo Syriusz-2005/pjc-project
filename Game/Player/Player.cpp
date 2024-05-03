@@ -1,18 +1,14 @@
-
 #include "Player.h"
 #include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
 #include "../ObjectType/ObjectType.h"
 
 Player::Player(InitContext ctx, std::string uid)
-        : Object(
-        PhysicsModule(1, 0.00043, 0),
-        uid,
-        FOREGROUND), EventEmitter<PlayerEventType>() {
+    : Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND),
+    animatedTxt(TextureSwitcher<TextureId>(*ctx.textureLoader, std::vector<TextureId>{PLAYER_STILL}, 60)),
+    EventEmitter<PlayerEventType>() {
     name = "Player object";
-    auto texture = ctx.textureLoader->getTexture(PLAYER_STILL);
-    sprite = sf::Sprite(*texture);
-    sprite.setScale(0.068, 0.068);
+    sprite = sf::Sprite();
     setEntityModule(entityModule);
     setType(PLAYER);
 }
@@ -76,7 +72,23 @@ auto Player::getBoundingBox() -> sf::FloatRect {
 }
 
 auto Player::render(Context ctx) -> void {
+    setAnimationState();
+    auto texture = animatedTxt.getTexture();
+    sprite.setTexture(*texture);
+    float sign = vel.x > 0 || vec::isNearZero(vel.x) ? 1 : -1;
+    sprite.setScale((float) 0.068 * sign, (float) 0.068 * sign);
+    auto size = vec::toFloat(sprite.getTexture()->getSize());
+
     auto screenPos = ctx.globalPos + pos;
+
+    if (sign < 0) {
+        screenPos = screenPos + sf::Vector2f(40, 80);
+        //Source: https://en.sfml-dev.org/forums/index.php?topic=10119.0
+        sprite.setTextureRect(sf::IntRect(0, (int) size.y, (int) size.x, (int) -size.y));
+    } else {
+        sprite.setTextureRect(sf::IntRect(0, 0, (int) size.x, (int) size.y));
+    }
+
     sprite.setPosition(screenPos);
     ctx.window->draw(sprite);
 }
@@ -90,7 +102,7 @@ void Player::onBeforeStep() {
     }
 
     if (physicsModule.isOnGround) {
-        vel.x = (float) (horizontalMovement * 0.14);
+        vel.x = (float) (horizontalMovement * 0.16);
     } else {
         auto finalVel = (double) vel.x;
         auto sign = vel.x > 0 ? 1 : -1;
@@ -102,7 +114,7 @@ void Player::onBeforeStep() {
             finalVel -= sign * 0.00001; // air friction
         }
 
-        vel.x = (float) std::clamp(finalVel, -.14, .14);
+        vel.x = (float) std::clamp(finalVel, -.16, .16);
     }
 
 }
@@ -122,4 +134,21 @@ std::unique_ptr<nlohmann::json> Player::save() {
     (*json)["spawnPoint"]["x"] = spawnPoint.x;
     (*json)["spawnPoint"]["y"] = spawnPoint.y;
     return json;
+}
+
+auto Player::setAnimationState() -> void {
+    if (vec::isNearZero(vel.x)) {
+        animatedTxt.setSequence(std::vector<TextureId>{PLAYER_STILL});
+    } else {
+        animatedTxt.setSequence(std::vector<TextureId>{
+            PLAYER_RUNNING_4,
+            PLAYER_RUNNING_5,
+            PLAYER_RUNNING_6,
+            PLAYER_RUNNING_7,
+            PLAYER_RUNNING_8,
+            PLAYER_RUNNING_9,
+            PLAYER_RUNNING_10,
+            PLAYER_RUNNING_11,
+        });
+    }
 }

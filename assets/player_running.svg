@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="1.8022875"
-     inkscape:cx="684.68543"
-     inkscape:cy="423.90573"
+     inkscape:zoom="0.90114375"
+     inkscape:cx="536.54037"
+     inkscape:cy="579.26385"
      inkscape:window-width="2560"
      inkscape:window-height="1369"
      inkscape:window-x="1672"
@@ -38,7 +38,7 @@
        width="247.87547"
        height="296.11917"
        id="page7"
-       margin="0 0 0 0"
+       margin="0"
        bleed="0" />
   </sodipodi:namedview>
   <defs
@@ -69,37 +69,37 @@
        y="-141.42526"
        transform="rotate(-162)" />
     <rect
-       style="fill:#000000;stroke-width:0.283128"
+       style="fill:#000000;stroke-width:0.226275"
        id="rect4"
-       width="28.840767"
-       height="78.722748"
-       x="-77.510239"
-       y="193.31039"
-       transform="matrix(0.65246803,-0.75781625,0.77411312,0.6330473,0,0)" />
+       width="23.151527"
+       height="62.637756"
+       x="-69.703583"
+       y="188.93224"
+       transform="matrix(0.63327718,-0.77392507,0.75801172,0.65224093,0,0)" />
     <rect
-       style="fill:#000000;stroke-width:0.285278"
+       style="fill:#000000;stroke-width:0.225716"
        id="rect5"
-       width="28.38822"
-       height="81.196754"
-       x="110.34792"
-       y="236.00801"
-       transform="matrix(0.98559668,-0.16911294,0.17734837,0.98414814,0,0)" />
+       width="20.647354"
+       height="69.887436"
+       x="108.99728"
+       y="228.31931"
+       transform="matrix(0.97957387,-0.20108464,0.14894672,0.98884522,0,0)" />
     <rect
-       style="fill:#000000;stroke-width:0.283128"
+       style="fill:#000000;stroke-width:0.237882"
        id="rect6"
-       width="28.840767"
-       height="78.722748"
-       x="173.95758"
-       y="31.065615"
-       transform="matrix(0.63300343,0.77414899,-0.75785321,0.6524251,0,0)" />
+       width="24.212355"
+       height="66.195511"
+       x="175.86409"
+       y="29.738277"
+       transform="matrix(0.63651068,0.77126789,-0.76082838,0.64895314,0,0)" />
     <rect
-       style="fill:#000000;stroke-width:0.283128"
+       style="fill:#000000;stroke-width:0.224506"
        id="rect7"
-       width="28.840767"
-       height="78.722748"
-       x="203.54666"
-       y="-24.219139"
-       transform="matrix(0.091885,0.99576963,-0.99312027,0.11709879,0,0)" />
+       width="20.854486"
+       height="68.454201"
+       x="201.94632"
+       y="-4.5889611"
+       transform="matrix(0.2251536,0.97432328,-0.98168862,0.19049268,0,0)" />
     <rect
        style="fill:#000000;stroke-width:0.264583"
        id="rect8"

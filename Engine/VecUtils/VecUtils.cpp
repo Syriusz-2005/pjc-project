@@ -31,3 +31,10 @@ auto vec::distance(const sf::Vector2f &v1, const sf::Vector2f &v2) -> float {
     auto d = v1 - v2;
     return std::abs(d.x) + std::abs(d.y);
 }
+
+auto vec::isNearZero(float a) -> bool {
+    return std::abs(a) < 0.0001;
+}
+auto vec::isNearZero(sf::Vector2f a) -> bool {
+    return isNearZero(length(a));
+}

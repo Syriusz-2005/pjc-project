@@ -53,7 +53,7 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
             "ground_rect",
             sf::Vector2f{4000, 400},
             BACKGROUND);
-    groundRect->setPos(sf::Vector2f{0, 950});
+    groundRect->setPos(sf::Vector2f{0, 980});
     scene->add(groundRect);
 
 

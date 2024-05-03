@@ -7,6 +7,7 @@
 #include "../InitContext/InitContext.h"
 #include "../../Engine/MortalEntityModule/MortalEntityModule.h"
 #include "../../Engine/EventEmitter/EventEmitter.h"
+#include "../../Engine/TextureSwitcher/TextureSwitcher.h"
 
 enum PlayerEventType {
         DEATH,
@@ -18,6 +19,8 @@ private:
     sf::Sprite sprite;
     bool willJump = false;
     sf::Vector2f spawnPoint;
+    TextureSwitcher<TextureId> animatedTxt;
+
     std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10, onDeath);
 
     auto onKeyPress(sf::Event event) -> void;
@@ -26,6 +29,7 @@ private:
         emit(DEATH);
         pos = spawnPoint;
     };
+    auto setAnimationState() -> void;
 public:
     explicit Player(InitContext ctx, std::string uid);
 

@@ -40,7 +40,7 @@ auto PhysicsEngine::getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) ->
     float y2 = std::min(bottomRightA.y, bottomRightB.y);
 
     if (x2 - x1 > 0 && y2 - y1 > 0) {
-        return new sf::Rect<float>(sf::Vector2f(x1, y1), sf::Vector2f(x2 - x1, y1 - y2));
+        return new sf::Rect<float>(sf::Vector2f(x1, y1), sf::Vector2f(x2 - x1, y2 - y1));
     }
 
     return nullptr;
@@ -67,7 +67,7 @@ auto PhysicsEngine::applyCollisionForces(Object& a, Object& b, sf::FloatRect con
         b.setVelX(rvx * bCommitment * mB.bounciness);
     } else {
         auto rvy = (a.getVel().y + b.getVel().y);
-        float direction = iPos.y < aPos.y ? -1 : 1;
+        float direction = iPos.y < aPos.y ? 1 : -1;
         aNewPos.y += i.height * aCommitment * direction;
         bNewPos.y += i.height * bCommitment * direction;
         a.setVelY(-rvy * aCommitment * mA.bounciness);

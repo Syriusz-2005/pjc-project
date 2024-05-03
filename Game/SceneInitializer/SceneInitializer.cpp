@@ -4,6 +4,7 @@
 #include "../SpikedGround/SpikedGround.h"
 #include "../GroundPlatformSmall/GroundPlatformSmall.h"
 #include "../BallEnemy/BallEnemy.h"
+#include "../../Engine/Rect/Rect.h"
 #include <memory>
 #include <random>
 
@@ -44,8 +45,17 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     scene->add(floor2);
 
     auto floor3 = std::make_shared<SpikedGround>(*ctx.textureLoader, "floor3");
-    floor3->setPos(sf::Vector2f(1800, 1050));
+    floor3->setPos(sf::Vector2f(1800, 950));
     scene->add(floor3);
+
+    auto groundRect = std::make_shared<Rect>(
+            PhysicsModule(0, 0, 0),
+            "ground_rect",
+            sf::Vector2f{4000, 400},
+            BACKGROUND);
+    groundRect->setPos(sf::Vector2f{0, 950});
+    scene->add(groundRect);
+
 
     auto platform = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "platform");
     platform->setPos(sf::Vector2f(2600, 820));

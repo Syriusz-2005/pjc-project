@@ -21,6 +21,7 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(PLAYER_RUNNING_9, "../assets/player_running_9.png");
     textureLoader.registerTexture(PLAYER_RUNNING_10, "../assets/player_running_10.png");
     textureLoader.registerTexture(PLAYER_RUNNING_11, "../assets/player_running_11.png");
+    textureLoader.registerTexture(BACKLIGHT, "../assets/backlight.png");
 
     auto initContext = InitContext{&textureLoader};
 

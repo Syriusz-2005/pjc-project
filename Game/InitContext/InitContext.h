@@ -23,6 +23,8 @@ enum TextureId {
     PLAYER_RUNNING_9,
     PLAYER_RUNNING_10,
     PLAYER_RUNNING_11,
+
+    BACKLIGHT,
 };
 
 

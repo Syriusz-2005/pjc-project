@@ -3,12 +3,14 @@
 #include <algorithm>
 #include "../ObjectType/ObjectType.h"
 
-Player::Player(InitContext ctx, std::string uid)
+Player::Player(InitContext ctx, std::string const& uid)
     : Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND),
     animatedTxt(TextureSwitcher<TextureId>(*ctx.textureLoader, std::vector<TextureId>{PLAYER_STILL}, 60)),
     EventEmitter<PlayerEventType>() {
     name = "Player object";
     sprite = sf::Sprite();
+    backlight.setTexture(*ctx.textureLoader->getTexture(BACKLIGHT));
+    backlight.setScale(1.3, 2);
     setEntityModule(entityModule);
     setType(PLAYER);
 }
@@ -71,6 +73,12 @@ auto Player::getBoundingBox() -> sf::FloatRect {
     return sf::FloatRect{pos, sf::Vector2f(40, 80)};
 }
 
+auto Player::renderBacklight(sf::Vector2f const& screenPos, sf::RenderWindow *window) -> void {
+    backlight.setPosition(screenPos - sf::Vector2f(40, 80));
+    window->draw(backlight);
+}
+
+
 auto Player::render(Context ctx) -> void {
     setAnimationState();
     auto texture = animatedTxt.getTexture();
@@ -80,6 +88,8 @@ auto Player::render(Context ctx) -> void {
     auto size = vec::toFloat(sprite.getTexture()->getSize());
 
     auto screenPos = ctx.globalPos + pos;
+
+    renderBacklight(screenPos, ctx.window);
 
     if (sign < 0) {
         screenPos = screenPos + sf::Vector2f(40, 80);
@@ -152,3 +162,4 @@ auto Player::setAnimationState() -> void {
         });
     }
 }
+

@@ -9,6 +9,7 @@ auto Renderer::render(Scene& scene, Camera& camera) -> void {
     context->globalPos = -cameraPos;
     context->backgroundShader = &shader;
     context->splashShader = &splashShader;
+    context->frame++;
 
     scene.render(*context);
 }

@@ -76,10 +76,15 @@ float fbm(vec3 x) {
 // The end of code injection
 // The rest is mine
 
+uniform int frame;
 varying vec2 vUvs;
 
 void main() {
-    float val = noise(vUvs);
+    float zPos = float(frame) * 0.0005;
+    vec2 pos = vec2(vUvs * 3 + 7);
+    float val = fbm(vec3(pos.x, pos.y + zPos, 0));
+    vec2 m = vec2(.5);
+    float d = distance(m, vUvs) * 10;
 
-    gl_FragColor = vec4(vec3(val) / 2.0, 1.0);
+    gl_FragColor = vec4(vec3(0.0), (1.4 - d) + val * 2 + .8);
 }

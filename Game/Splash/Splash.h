@@ -7,7 +7,7 @@
 #include "../../Engine/Object/Object.h"
 
 class Splash : public Object {
-    sf::RectangleShape shape{sf::Vector2f(326, 326)};
+    sf::RectangleShape shape{sf::Vector2f(512, 512)};
 public:
     explicit Splash(std::string const& uid);
 

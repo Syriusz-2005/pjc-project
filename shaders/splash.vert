@@ -3,7 +3,7 @@
 
 
 // The sfml does not provide normalized uv coordinates, so we have to do it manually
-// Take a look: https://en.sfml-dev.org/forums/index.php?topic=21635.0
+// My source: https://en.sfml-dev.org/forums/index.php?topic=21635.0
 uniform vec2 size;
 
 varying vec2 vUvs;

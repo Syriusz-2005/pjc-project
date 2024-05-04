@@ -9,6 +9,7 @@ struct Context {
     BackgroundShader * backgroundShader;
     SplashShader* splashShader;
     sf::Vector2f globalPos;
+    int frame;
 
     explicit Context(sf::RenderWindow & window);
 };

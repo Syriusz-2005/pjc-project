@@ -35,7 +35,7 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
 
     auto splash = std::make_shared<Splash>("splash_1");
     splash->isSavable = false;
-    splash->setPos(2000, 550);
+    splash->setPos(3340, 490);
     scene->add(splash);
 
     auto wall1 = std::make_shared<Ground>(*ctx.textureLoader, "wall1");
@@ -89,7 +89,7 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     scene->add(wallRight);
 
     auto enemy1 = std::make_shared<BallEnemy>(*ctx.textureLoader, "ball_enemy1");
-    enemy1->setPos(sf::Vector2f(2650, 700));
+    enemy1->setPos(sf::Vector2f(2650, 710));
     scene->add(enemy1);
 
     return scene;

@@ -90,6 +90,10 @@ add_executable(pjc_project main.cpp
         Engine/EventEmitter/EventEmitter.h
         Engine/TextureSwitcher/TextureSwitcher.cpp
         Engine/TextureSwitcher/TextureSwitcher.h
+        Game/Splash/Splash.cpp
+        Game/Splash/Splash.h
+        Game/SplashShader/SplashShader.cpp
+        Game/SplashShader/SplashShader.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

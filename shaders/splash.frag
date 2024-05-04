@@ -1,5 +1,3 @@
-#version 120
-
 // Source: https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83
 
 vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
@@ -78,12 +76,10 @@ float fbm(vec3 x) {
 // The end of code injection
 // The rest is mine
 
-uniform vec2 position;
-uniform vec2 screenSize;
-
 varying vec2 vUvs;
 
 void main() {
-    vec2 pos = position / screenSize / 4;
-    gl_FragColor = vec4(vec3(fbm(vec3(vUvs - pos, 0)) * .3 + .7), 1.0);
+    float val = noise(vUvs);
+
+    gl_FragColor = vec4(vec3(val) / 2.0, 1.0);
 }

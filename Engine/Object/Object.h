@@ -49,6 +49,7 @@ public:
     auto getPos() -> sf::Vector2f;
 
     auto setPos(sf::Vector2f p) -> void;
+    auto setPos(float x, float y) -> void;
 
     auto move(sf::Vector2f delta) -> void;
 

@@ -9,7 +9,8 @@
 class Renderer {
 private:
     Context* context;
-    BackgroundShader shader{BackgroundShader()};
+    BackgroundShader shader{};
+    SplashShader splashShader{};
 public:
     explicit Renderer(Context& ctx);
 

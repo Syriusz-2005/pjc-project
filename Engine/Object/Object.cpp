@@ -29,6 +29,12 @@ auto Object::setPos(sf::Vector2f p) -> void {
     this->pos = p;
 }
 
+auto Object::setPos(float x, float y) -> void {
+    pos.x = x;
+    pos.y = y;
+}
+
+
 auto Object::move(sf::Vector2f delta) -> void {
     this->pos += delta;
 }
@@ -108,3 +114,4 @@ auto Object::getType() -> int {
 auto Object::getUid() -> std::string const & {
     return uid;
 }
+

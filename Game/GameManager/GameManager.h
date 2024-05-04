@@ -13,6 +13,10 @@
 #include "../../Engine/TextureLoader/TextureLoader.h"
 #include "../../Engine/GameStateController/GameStateController.h"
 
+/**
+ * Game manager for the "Splash" game
+ * It's designed to work "good enough". There's lots of room for potential improvement and optimization.
+ */
 class GameManager : public Savable {
 private:
     GameStateController gameStateController{this, "../state.splash.json"};

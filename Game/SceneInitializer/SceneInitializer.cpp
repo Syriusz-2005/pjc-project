@@ -5,6 +5,7 @@
 #include "../GroundPlatformSmall/GroundPlatformSmall.h"
 #include "../BallEnemy/BallEnemy.h"
 #include "../../Engine/Rect/Rect.h"
+#include "../Splash/Splash.h"
 #include <memory>
 #include <random>
 
@@ -31,6 +32,11 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     for (const auto& tree : trees) {
         scene->add(tree);
     }
+
+    auto splash = std::make_shared<Splash>("splash_1");
+    splash->isSavable = false;
+    splash->setPos(2000, 550);
+    scene->add(splash);
 
     auto wall1 = std::make_shared<Ground>(*ctx.textureLoader, "wall1");
     wall1->setPos(sf::Vector2f(-1800, 600));

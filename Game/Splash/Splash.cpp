@@ -1,7 +1,10 @@
 #include "Splash.h"
+#include "../../Engine/VecUtils/VecUtils.h"
+#include "../ObjectType/ObjectType.h"
 
 Splash::Splash(std::string const &uid) : Object(PhysicsModule(0, 0, 0), uid, BACKGROUND) {
     name = "Splash teleport";
+    info.setPos(100, 0);
 }
 
 void Splash::render(Context ctx) {
@@ -12,8 +15,22 @@ void Splash::render(Context ctx) {
     shader->setUniform("frame", ctx.frame);
     shape.setPosition(globalPos);
     ctx.window->draw(shape, shader);
+    ctx.globalPos += pos;
+    if (displayInfo) {
+        info.render(ctx);
+    }
 }
 
 sf::FloatRect Splash::getBoundingBox() {
     return sf::FloatRect{pos, shape.getSize()};
+}
+
+bool Splash::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
+    Object::onBeforeCollision(collisionTarget);
+    if (collisionTarget->getType() == PLAYER) {
+        auto distance = vec::distance(pos, collisionTarget->getPos());
+        fmt::println("{}", distance);
+        displayInfo = distance < 230;
+    }
+    return true;
 }

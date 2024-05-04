@@ -24,6 +24,7 @@ private:
     Scene* testScene;
     Camera camera = Camera();
     sf::RenderWindow* window;
+    sf::Font defaultFont{};
     Context drawContext;
     Renderer renderer;
     TextureLoader<TextureId> textureLoader{};

@@ -14,7 +14,7 @@ auto Group::getObjects() -> std::vector<Object*> const& {
 }
 
 auto Group::render(Context ctx) -> void {
-    auto localCtx = Context(*ctx.window);
+    auto localCtx = Context(*ctx.window, *ctx.font);
 
     localCtx.globalPos = ctx.globalPos + pos;
 

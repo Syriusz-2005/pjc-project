@@ -94,6 +94,8 @@ add_executable(pjc_project main.cpp
         Game/Splash/Splash.h
         Game/SplashShader/SplashShader.cpp
         Game/SplashShader/SplashShader.h
+        Engine/TextDisplay/TextDisplay.cpp
+        Engine/TextDisplay/TextDisplay.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

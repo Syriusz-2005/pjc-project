@@ -5,11 +5,12 @@
 #pragma once
 
 struct Context {
-    sf::RenderWindow * window;
-    BackgroundShader * backgroundShader;
-    SplashShader* splashShader;
+    sf::RenderWindow *window;
+    BackgroundShader *backgroundShader;
+    SplashShader *splashShader;
+    sf::Font *font;
     sf::Vector2f globalPos;
     int frame;
 
-    explicit Context(sf::RenderWindow & window);
+    explicit Context(sf::RenderWindow &window, sf::Font &font);
 };

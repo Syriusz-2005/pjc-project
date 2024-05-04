@@ -92,5 +92,9 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     enemy1->setPos(sf::Vector2f(2650, 710));
     scene->add(enemy1);
 
+    auto testText = std::make_shared<TextDisplay>("test_text", "This is a test text");
+    testText->isSavable = false;
+    scene->add(testText);
+
     return scene;
 };

@@ -2,10 +2,8 @@
 
 #include "GameManager.h"
 
-GameManager::GameManager(sf::RenderWindow &window)
-    : window(&window),
-    drawContext(Context(window)),
-    renderer(Renderer(this->drawContext)) {
+GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContext(Context(window, defaultFont)),
+                                                     renderer(Renderer(this->drawContext)) {
     // A texture atlas would be more efficient
     textureLoader.registerTexture(GROUND, "../assets/grass.png");
     textureLoader.registerTexture(TREE, "../assets/tree.png");
@@ -23,9 +21,11 @@ GameManager::GameManager(sf::RenderWindow &window)
     textureLoader.registerTexture(PLAYER_RUNNING_11, "../assets/player_running_11.png");
     textureLoader.registerTexture(BACKLIGHT, "../assets/backlight.png");
 
+    defaultFont.loadFromFile("../assets/GochiHand-Regular.ttf");
+
     auto initContext = InitContext{&textureLoader};
 
-   initScenes(initContext);
+    initScenes(initContext);
 
     player = std::make_shared<Player>(initContext, "player0");
     player->setPos(sf::Vector2f{50, 700});
@@ -35,7 +35,7 @@ GameManager::GameManager(sf::RenderWindow &window)
     gameStateController.loadIfExists();
 }
 
-auto GameManager::initScenes(InitContext& initContext) -> void {
+auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising new scene");
     testScene = initializeTestScene(initContext);
     currentScene = testScene;
@@ -48,7 +48,7 @@ auto GameManager::startGameLoop() -> void {
         auto timeDelta = clock.getElapsedTime();
 //        fmt::println("{}", timeDelta.asMilliseconds());
         tickClock.restart();
-        currentScene->getPhysicsEngine().step( std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
+        currentScene->getPhysicsEngine().step(std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
         clock.restart();
         auto size = window->getSize();
         camera.setPos(player->getPos() - sf::Vector2f(size.x / 2, size.y / 1.3));
@@ -66,7 +66,7 @@ auto GameManager::switchScene() -> void {
 
 void GameManager::load(const nlohmann::json &json) {
     player->load(json["player"]);
-    for (auto sceneData : json["scenes"]) {
+    for (auto sceneData: json["scenes"]) {
         auto id = sceneData["uid"].get<std::string>();
         if (testScene->isUidMatch(id)) {
             testScene->load(sceneData);

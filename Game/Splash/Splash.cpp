@@ -28,8 +28,8 @@ sf::FloatRect Splash::getBoundingBox() {
 bool Splash::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
     Object::onBeforeCollision(collisionTarget);
     if (collisionTarget->getType() == PLAYER) {
-        auto distance = vec::distance(pos, collisionTarget->getPos());
-        fmt::println("{}", distance);
+        auto middle = pos + vec::divide(shape.getSize(), 2);
+        auto distance = vec::distance(middle, collisionTarget->getPos());
         displayInfo = distance < 230;
     }
     return true;

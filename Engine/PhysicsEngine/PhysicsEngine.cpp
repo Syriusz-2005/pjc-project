@@ -97,7 +97,6 @@ auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
     // For example Spikes destroy an object that collides with them in the onBeforeCollision method. Range based loop will crash the program in such scenario.
     for (auto it = objects->begin(); it != objects->end(); it++) {
         const auto neighbour = *it;
-        if (neighbour->getLayer() == BACKGROUND) continue;
         auto nModule = neighbour->physicsModule;
         if (!nModule.isEthereal && neighbour != o) {
             auto nBox = neighbour->getBoundingBox();
@@ -107,6 +106,7 @@ auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
                 if (!continued) continue;
                 auto neighbourContinued = neighbour->onBeforeCollision(o);
                 if (!neighbourContinued) continue;
+                if (neighbour->getLayer() == BACKGROUND) continue;
                 applyCollisionForces(*o, *neighbour, *intersectionArea);
                 if (std::abs(o->getVel().y) < .01 and intersectionArea->width > intersectionArea->height) {
                     module->isOnGround = true;

@@ -96,6 +96,12 @@ add_executable(pjc_project main.cpp
         Game/SplashShader/SplashShader.h
         Engine/TextDisplay/TextDisplay.cpp
         Engine/TextDisplay/TextDisplay.h
+        Engine/StateStore/StateStore.cpp
+        Engine/StateStore/StateStore.h
+        Engine/StateStore/StateStore.cpp
+        Engine/StateStore/StateStore.h
+        Game/States/States.cpp
+        Game/States/States.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

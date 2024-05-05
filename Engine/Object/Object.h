@@ -16,6 +16,7 @@ enum Layer {
     BACKGROUND,
 };
 
+
 class Object : public Savable {
 private:
     std::string uid;
@@ -35,7 +36,7 @@ protected:
     Layer layer;
     float zDistance{};
 
-    CompositeParent<Object>* parent;
+    CompositeParent<Object, int>* parent;
     auto getUid() -> std::string const&;
 public:
     PhysicsModule physicsModule;
@@ -44,7 +45,7 @@ public:
 
     auto getType() -> int;
 
-    auto setParent(CompositeParent<Object>* p) -> void;
+    auto setParent(CompositeParent<Object, int>* p) -> void;
 
     auto getPos() -> sf::Vector2f;
 

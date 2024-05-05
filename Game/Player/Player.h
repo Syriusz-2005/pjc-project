@@ -13,6 +13,7 @@ enum PlayerEventType {
         DEATH,
 };
 
+
 class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
     short horizontalMovement = 0;

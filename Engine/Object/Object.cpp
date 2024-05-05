@@ -95,7 +95,7 @@ auto Object::setEntityModule(std::shared_ptr<EntityModule>& module) -> void {
     entityModule = module;
 }
 
-auto Object::setParent(CompositeParent<Object> *p) -> void {
+auto Object::setParent(CompositeParent<Object, int> *p) -> void {
     parent = p;
 }
 

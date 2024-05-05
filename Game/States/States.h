@@ -1,0 +1,11 @@
+
+
+#ifndef PJC_PROJECT_STATES_H
+#define PJC_PROJECT_STATES_H
+
+
+enum States {
+    NEAR_FIRST_SPLASH,
+};
+
+#endif //PJC_PROJECT_STATES_H

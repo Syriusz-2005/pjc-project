@@ -4,6 +4,7 @@
 
 
 #include <memory>
+#include <variant>
 
 #include "../../Engine/Scene/Scene.h"
 #include "../../Engine/Camera/Camera.h"
@@ -12,10 +13,11 @@
 #include "../Player/Player.h"
 #include "../../Engine/TextureLoader/TextureLoader.h"
 #include "../../Engine/GameStateController/GameStateController.h"
+#include "../States/States.h"
 
 /**
  * Game manager for the "Splash" game
- * It's designed to work "good enough". There's lots of room for potential improvement and optimization.
+ * The whole system is designed to be "good enough". There's lots of room for potential improvement and optimization.
  */
 class GameManager : public Savable {
 private:

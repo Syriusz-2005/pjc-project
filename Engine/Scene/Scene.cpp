@@ -84,3 +84,13 @@ bool Scene::isUidMatch(std::string const&id) const {
 const std::vector<std::shared_ptr<Object>> &Scene::getChildren() {
     return objects;
 }
+
+const std::vector<std::shared_ptr<Object>> &Scene::getChildren(std::function<bool(Object&)> const& predicate) {
+    auto filteredObjects = new std::vector<std::shared_ptr<Object>>{};
+    for (auto& object : objects) {
+        if (predicate(*object)) {
+            filteredObjects->push_back(object);
+        }
+    }
+    return *filteredObjects;
+}

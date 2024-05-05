@@ -11,7 +11,7 @@
 #include <algorithm>
 
 
-class Scene : public Savable, public CompositeParent<Object> {
+class Scene : public Savable, public CompositeParent<Object, int> {
 private:
     std::vector<std::shared_ptr<Object>> objects = std::vector<std::shared_ptr<Object>>();
     sf::Color clearColor;
@@ -37,7 +37,8 @@ public:
         });
         objects.erase(first, last);
     }
-    const std::vector<std::shared_ptr<Object>> & getChildren() override;
+    const std::vector<std::shared_ptr<Object>>& getChildren(std::function<bool(Object&)> const& predicate) override;
+    const std::vector<std::shared_ptr<Object>>& getChildren() override;
     auto render(Context ctx) -> void;
     auto getPhysicsEngine() -> PhysicsEngine const&;
     auto setBackground(std::string textureFile) -> void;

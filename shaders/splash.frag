@@ -1,4 +1,7 @@
+#version 120
+
 // Source: https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83
+// Reason: Implementing them by myself would be a nightmare
 
 vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
 
@@ -73,18 +76,18 @@ float fbm(vec3 x) {
     return v;
 }
 
-// The end of code injection
-// The rest is mine
+// The end of shader function injection
 
 uniform int frame;
 varying vec2 vUvs;
 
+
 void main() {
     float zPos = float(frame) * 0.0005;
-    vec2 pos = vec2(vUvs * 3 + 7);
-    float val = fbm(vec3(pos.x, pos.y + zPos, 0));
+    vec2 pos = vec2(vUvs * 3.0 + 7.0);
+    float val = fbm(vec3(pos.x, pos.y + zPos, 0.0));
     vec2 m = vec2(.5);
-    float d = distance(m, vUvs) * 10;
+    float d = distance(m, vUvs) * 10.0;
 
-    gl_FragColor = vec4(vec3(0.0), (1.4 - d) + val * 2 + .8);
+    gl_FragColor = vec4(vec3(0.0), (1.4 - d) + val * 2.0 + .8);
 }

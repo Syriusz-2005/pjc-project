@@ -5,9 +5,8 @@ uniform float zDistance;
 
 varying vec2 texCoord;
 
-out vec4 fragColor;
-
 void main() {
+    vec4 fragColor = vec4(0.0);
     vec4 txt = texture2D(texture, texCoord);
     vec3 scatteringTarget = vec3(.9, .9, .9);
 
@@ -16,4 +15,6 @@ void main() {
     fragColor.rgb = txt.rgb + delta * min(1, zDistance / 10);
 
     fragColor.a = txt.a;
+
+    gl_FragColor = fragColor;
 }

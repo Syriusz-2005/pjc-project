@@ -49,6 +49,7 @@ auto Player::onKeyPress(sf::Event event) -> void {
         }
         case sf::Keyboard::Space: {
             willJump = true;
+            break;
         }
         case sf::Keyboard::W: {
             auto val = parent->state.get(IS_FIRST_SPLASH_ACTIVE);

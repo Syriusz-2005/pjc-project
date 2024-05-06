@@ -3,10 +3,12 @@
 uniform sampler2D texture;
 uniform float zDistance;
 
+varying vec2 texCoord;
+
 out vec4 fragColor;
 
 void main() {
-    vec4 txt = texture2D(texture, gl_TexCoord[0].xy);
+    vec4 txt = texture2D(texture, texCoord);
     vec3 scatteringTarget = vec3(.9, .9, .9);
 
     vec3 delta = scatteringTarget - txt.rgb;

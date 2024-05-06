@@ -15,12 +15,13 @@ enum PlayerEventType {
 
 class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
-    short horizontalMovement = 0;
+    short horizontalMovement{0};
     sf::Sprite sprite;
     sf::Sprite backlight{};
     bool willJump = false;
     sf::Vector2f spawnPoint;
     TextureSwitcher<TextureId> animatedTxt;
+    bool wKeyPressed{false};
 
     std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10, onDeath);
 
@@ -34,6 +35,8 @@ private:
     auto renderBacklight(sf::Vector2f const& screenPos, sf::RenderWindow *window) -> void;
 public:
     explicit Player(InitContext ctx, std::string const& uid);
+
+    auto isWKeyPressed() -> bool;
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
     auto setSpawnPoint() -> void;

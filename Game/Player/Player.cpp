@@ -49,6 +49,10 @@ auto Player::onKeyPress(sf::Event event) -> void {
         case sf::Keyboard::Space: {
             willJump = true;
         }
+        case sf::Keyboard::W: {
+            wKeyPressed = true;
+            break;
+        }
         default: {
         }
     }
@@ -62,6 +66,10 @@ auto Player::onKeyRelease(sf::Event event) -> void {
         }
         case sf::Keyboard::D: {
             horizontalMovement = 0;
+            break;
+        }
+        case sf::Keyboard::W: {
+            wKeyPressed = false;
             break;
         }
         default: {
@@ -161,5 +169,9 @@ auto Player::setAnimationState() -> void {
             PLAYER_RUNNING_11,
         });
     }
+}
+
+auto Player::isWKeyPressed() -> bool {
+    return wKeyPressed;
 }
 

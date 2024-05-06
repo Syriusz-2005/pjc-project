@@ -5,7 +5,7 @@
 
 
 enum States {
-    NEAR_FIRST_SPLASH,
+    IS_FIRST_SPLASH_ACTIVE,
 };
 
 #endif //PJC_PROJECT_STATES_H

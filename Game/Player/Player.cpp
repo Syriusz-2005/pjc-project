@@ -2,6 +2,7 @@
 #include "../../Engine/VecUtils/VecUtils.h"
 #include <algorithm>
 #include "../ObjectType/ObjectType.h"
+#include "../States/States.h"
 
 Player::Player(InitContext ctx, std::string const& uid)
     : Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND),
@@ -48,6 +49,12 @@ auto Player::onKeyPress(sf::Event event) -> void {
         }
         case sf::Keyboard::Space: {
             willJump = true;
+        }
+        case sf::Keyboard::W: {
+            auto val = parent->state.get(IS_FIRST_SPLASH_ACTIVE);
+            if (std::holds_alternative<bool>(val)) {
+                fmt::println("Pressing w, is splash active: {}", std::get<bool>(val));
+            }
         }
         default: {
         }

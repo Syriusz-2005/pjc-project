@@ -24,6 +24,8 @@ private:
     GameStateController gameStateController{this, "../state.splash.json"};
 
     Scene* testScene;
+    Scene* verticalScene;
+
     Camera camera = Camera();
     sf::RenderWindow* window;
     sf::Font defaultFont{};

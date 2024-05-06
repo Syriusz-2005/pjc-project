@@ -55,6 +55,8 @@ auto Player::onKeyPress(sf::Event event) -> void {
             if (std::holds_alternative<bool>(val)) {
                 fmt::println("Pressing w, is splash active: {}", std::get<bool>(val));
             }
+            wKeyPressed = true;
+            break;
         }
         default: {
         }
@@ -69,6 +71,10 @@ auto Player::onKeyRelease(sf::Event event) -> void {
         }
         case sf::Keyboard::D: {
             horizontalMovement = 0;
+            break;
+        }
+        case sf::Keyboard::W: {
+            wKeyPressed = false;
             break;
         }
         default: {
@@ -168,5 +174,9 @@ auto Player::setAnimationState() -> void {
             PLAYER_RUNNING_11,
         });
     }
+}
+
+auto Player::isWKeyPressed() -> bool {
+    return wKeyPressed;
 }
 

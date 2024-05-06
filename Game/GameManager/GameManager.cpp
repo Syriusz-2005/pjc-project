@@ -57,6 +57,7 @@ auto GameManager::startGameLoop() -> void {
         auto tickDelta = tickClock.getElapsedTime();
 //        fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
         player->dispatchEvents(*window);
+        if (player->isWKeyPressed() && currentScene) {}
     }
 }
 

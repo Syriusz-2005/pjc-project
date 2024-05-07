@@ -80,7 +80,7 @@ float fbm(vec3 x) {
 
 uniform float frame;
 
-in vec2 vUvs;
+varying vec2 vUvs;
 
 void main() {
     float zPos = float(frame) * 0.0005;

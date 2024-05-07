@@ -13,6 +13,7 @@ Tree::Tree(float posX, std::string uid, InitContext const& ctx)
     float distance = ((float) (std::rand() % 35)) / 10 + 1.1;
     pos = sf::Vector2f(posX, (float) -730);
     zDistance = distance;
+    isSavable = false;
 }
 
 void Tree::render(Context ctx) {

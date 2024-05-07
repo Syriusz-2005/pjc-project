@@ -21,6 +21,7 @@ private:
     BackgroundSource backgroundSource = COLOR;
     std::string uid;
     sf::Vector2f spawn;
+    sf::RectangleShape backgroundShaderRect{};
 
 public:
     explicit Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn);

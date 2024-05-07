@@ -14,8 +14,10 @@ spawn(spawn) {
 
 auto Scene::render(Context ctx) -> void {
     ctx.window->clear(clearColor);
+
     sf::Vector2u windowSize = ctx.window->getSize();
     auto windowSizeF = sf::Vector2f((float) windowSize.x, (float) windowSize.y);
+
     switch (backgroundSource) {
         case TEXTURE: {
             auto s = sf::Sprite(background);
@@ -25,13 +27,14 @@ auto Scene::render(Context ctx) -> void {
             ctx.window->draw(s);
         }
         case SHADER: {
-            auto rect = sf::RectangleShape(windowSizeF);
+            backgroundShaderRect.setSize(windowSizeF);
             backgroundShader.setUniform("screenSize", windowSizeF);
             backgroundShader.setUniform("position", ctx.globalPos);
-            ctx.window->draw(rect, &backgroundShader);
+            ctx.window->draw(backgroundShaderRect, &backgroundShader);
         }
         default: {}
     }
+
 
     for (const auto& object : objects) {
         object->render(ctx);

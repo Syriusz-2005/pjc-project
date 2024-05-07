@@ -98,3 +98,35 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
 
     return scene;
 };
+
+auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
+    auto scene = new Scene(sf::Color(150, 150, 150), "test_scene", sf::Vector2f{50, 700});
+    auto shader = &scene->getBackgroundShader();
+    shader->loadFromFile("../shaders/paper.vert", "../shaders/paper.frag");
+    scene->setBackgroundSource(SHADER);
+    scene->setBackground("../assets/background.png");
+    std::srand(80);
+
+//    auto trees = std::vector<std::shared_ptr<Tree>>();
+//
+//    for (int i = 0; i < 15; i++) {
+//        auto spread = (std::rand() % 450) + 140;
+//        auto tree = std::make_shared<Tree>((float) i * spread, "tree_" + std::to_string(i), ctx);
+//        trees.push_back(tree);
+//    }
+//    auto compare = [](const std::shared_ptr<Tree>& a, const std::shared_ptr<Tree>& b) -> bool {
+//        return a->getZDistance() > b->getZDistance();
+//    };
+//    std::ranges::sort(trees.begin(), trees.end(), compare);
+//
+//    for (const auto& tree : trees) {
+//        scene->add(tree);
+//    }
+
+    auto floor = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor1");
+    floor->setPos(sf::Vector2f(0, 850));
+    floor->isSavable = false;
+    scene->add(floor);
+
+    return scene;
+}

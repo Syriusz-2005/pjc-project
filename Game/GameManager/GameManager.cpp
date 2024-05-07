@@ -31,7 +31,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     player->onMicrotask(DEATH, onPlayerDeath);
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
 
-    testScene->add(player);
+    currentScene->add(player);
 
     player->setPos(currentScene->getSpawn());
 
@@ -41,8 +41,8 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising new scene");
     testScene = initializeTestScene(initContext);
-    platformMadness = new Scene{sf::Color(0, 0, 0), "platform_madness", sf::Vector2f(0, 0)};
-    currentScene = testScene;
+    platformMadness = initializePlatformMadness(initContext);
+    currentScene = platformMadness;
 }
 
 auto GameManager::startGameLoop() -> void {

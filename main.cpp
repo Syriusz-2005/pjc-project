@@ -17,6 +17,8 @@ auto main() -> int {
             sf::Style::Default, sf::ContextSettings(0, 0, 0)
     );
     // temporary, because not limiting it causes the clear method to eat up CPU by a lot on my device (I assume to the usage of Nvidia Gsync)
+    // With the cap enabled the game loop is crazy fast. Even the per-frame simulation doesn't matter
+    // I must admit, c++ is fast, especially backed by an Opengl for rendering
     window.setFramerateLimit(144);
     auto manager = GameManager(window);
     manager.startGameLoop();

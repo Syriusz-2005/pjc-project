@@ -107,21 +107,21 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     scene->setBackground("../assets/background.png");
     std::srand(80);
 
-//    auto trees = std::vector<std::shared_ptr<Tree>>();
-//
-//    for (int i = 0; i < 15; i++) {
-//        auto spread = (std::rand() % 450) + 140;
-//        auto tree = std::make_shared<Tree>((float) i * spread, "tree_" + std::to_string(i), ctx);
-//        trees.push_back(tree);
-//    }
-//    auto compare = [](const std::shared_ptr<Tree>& a, const std::shared_ptr<Tree>& b) -> bool {
-//        return a->getZDistance() > b->getZDistance();
-//    };
-//    std::ranges::sort(trees.begin(), trees.end(), compare);
-//
-//    for (const auto& tree : trees) {
-//        scene->add(tree);
-//    }
+    auto trees = std::vector<std::shared_ptr<Tree>>();
+
+    for (int i = 0; i < 15; i++) {
+        auto spread = (std::rand() % 450) + 140;
+        auto tree = std::make_shared<Tree>((float) i * spread, "tree_" + std::to_string(i), ctx);
+        trees.push_back(tree);
+    }
+    auto compare = [](const std::shared_ptr<Tree>& a, const std::shared_ptr<Tree>& b) -> bool {
+        return a->getZDistance() > b->getZDistance();
+    };
+    std::ranges::sort(trees.begin(), trees.end(), compare);
+
+    for (const auto& tree : trees) {
+        scene->add(tree);
+    }
 
     auto floor = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor1");
     floor->setPos(sf::Vector2f(0, 850));

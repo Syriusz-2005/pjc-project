@@ -13,8 +13,8 @@ void Splash::render(Context ctx) {
 
     auto shader = ctx.splashShader->getShader();
     shape.setPosition(globalPos);
-//    shader->setUniform("size", shape.getSize());
-    shader->setUniform("frame", ctx.frame);
+    shader->setUniform("size", shape.getSize());
+    shader->setUniform("frame", (float) ctx.frame);
     ctx.window->draw(shape, shader);
     ctx.globalPos += pos;
     if (displayInfo) {

@@ -8,7 +8,7 @@
 
 class SplashShader {
 private:
-    sf::Shader shader{sf::Shader()};
+    sf::Shader shader{};
 public:
     SplashShader();
     auto getShader() -> sf::Shader *;

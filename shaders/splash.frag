@@ -78,14 +78,14 @@ float fbm(vec3 x) {
 
 // The end of shader function injection
 
-uniform int frame;
-varying vec2 vUvs;
+uniform float frame;
 
+in vec2 vUvs;
 
 void main() {
     float zPos = float(frame) * 0.0005;
     vec2 pos = vec2(vUvs * 3.0 + 7.0);
-    float val = fbm(vec3(pos.x, pos.y + zPos, 0.0));
+    float val = fbm(vec2(pos.x, pos.y + zPos));
     vec2 m = vec2(.5);
     float d = distance(m, vUvs) * 10.0;
 

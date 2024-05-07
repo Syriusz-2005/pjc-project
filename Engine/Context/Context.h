@@ -10,7 +10,7 @@ struct Context {
     SplashShader *splashShader;
     sf::Font *font;
     sf::Vector2f globalPos;
-    int frame;
+    int frame{0};
 
     explicit Context(sf::RenderWindow &window, sf::Font &font);
 };

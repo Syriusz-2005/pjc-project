@@ -31,6 +31,9 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     player->setPos(sf::Vector2f{50, 700});
     player->setSpawnPoint();
     player->onMicrotask(DEATH, onPlayerDeath);
+    player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
+
+    platformMadness->add(player);
     currentScene->add(player);
     gameStateController.loadIfExists();
 }
@@ -38,6 +41,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising new scene");
     testScene = initializeTestScene(initContext);
+    platformMadness = new Scene{sf::Color(0, 0, 0), "platform_madness"};
     currentScene = testScene;
 }
 
@@ -48,21 +52,24 @@ auto GameManager::startGameLoop() -> void {
         auto timeDelta = clock.getElapsedTime();
 //        fmt::println("{}", timeDelta.asMilliseconds());
         tickClock.restart();
-        currentScene->getPhysicsEngine().step(std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
-        clock.restart();
-        auto size = window->getSize();
-        camera.setPos(player->getPos() - sf::Vector2f(size.x / 2, size.y / 1.3));
-        renderer.render(*currentScene, camera);
-        window->display();
-        auto tickDelta = tickClock.getElapsedTime();
-//        fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
-        player->dispatchEvents(*window);
-        if (player->isWKeyPressed() && currentScene) {}
+        if (currentScene) {
+            currentScene->getPhysicsEngine().step(std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
+            clock.restart();
+            auto size = window->getSize();
+            camera.setPos(player->getPos() - sf::Vector2f(size.x / 2, size.y / 1.3));
+            renderer.render(*currentScene, camera);
+            window->display();
+            auto tickDelta = tickClock.getElapsedTime();
+    //        fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
+            player->dispatchEvents(*window);
+        }
     }
 }
 
 auto GameManager::switchScene() -> void {
-//    currentScene = testScene;
+    if (currentScene == testScene) {
+        currentScene = platformMadness;
+    }
 }
 
 void GameManager::load(const nlohmann::json &json) {

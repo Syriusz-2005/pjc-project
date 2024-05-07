@@ -11,6 +11,7 @@
 
 enum PlayerEventType {
         DEATH,
+        SWITCH_TO_NEXT_SCENE,
 };
 
 

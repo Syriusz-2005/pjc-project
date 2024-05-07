@@ -24,7 +24,7 @@ private:
     GameStateController gameStateController{this, "../state.splash.json"};
 
     Scene* testScene;
-    Scene* verticalScene;
+    Scene* platformMadness;
 
     Camera camera = Camera();
     sf::RenderWindow* window;
@@ -40,6 +40,9 @@ private:
         currentScene->add(player);
         gameStateController.loadIfExists();
     };
+    std::function<void()> onSwitchScene = [this]() -> void {
+        switchScene();
+    };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;
 
@@ -50,6 +53,7 @@ public:
     ~GameManager() {
         fmt::println("Disposing game manager");
         delete testScene;
+        delete platformMadness;
         player.reset();
     }
 

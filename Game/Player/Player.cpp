@@ -55,6 +55,7 @@ auto Player::onKeyPress(sf::Event event) -> void {
             auto val = parent->state.get(IS_FIRST_SPLASH_ACTIVE);
             if (std::holds_alternative<bool>(val)) {
                 fmt::println("Pressing w, is splash active: {}", std::get<bool>(val));
+                emit(SWITCH_TO_NEXT_SCENE);
             }
             wKeyPressed = true;
             break;

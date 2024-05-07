@@ -28,20 +28,20 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     initScenes(initContext);
 
     player = std::make_shared<Player>(initContext, "player0");
-    player->setPos(sf::Vector2f{50, 700});
-    player->setSpawnPoint();
     player->onMicrotask(DEATH, onPlayerDeath);
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
 
-    platformMadness->add(player);
-    currentScene->add(player);
+    testScene->add(player);
+
+    player->setPos(currentScene->getSpawn());
+
     gameStateController.loadIfExists();
 }
 
 auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising new scene");
     testScene = initializeTestScene(initContext);
-    platformMadness = new Scene{sf::Color(0, 0, 0), "platform_madness"};
+    platformMadness = new Scene{sf::Color(0, 0, 0), "platform_madness", sf::Vector2f(0, 0)};
     currentScene = testScene;
 }
 
@@ -67,13 +67,16 @@ auto GameManager::startGameLoop() -> void {
 }
 
 auto GameManager::switchScene() -> void {
+    currentScene->remove(player);
+
     if (currentScene == testScene) {
         currentScene = platformMadness;
+        currentScene->add(player);
+        player->setPos(currentScene->getSpawn());
     }
 }
 
 void GameManager::load(const nlohmann::json &json) {
-    player->load(json["player"]);
     for (auto sceneData: json["scenes"]) {
         auto id = sceneData["uid"].get<std::string>();
         if (testScene->isUidMatch(id)) {
@@ -84,8 +87,6 @@ void GameManager::load(const nlohmann::json &json) {
 
 std::unique_ptr<nlohmann::json> GameManager::save() {
     auto json = std::make_unique<nlohmann::json>();
-    (*json)["player"] = *player->save();
-    fmt::println("Player saved");
     (*json)["scenes"].push_back(*testScene->save());
     return json;
 }

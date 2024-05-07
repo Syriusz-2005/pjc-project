@@ -20,9 +20,10 @@ private:
     sf::Shader backgroundShader{};
     BackgroundSource backgroundSource = COLOR;
     std::string uid;
+    sf::Vector2f spawn;
 
 public:
-    explicit Scene(sf::Color clearColor, std::string uid);
+    explicit Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn);
     auto add(std::shared_ptr<Object> o) -> void override {
         o->setParent(this);
         objects.push_back(o);
@@ -50,6 +51,8 @@ public:
     void load(nlohmann::json const& json) override;
     std::unique_ptr<nlohmann::json> save() override;
     bool isUidMatch(std::string const &id) const override;
+
+    auto getSpawn() -> sf::Vector2f const&;
 
     ~Scene();
 };

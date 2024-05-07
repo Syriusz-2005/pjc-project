@@ -4,7 +4,11 @@
 #include "../VecUtils/VecUtils.h"
 
 
-Scene::Scene(sf::Color clearColor, std::string uid): clearColor(clearColor), physicsEngine(PhysicsEngine(objects)), uid(uid) {
+Scene::Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn):
+clearColor(clearColor),
+physicsEngine(PhysicsEngine(objects)),
+uid(uid),
+spawn(spawn) {
 
 }
 
@@ -93,4 +97,8 @@ const std::vector<std::shared_ptr<Object>> &Scene::getChildren(std::function<boo
         }
     }
     return *filteredObjects;
+}
+
+auto Scene::getSpawn() -> sf::Vector2f const & {
+    return spawn;
 }

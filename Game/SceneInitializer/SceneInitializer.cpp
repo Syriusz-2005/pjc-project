@@ -10,7 +10,7 @@
 #include <random>
 
 auto initializeTestScene(InitContext const& ctx) -> Scene * {
-    auto scene = new Scene(sf::Color(150, 150, 150), "test_scene");
+    auto scene = new Scene(sf::Color(150, 150, 150), "test_scene", sf::Vector2f{50, 700});
     auto shader = &scene->getBackgroundShader();
     shader->loadFromFile("../shaders/paper.vert", "../shaders/paper.frag");
     scene->setBackgroundSource(SHADER);

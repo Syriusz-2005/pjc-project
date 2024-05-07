@@ -35,9 +35,11 @@ private:
     std::function<void()> onPlayerDeath = [this]() -> void {
         fmt::println("Player died, resetting scene...");
         delete testScene;
+        delete platformMadness;
         auto initContext = InitContext{&textureLoader};
         initScenes(initContext);
         currentScene->add(player);
+        player->setPos(currentScene->getSpawn());
         gameStateController.loadIfExists();
     };
     std::function<void()> onSwitchScene = [this]() -> void {

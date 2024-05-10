@@ -16,7 +16,6 @@
 
     auto isNearZero(float a) -> bool;
     auto isNearZero(sf::Vector2f a) -> bool;
-
 }
 
 #endif //PJC_PROJECT_VECUTILS_H

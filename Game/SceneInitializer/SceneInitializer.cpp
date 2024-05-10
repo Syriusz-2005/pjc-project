@@ -6,6 +6,7 @@
 #include "../BallEnemy/BallEnemy.h"
 #include "../../Engine/Rect/Rect.h"
 #include "../Splash/Splash.h"
+#include "../MovingPlatform/MovingPlatform.h"
 #include <memory>
 #include <random>
 
@@ -127,6 +128,11 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     floor->setPos(sf::Vector2f(0, 850));
     floor->isSavable = false;
     scene->add(floor);
+
+    auto platform1 = std::make_shared<MovingPlatform>("platform_1");
+    platform1->setPos1(sf::Vector2f(500, 760));
+    platform1->setPos2(sf::Vector2f{700, 760});
+    scene->add(platform1);
 
     return scene;
 }

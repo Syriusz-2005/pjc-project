@@ -45,7 +45,7 @@ public:
 
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;
-    void onBeforeStep() override;
+    void onBeforeStep(long long timeElapsed) override;
 
     void load(nlohmann::json const& json) override;
     std::unique_ptr<nlohmann::json> save() override;

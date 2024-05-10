@@ -13,7 +13,7 @@ auto PhysicsEngine::step(long long timeElapsed) const -> void {
     auto deltaMs = ((float) timeElapsed) / 1000;
     for (auto it = objects->begin(); it != objects->end(); it++) {
         const auto object = *it;
-        object->onBeforeStep();
+        object->onBeforeStep(timeElapsed);
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;
         if (module.isImmovable) continue;

@@ -118,7 +118,7 @@ auto Player::render(Context ctx) -> void {
     ctx.window->draw(sprite);
 }
 
-void Player::onBeforeStep() {
+void Player::onBeforeStep(long long timeElapsed) {
     if (willJump) {
         willJump = false;
         if (physicsModule.isOnGround) {

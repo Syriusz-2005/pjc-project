@@ -25,6 +25,8 @@ public:
         pos2 = p;
     }
 
+    auto setCurrentState(float newState) -> void;
+
     void onBeforeStep(long long timeElapsed) override;
     bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
 };

@@ -26,3 +26,7 @@ bool MovingPlatform::onBeforeCollision(const std::shared_ptr<Object> &collisionT
 
     return true;
 }
+
+auto MovingPlatform::setCurrentState(float newState) -> void {
+    currentState = newState;
+}

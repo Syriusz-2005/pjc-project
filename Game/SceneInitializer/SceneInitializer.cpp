@@ -130,9 +130,20 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     scene->add(floor);
 
     auto platform1 = std::make_shared<MovingPlatform>("platform_1");
-    platform1->setPos1(sf::Vector2f(500, 760));
-    platform1->setPos2(sf::Vector2f{700, 760});
+    platform1->setPos1(sf::Vector2f(680, 860));
+    platform1->setPos2(sf::Vector2f{880, 860});
     scene->add(platform1);
+
+    auto platform2 = std::make_shared<MovingPlatform>("platform_2");
+    platform2->setPos1(sf::Vector2f(1190, 860));
+    platform2->setPos2(sf::Vector2f{1450, 860});
+    platform2->setCurrentState(3.14);
+    scene->add(platform2);
+
+    auto floor2 = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor2");
+    floor2->setPos(sf::Vector2f(2000, 850));
+    floor2->isSavable = false;
+    scene->add(floor2);
 
     return scene;
 }

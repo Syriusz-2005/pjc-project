@@ -12,6 +12,8 @@ class MovingPlatform : public Rect {
     float currentState{0};
     float speed{0.001};
 
+    sf::Vector2f prevPos{};
+
 public:
     explicit MovingPlatform(std::string const& uid);
 
@@ -24,6 +26,7 @@ public:
     }
 
     void onBeforeStep(long long timeElapsed) override;
+    bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
 };
 
 

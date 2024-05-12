@@ -101,7 +101,7 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
 };
 
 auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
-    auto scene = new Scene(sf::Color(150, 150, 150), "test_scene", sf::Vector2f{50, 700});
+    auto scene = new Scene(sf::Color(150, 150, 150), "platform_madness", sf::Vector2f{50, 700});
     auto shader = &scene->getBackgroundShader();
     shader->loadFromFile("../shaders/paper.vert", "../shaders/paper.frag");
     scene->setBackgroundSource(SHADER);
@@ -144,6 +144,17 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     floor2->setPos(sf::Vector2f(2000, 850));
     floor2->isSavable = false;
     scene->add(floor2);
+
+    auto platform3 = std::make_shared<MovingPlatform>("platform_3");
+    platform3->setPos1(sf::Vector2f(2450, 1080));
+    platform3->setPos2(sf::Vector2f{2450, 450});
+    scene->add(platform3);
+
+    auto platform4 = std::make_shared<MovingPlatform>("platform_4");
+    platform4->setPos1(sf::Vector2f(1450, 160));
+    platform4->setPos2(sf::Vector2f{1880, 160});
+//    platform4->setCurrentState(3.14);
+    scene->add(platform4);
 
     return scene;
 }

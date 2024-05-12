@@ -79,8 +79,11 @@ auto GameManager::switchScene() -> void {
 void GameManager::load(const nlohmann::json &json) {
     for (auto sceneData: json["scenes"]) {
         auto id = sceneData["uid"].get<std::string>();
+        // Could be better? Sure.
         if (testScene->isUidMatch(id)) {
             testScene->load(sceneData);
+        } else if (platformMadness->isUidMatch(id)) {
+            platformMadness->load(sceneData);
         }
     }
 }
@@ -88,6 +91,7 @@ void GameManager::load(const nlohmann::json &json) {
 std::unique_ptr<nlohmann::json> GameManager::save() {
     auto json = std::make_unique<nlohmann::json>();
     (*json)["scenes"].push_back(*testScene->save());
+    (*json)["scenes"].push_back(*platformMadness->save());
     return json;
 }
 

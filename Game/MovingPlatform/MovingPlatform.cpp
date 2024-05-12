@@ -16,17 +16,31 @@ void MovingPlatform::onBeforeStep(long long timeElapsed) {
     pos = finalPos;
 }
 
-bool MovingPlatform::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
-    Object::onBeforeCollision(collisionTarget);
+void MovingPlatform::onAfterCollision(const std::shared_ptr<Object> &collisionTarget) {
+    Object::onAfterCollision(collisionTarget);
+
     if (!collisionTarget->physicsModule.isImmovable and collisionTarget->physicsModule.isOnGround) {
         auto posDelta = pos - prevPos;
-        collisionTarget->move(posDelta);
+        collisionTarget->move(sf::Vector2f{posDelta.x, posDelta.y > 0 ? posDelta.y: 0});
     }
 
-
-    return true;
 }
+
+
 
 auto MovingPlatform::setCurrentState(float newState) -> void {
     currentState = newState;
 }
+
+std::unique_ptr<nlohmann::json> MovingPlatform::save() {
+    auto json = Object::save();
+    (*json)["currentState"] = currentState;
+    return json;
+}
+
+void MovingPlatform::load(const nlohmann::json &json) {
+    Object::load(json);
+    currentState = json["currentState"];
+}
+
+

@@ -28,7 +28,9 @@ public:
     auto setCurrentState(float newState) -> void;
 
     void onBeforeStep(long long timeElapsed) override;
-    bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
+    void onAfterCollision(const std::shared_ptr<Object> &collisionTarget) override;
+    std::unique_ptr<nlohmann::json> save() override;
+    void load(const nlohmann::json &json) override;
 };
 
 

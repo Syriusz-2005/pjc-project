@@ -75,6 +75,7 @@ public:
     virtual auto onBeforeStep(long long timeElapsed) -> void {}
 
     virtual auto onBeforeCollision(std::shared_ptr<Object> const &collisionTarget) -> bool { return true; }
+    virtual auto onAfterCollision(std::shared_ptr<Object> const& collisionTarget) -> void {};
 
     virtual auto applyDamage(float damageValue) -> void;
 

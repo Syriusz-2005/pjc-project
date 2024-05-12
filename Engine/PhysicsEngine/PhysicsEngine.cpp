@@ -108,6 +108,8 @@ auto PhysicsEngine::applyCollision(std::shared_ptr<Object> o) const -> void {
                 if (!neighbourContinued) continue;
                 if (neighbour->getLayer() == BACKGROUND) continue;
                 applyCollisionForces(*o, *neighbour, *intersectionArea);
+                o->onAfterCollision(neighbour);
+                neighbour->onAfterCollision(o);
                 if (std::abs(o->getVel().y) < .01 and intersectionArea->width > intersectionArea->height) {
                     module->isOnGround = true;
                 }

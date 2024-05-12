@@ -7,6 +7,7 @@
 #include "../../Engine/Rect/Rect.h"
 #include "../Splash/Splash.h"
 #include "../MovingPlatform/MovingPlatform.h"
+#include "../SpikeBallObstacle/SpikeBallObstacle.h"
 #include <memory>
 #include <random>
 
@@ -153,8 +154,12 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     auto platform4 = std::make_shared<MovingPlatform>("platform_4");
     platform4->setPos1(sf::Vector2f(1450, 160));
     platform4->setPos2(sf::Vector2f{1880, 160});
-//    platform4->setCurrentState(3.14);
     scene->add(platform4);
+
+    auto obstacle1 = std::make_shared<SpikeBallObstacle>(*ctx.textureLoader, "obstacle_1");
+    obstacle1->setPos(1830, 60);
+    obstacle1->isSavable = false;
+    scene->add(obstacle1);
 
     return scene;
 }

@@ -5,8 +5,9 @@
 #include "../../Engine/TexturedRect/TexturedRect.h"
 #include "../InitContext/InitContext.h"
 #include "../../Engine/MortalEntityModule/MortalEntityModule.h"
+#include "../SpikeBallObstacle/SpikeBallObstacle.h"
 
-class BallEnemy : public TexturedRect {
+class BallEnemy : public SpikeBallObstacle {
 private:
     std::function<void()> onDeath = [this]() -> void {
         fmt::println("Trying to remove ball...");
@@ -17,7 +18,6 @@ private:
 public:
     BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid);
 
-    bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
     void onAfterStep() override;
 };
 

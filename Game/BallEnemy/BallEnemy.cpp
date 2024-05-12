@@ -5,14 +5,12 @@
 #include "../../Engine/VecUtils/VecUtils.h"
 
 BallEnemy::BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid)
-: TexturedRect(
-        PhysicsModule(),
-        uid,
-        *loader.getTexture(ENEMY_BALL),
-        sf::Vector2f(50, 50),
-        FOREGROUND
+: SpikeBallObstacle(
+        loader,
+        uid
         ) {
     name = "Ball enemy";
+    physicsModule.isImmovable = false;
     setEntityModule(entityModule);
     boxSize = sf::Vector2f(55, 55);
 }
@@ -33,10 +31,4 @@ void BallEnemy::onAfterStep() {
     auto size = vec::toFloat(sprite.getTexture()->getSize());
     sprite.setOrigin(vec::multiply(size, 1.0 / 2.0));
     sprite.rotate(vel.x * 10);
-}
-
-bool BallEnemy::onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) {
-    Object::onBeforeCollision(collisionTarget);
-    collisionTarget->applyDamage(20);
-    return true;
 }

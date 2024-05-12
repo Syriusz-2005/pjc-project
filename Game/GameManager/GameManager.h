@@ -49,6 +49,7 @@ private:
     Scene* currentScene = testScene;
 
     auto initScenes(InitContext& initContext) -> void;
+    auto setScene(std::string const& uid) -> void;
 public:
     explicit GameManager(sf::RenderWindow & window);
 

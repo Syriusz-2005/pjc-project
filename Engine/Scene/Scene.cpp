@@ -105,3 +105,7 @@ const std::vector<std::shared_ptr<Object>> &Scene::getChildren(std::function<boo
 auto Scene::getSpawn() -> sf::Vector2f const & {
     return spawn;
 }
+
+auto Scene::getUid() -> std::string const & {
+    return uid;
+}

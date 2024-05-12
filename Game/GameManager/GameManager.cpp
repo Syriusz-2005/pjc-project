@@ -39,7 +39,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 }
 
 auto GameManager::initScenes(InitContext &initContext) -> void {
-    fmt::println("Initialising new scene");
+    fmt::println("Initialising scenes...");
     testScene = initializeTestScene(initContext);
     platformMadness = initializePlatformMadness(initContext);
     currentScene = testScene;
@@ -86,16 +86,30 @@ void GameManager::load(const nlohmann::json &json) {
             platformMadness->load(sceneData);
         }
     }
+    if (json.contains("currentSceneId")) {
+        setScene(json["currentSceneId"]);
+    }
 }
 
 std::unique_ptr<nlohmann::json> GameManager::save() {
     auto json = std::make_unique<nlohmann::json>();
     (*json)["scenes"].push_back(*testScene->save());
     (*json)["scenes"].push_back(*platformMadness->save());
+    (*json)["currentSceneId"] = currentScene->getUid();
     return json;
 }
 
 auto GameManager::saveGame() -> void {
     gameStateController.saveToFile();
+}
+
+auto GameManager::setScene(const std::string &uid) -> void {
+    currentScene->remove(player);
+    if (testScene->isUidMatch(uid)) {
+        currentScene = testScene;
+    } else if (platformMadness->isUidMatch(uid)) {
+        currentScene = platformMadness;
+        currentScene->add(player);
+    }
 }
 

@@ -39,6 +39,7 @@ public:
         });
         objects.erase(first, last);
     }
+    auto getUid() -> std::string const&;
     const std::vector<std::shared_ptr<Object>>& getChildren(std::function<bool(Object&)> const& predicate) override;
     const std::vector<std::shared_ptr<Object>>& getChildren() override;
     auto render(Context ctx) -> void;

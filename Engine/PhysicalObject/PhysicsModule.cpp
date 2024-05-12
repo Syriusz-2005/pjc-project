@@ -5,7 +5,8 @@
 PhysicsModule::PhysicsModule(
         const float mass,
         const float gravity,
-        const float bounciness) : mass(mass), gravity(gravity), bounciness(bounciness) {
+        const float bounciness,
+        bool isImmovable) : mass(mass), gravity(gravity), bounciness(bounciness), isImmovable(isImmovable) {
 
 }
 

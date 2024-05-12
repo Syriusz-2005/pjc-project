@@ -7,10 +7,8 @@
 #include "../VecUtils/VecUtils.h"
 
 class TexturedRect : public Object {
-private:
-    sf::Vector2f shift;
-
 protected:
+    sf::Vector2f shift;
     sf::Sprite sprite;
 
     sf::Vector2f boxSize;

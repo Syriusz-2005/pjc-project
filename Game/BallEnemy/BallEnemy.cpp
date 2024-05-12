@@ -7,12 +7,13 @@
 BallEnemy::BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid)
 : SpikeBallObstacle(
         loader,
-        uid
+        uid,
+        PhysicsModule()
         ) {
     name = "Ball enemy";
-    physicsModule.isImmovable = false;
     setEntityModule(entityModule);
-    boxSize = sf::Vector2f(55, 55);
+    boxSize = sf::Vector2f(45, 45);
+    shift = sf::Vector2f(50, 50);
 }
 
 void BallEnemy::onAfterStep() {

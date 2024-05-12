@@ -7,6 +7,9 @@
 #include "../../Engine/MortalEntityModule/MortalEntityModule.h"
 #include "../SpikeBallObstacle/SpikeBallObstacle.h"
 
+/**
+ * This inheritance has been made strictly for the project criteria. I think that leaving BallEnemy and SpikeBallObstacle as fully separate entities makes more sense.
+ */
 class BallEnemy : public SpikeBallObstacle {
 private:
     std::function<void()> onDeath = [this]() -> void {
@@ -16,7 +19,9 @@ private:
     };
     std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10, onDeath);
 public:
-    BallEnemy(TextureLoader<TextureId> const& loader, std::string const& uid);
+    BallEnemy(
+            TextureLoader<TextureId> const& loader,
+            std::string const& uid);
 
     void onAfterStep() override;
 };

@@ -42,7 +42,7 @@ auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising new scene");
     testScene = initializeTestScene(initContext);
     platformMadness = initializePlatformMadness(initContext);
-    currentScene = platformMadness;
+    currentScene = testScene;
 }
 
 auto GameManager::startGameLoop() -> void {

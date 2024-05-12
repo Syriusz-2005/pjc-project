@@ -22,7 +22,8 @@ public:
     explicit PhysicsModule(
             float mass = 1,
             float gravity = 0.0003,
-            float bounciness = 1);
+            float bounciness = 1,
+                bool isImmovable = false);
 
     void load(nlohmann::json const& json) override;
     std::unique_ptr<nlohmann::json> save() override;

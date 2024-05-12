@@ -8,7 +8,10 @@
 
 class SpikeBallObstacle : public TexturedRect {
 public:
-    explicit SpikeBallObstacle(TextureLoader<TextureId> const& loader, std::string const& uid);
+    explicit SpikeBallObstacle(
+            TextureLoader<TextureId> const& loader,
+            std::string const& uid,
+            PhysicsModule const& module = PhysicsModule(0, 0, 0, true));
 
     bool onBeforeCollision(const std::shared_ptr<Object> &collisionTarget) override;
 };

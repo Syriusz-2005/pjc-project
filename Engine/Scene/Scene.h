@@ -24,7 +24,7 @@ private:
     sf::RectangleShape backgroundShaderRect{};
 
 public:
-    explicit Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn);
+    explicit Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn, bool const& isFrozen = false);
     auto add(std::shared_ptr<Object> o) -> void override {
         o->setParent(this);
         objects.push_back(o);
@@ -42,6 +42,7 @@ public:
     auto getUid() -> std::string const&;
     const std::vector<std::shared_ptr<Object>>& getChildren(std::function<bool(Object&)> const& predicate) override;
     const std::vector<std::shared_ptr<Object>>& getChildren() override;
+
     auto render(Context ctx) -> void;
     auto getPhysicsEngine() -> PhysicsEngine const&;
     auto setBackground(std::string textureFile) -> void;

@@ -20,16 +20,19 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     textureLoader.registerTexture(PLAYER_RUNNING_10, "../assets/player_running_10.png");
     textureLoader.registerTexture(PLAYER_RUNNING_11, "../assets/player_running_11.png");
     textureLoader.registerTexture(BACKLIGHT, "../assets/backlight.png");
+    textureLoader.registerTexture(GAME_TITLE, "../assets/title.png");
 
     defaultFont.loadFromFile("../assets/GochiHand-Regular.ttf");
 
-    auto initContext = InitContext{&textureLoader};
+    auto initContext = InitContext{&textureLoader, window, camera};
 
     initScenes(initContext);
 
     player = std::make_shared<Player>(initContext, "player0");
     player->onMicrotask(DEATH, onPlayerDeath);
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
+    player->onMicrotask(CREATE_NEW_GAME, onAddNewGame);
+    player->onMicrotask(SUBMIT_NEW_GAME_NAME, onSubmitNewGameName);
 
     currentScene->add(player);
 
@@ -42,7 +45,8 @@ auto GameManager::initScenes(InitContext &initContext) -> void {
     fmt::println("Initialising scenes...");
     testScene = initializeTestScene(initContext);
     platformMadness = initializePlatformMadness(initContext);
-    currentScene = testScene;
+    gameMenu = initializeGameMenu(initContext);
+    currentScene = gameMenu;
 }
 
 auto GameManager::startGameLoop() -> void {
@@ -84,6 +88,8 @@ void GameManager::load(const nlohmann::json &json) {
             testScene->load(sceneData);
         } else if (platformMadness->isUidMatch(id)) {
             platformMadness->load(sceneData);
+        } else if (gameMenu->isUidMatch(id)) {
+            gameMenu->load(sceneData);
         }
     }
     if (json.contains("currentSceneId")) {
@@ -95,6 +101,7 @@ std::unique_ptr<nlohmann::json> GameManager::save() {
     auto json = std::make_unique<nlohmann::json>();
     (*json)["scenes"].push_back(*testScene->save());
     (*json)["scenes"].push_back(*platformMadness->save());
+    (*json)["scenes"].push_back(*gameMenu->save());
     (*json)["currentSceneId"] = currentScene->getUid();
     return json;
 }

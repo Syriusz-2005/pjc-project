@@ -6,6 +6,7 @@ enum ObjectType {
     ENVIRONMENT,
     ENEMY,
     PLAYER,
+    BUTTON,
 };
 
 

@@ -106,6 +106,10 @@ add_executable(pjc_project main.cpp
         Game/MovingPlatform/MovingPlatform.h
         Game/SpikeBallObstacle/SpikeBallObstacle.cpp
         Game/SpikeBallObstacle/SpikeBallObstacle.h
+        Game/Button/Button.cpp
+        Game/Button/Button.h
+        Game/TextField/TextField.cpp
+        Game/TextField/TextField.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)

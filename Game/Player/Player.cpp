@@ -7,7 +7,8 @@
 Player::Player(InitContext ctx, std::string const& uid)
     : Object(PhysicsModule(1, 0.00043, 0), uid, FOREGROUND),
     animatedTxt(TextureSwitcher<TextureId>(*ctx.textureLoader, std::vector<TextureId>{PLAYER_STILL}, 60)),
-    EventEmitter<PlayerEventType>() {
+    EventEmitter<PlayerEventType>(),
+    camera(ctx.camera) {
     name = "Player object";
     sprite = sf::Sprite();
     backlight.setTexture(*ctx.textureLoader->getTexture(BACKLIGHT));
@@ -20,24 +21,53 @@ auto Player::dispatchEvents(sf::RenderWindow &window) -> void {
     auto event = sf::Event();
     while (window.pollEvent(event)) {
         switch (event.type) {
-            case sf::Event::Closed: {
+            case sf::Event::Closed:
                 window.close();
                 break;
-            }
             case sf::Event::KeyPressed:
                 onKeyPress(event);
                 break;
             case sf::Event::KeyReleased:
                 onKeyRelease(event);
                 break;
-            default: {
-            }
+            case sf::Event::MouseButtonPressed:
+                onButtonPress(event);
+                break;
+            case sf::Event::TextEntered:
+                onTextEntered(event);
+                break;
+            default: {}
         }
     }
     emitScheduledMicrotasks();
 }
 
+
+auto Player::onButtonPress(sf::Event event) -> void {
+    auto mousePos = sf::Vector2f{(float) event.mouseButton.x, (float) event.mouseButton.y} + camera.getPos();
+    for (auto& child : parent->getChildren()) {
+        if (child->getType() == BUTTON and child->getBoundingBox().contains(mousePos) and child->isVisible) {
+            if (child->isUidMatch("new_game_button")) {
+                emit(CREATE_NEW_GAME);
+            } else if (child->isUidMatch("submit_game_name_button")) {
+                emit(SUBMIT_NEW_GAME_NAME);
+            }
+        }
+    }
+}
+
+auto Player::onTextEntered(sf::Event event) -> void {
+    if (inputMode == inputMode::TEXT_INSERT) {
+        //Based on: https://en.sfml-dev.org/forums/index.php?topic=19965.0
+        playerInput += event.text.unicode;
+        fmt::println("{}", playerInput);
+        parent->state.set(FOCUSED_INPUT_TEXT, playerInput);
+        return;
+    }
+}
+
 auto Player::onKeyPress(sf::Event event) -> void {
+    if (inputMode != inputMode::GAME_CONTROL) return;
     switch (event.key.code) {
         case sf::Keyboard::A: {
             horizontalMovement = -1;
@@ -181,4 +211,14 @@ auto Player::setAnimationState() -> void {
 auto Player::isWKeyPressed() -> bool {
     return wKeyPressed;
 }
+
+auto Player::setInputMode(inputMode::InputMode newMode) -> void {
+    inputMode = newMode;
+}
+
+auto Player::getEnteredText() -> std::string {
+    return playerInput;
+    playerInput = "";
+}
+
 

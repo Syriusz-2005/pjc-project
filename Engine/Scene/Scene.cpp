@@ -4,9 +4,9 @@
 #include "../VecUtils/VecUtils.h"
 
 
-Scene::Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn):
+Scene::Scene(sf::Color clearColor, std::string uid, sf::Vector2f const& spawn, bool const& isFrozen):
 clearColor(clearColor),
-physicsEngine(PhysicsEngine(objects)),
+physicsEngine(PhysicsEngine(objects, isFrozen)),
 uid(uid),
 spawn(spawn) {
 
@@ -37,7 +37,9 @@ auto Scene::render(Context ctx) -> void {
 
 
     for (const auto& object : objects) {
-        object->render(ctx);
+        if (object->isVisible) {
+            object->render(ctx);
+        }
     }
 }
 
@@ -75,6 +77,7 @@ void Scene::load(nlohmann::json const& json) {
 std::unique_ptr<nlohmann::json> Scene::save() {
     auto json = std::make_unique<nlohmann::json>();
     (*json)["uid"] = uid;
+    (*json)["objects"] = {};
     for (const auto& o : objects) {
         if (o->isSavable) {
             auto val = o->save();

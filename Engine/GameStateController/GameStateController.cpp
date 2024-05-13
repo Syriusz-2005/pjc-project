@@ -3,8 +3,9 @@
 #include "fmt/core.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <utility>
 
-GameStateController::GameStateController(Savable *savable, std::string fileLocation): savable(savable), fileLocation(fileLocation) {
+GameStateController::GameStateController(Savable *savable, std::string fileLocation): savable(savable), fileLocation(std::move(fileLocation)) {
 
 }
 

@@ -5,11 +5,12 @@
 #include <fmt/core.h>
 #include <cmath>
 
-PhysicsEngine::PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects): objects(&objects) {
+PhysicsEngine::PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects, bool const& isFrozen): objects(&objects), isFrozen(isFrozen) {
 
 }
 
 auto PhysicsEngine::step(long long timeElapsed) const -> void {
+    if (isFrozen) return;
     auto deltaMs = ((float) timeElapsed) / 1000;
     for (auto it = objects->begin(); it != objects->end(); it++) {
         const auto object = *it;

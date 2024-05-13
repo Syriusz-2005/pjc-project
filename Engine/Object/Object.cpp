@@ -114,4 +114,3 @@ auto Object::getType() -> int {
 auto Object::getUid() -> std::string const & {
     return uid;
 }
-

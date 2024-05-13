@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
 
-auto Camera::getPos() -> sf::Vector2f {
+auto Camera::getPos() const -> sf::Vector2f {
     return pos;
 }
 

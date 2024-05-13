@@ -8,6 +8,9 @@
 #include "../Splash/Splash.h"
 #include "../MovingPlatform/MovingPlatform.h"
 #include "../SpikeBallObstacle/SpikeBallObstacle.h"
+#include "../Button/Button.h"
+#include "../TextField/TextField.h"
+#include "../States/States.h"
 #include <memory>
 #include <random>
 
@@ -160,6 +163,48 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     obstacle1->setPos(1830, 60);
     obstacle1->isSavable = false;
     scene->add(obstacle1);
+
+    return scene;
+}
+
+auto initializeGameMenu(InitContext const& ctx) -> Scene* {
+    auto scene = new Scene(sf::Color(150, 150, 150), "game_menu", sf::Vector2f{0, 0}, false);
+    auto shader = &scene->getBackgroundShader();
+    shader->loadFromFile("../shaders/paper.vert", "../shaders/paper.frag");
+    scene->setBackgroundSource(SHADER);
+    scene->setBackground("../assets/background.png");
+
+    auto title = std::make_shared<TexturedRect>(
+            PhysicsModule(),
+            "game_title",
+            *ctx.textureLoader->getTexture(GAME_TITLE),
+            sf::Vector2f{0, 0},
+            BACKGROUND);
+    title->setPos(-title->getBoundingBox().width / 2, -800);
+    title->isSavable = false;
+    scene->add(title);
+
+    auto newGameButton = std::make_shared<Button>("new_game_button", "New game");
+    newGameButton->setPos(-newGameButton->getBoundingBox().width / 2, -140);
+    newGameButton->isSavable = false;
+    scene->add(newGameButton);
+
+    auto selectGameButton = std::make_shared<Button>("select_game_button", "Select game");
+    selectGameButton->setPos(-selectGameButton->getBoundingBox().width / 2, -40);
+    selectGameButton->isSavable = false;
+    scene->add(selectGameButton);
+
+    auto nameGameField = std::make_shared<TextField>("name_game_field", FOCUSED_INPUT_ID, FOCUSED_INPUT_TEXT);
+    nameGameField->setPos(-nameGameField->getBoundingBox().width / 2, -140);
+    nameGameField->isSavable = false;
+    nameGameField->isVisible = false;
+    scene->add(nameGameField);
+
+    auto submitNameButton = std::make_shared<Button>("submit_game_name_button", "Create");
+    submitNameButton->setPos(-nameGameField->getBoundingBox().width / 2, -40);
+    submitNameButton->isSavable = false;
+    submitNameButton->isVisible = false;
+    scene->add(submitNameButton);
 
     return scene;
 }

@@ -12,11 +12,12 @@ private:
     auto applyCollision(std::shared_ptr<Object> o) const -> void;
     static auto getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) -> sf::Rect<float>*;
     auto applyCollisionForces(Object& a, Object& b, sf::FloatRect const&i) const -> void;
+    bool isFrozen;
 
 public:
-    explicit PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects);
+    explicit PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects, bool const& isFrozen);
 
-    auto step(long long timeElapsed) const -> void;
+    virtual auto step(long long timeElapsed) const -> void;
 };
 
 

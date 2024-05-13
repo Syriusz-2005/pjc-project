@@ -8,15 +8,26 @@
 #include "../../Engine/MortalEntityModule/MortalEntityModule.h"
 #include "../../Engine/EventEmitter/EventEmitter.h"
 #include "../../Engine/TextureSwitcher/TextureSwitcher.h"
+#include "../../Engine/Camera/Camera.h"
 
 enum PlayerEventType {
         DEATH,
         SWITCH_TO_NEXT_SCENE,
+        CREATE_NEW_GAME,
+        SUBMIT_NEW_GAME_NAME,
 };
+
+namespace inputMode {
+    enum InputMode {
+        GAME_CONTROL,
+        TEXT_INSERT,
+    };
+}
 
 
 class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
+    std::string playerInput;
     short horizontalMovement{0};
     sf::Sprite sprite;
     sf::Sprite backlight{};
@@ -24,11 +35,15 @@ private:
     sf::Vector2f spawnPoint;
     TextureSwitcher<TextureId> animatedTxt;
     bool wKeyPressed{false};
+    Camera const& camera;
+    inputMode::InputMode inputMode{inputMode::GAME_CONTROL};
 
     std::shared_ptr<EntityModule> entityModule = std::make_shared<MortalEntityModule>(10, onDeath);
 
     auto onKeyPress(sf::Event event) -> void;
     auto onKeyRelease(sf::Event event) -> void;
+    auto onButtonPress(sf::Event event) -> void;
+    auto onTextEntered(sf::Event event) -> void;
     std::function<void()> onDeath = [this]() -> void {
         emit(DEATH);
         pos = spawnPoint;
@@ -42,6 +57,8 @@ public:
 
     auto dispatchEvents(sf::RenderWindow& window) -> void;
     auto setSpawnPoint() -> void;
+    auto setInputMode(inputMode::InputMode newMode) -> void;
+    auto getEnteredText() -> std::string;
 
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;

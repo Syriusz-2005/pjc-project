@@ -9,7 +9,7 @@ private:
     sf::Vector2f pos;
 
 public:
-    auto getPos() -> sf::Vector2f;
+    auto getPos() const -> sf::Vector2f;
     auto setPos(sf::Vector2f newPos) -> void;
 };
 

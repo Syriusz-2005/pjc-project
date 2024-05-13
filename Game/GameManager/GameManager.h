@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <variant>
+#include <regex>
 
 #include "../../Engine/Scene/Scene.h"
 #include "../../Engine/Camera/Camera.h"
@@ -25,8 +26,9 @@ private:
 
     Scene* testScene;
     Scene* platformMadness;
+    Scene* gameMenu;
 
-    Camera camera = Camera();
+    Camera camera{};
     sf::RenderWindow* window;
     sf::Font defaultFont{};
     Context drawContext;
@@ -36,7 +38,8 @@ private:
         fmt::println("Player died, resetting scene...");
         delete testScene;
         delete platformMadness;
-        auto initContext = InitContext{&textureLoader};
+        delete gameMenu;
+        auto initContext = InitContext{&textureLoader, *window, camera};
         initScenes(initContext);
         currentScene->add(player);
         player->setPos(currentScene->getSpawn());
@@ -44,6 +47,33 @@ private:
     };
     std::function<void()> onSwitchScene = [this]() -> void {
         switchScene();
+    };
+    std::function<void()> onAddNewGame = [this]() -> void {
+        fmt::println("Switching to the add game menu");
+        auto mainMenuButtons = gameMenu->getChildren([](Object& o) -> bool {
+            // A more future-proof solution would be to use "groups"
+            return o.isUidMatch("new_game_button") or o.isUidMatch("select_game_button");
+        });
+        for (auto& menuButton : mainMenuButtons) {
+            menuButton->isVisible = false;
+        }
+        auto nameGameInputId = std::string{"name_game_field"};
+        auto selectGameButtons = gameMenu->getChildren([nameGameInputId](Object& o) -> bool {
+            return o.isUidMatch(nameGameInputId) or o.isUidMatch("submit_game_name_button");
+        });
+        for (auto& selectGameButton : selectGameButtons) {
+            selectGameButton->isVisible = true;
+        }
+        gameMenu->state.set(FOCUSED_INPUT_ID, nameGameInputId);
+        player->setInputMode(inputMode::TEXT_INSERT);
+    };
+    std::function<void()> onSubmitNewGameName = [this]() -> void {
+        auto gameName = player->getEnteredText();
+        player->setInputMode(inputMode::GAME_CONTROL);
+        // Source: https://en.cppreference.com/w/cpp/regex
+        std::regex allowedChars("[^a-zA-Z_]");
+        auto sanitisedGameName = std::regex_replace(gameName, allowedChars, "_");
+        fmt::println("{}", sanitisedGameName, gameName);
     };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;
@@ -57,6 +87,7 @@ public:
         fmt::println("Disposing game manager");
         delete testScene;
         delete platformMadness;
+        delete gameMenu;
         player.reset();
     }
 

@@ -8,6 +8,7 @@
 
 auto initializeTestScene(InitContext const& ctx) -> Scene*;
 auto initializePlatformMadness(InitContext const& ctx) -> Scene*;
+auto initializeGameMenu(InitContext const& ctx) -> Scene*;
 
 
 #endif //PJC_PROJECT_SCENEINITIALIZER_H

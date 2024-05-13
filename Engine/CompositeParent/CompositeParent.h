@@ -15,7 +15,7 @@
 template <typename T, typename K>
 class CompositeParent {
 public:
-    StateStore<K, std::variant<bool>> state{};
+    StateStore<K, std::variant<bool, std::string>> state{};
 
 
     virtual auto add(std::shared_ptr<T> o) -> void = 0;

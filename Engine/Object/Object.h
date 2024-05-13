@@ -9,6 +9,7 @@
 #include "../Savable/Savable.h"
 #include "../EntityModule/EntityModule.h"
 #include "../CompositeParent/CompositeParent.h"
+#include "../../Game/ObjectType/ObjectType.h"
 
 
 enum Layer {
@@ -22,6 +23,7 @@ private:
     std::string uid;
     std::shared_ptr<EntityModule> entityModule;
     int type;
+
 protected:
     explicit Object(
             PhysicsModule const &physicsModule,
@@ -41,7 +43,7 @@ protected:
 public:
     PhysicsModule physicsModule;
     std::string name;
-
+    bool isVisible{true};
 
     auto getType() -> int;
 

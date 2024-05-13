@@ -4,6 +4,7 @@
 
 
 #include "../../Engine/TextureLoader/TextureLoader.h"
+#include "../../Engine/Camera/Camera.h"
 
 enum TextureId {
     TREE,
@@ -25,11 +26,14 @@ enum TextureId {
     PLAYER_RUNNING_11,
 
     BACKLIGHT,
+    GAME_TITLE,
 };
 
 
 struct InitContext {
     TextureLoader<TextureId> const* textureLoader;
+    sf::RenderWindow const& window;
+    Camera const& camera;
 };
 
 

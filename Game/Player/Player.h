@@ -66,6 +66,8 @@ public:
 
     void load(nlohmann::json const& json) override;
     std::unique_ptr<nlohmann::json> save() override;
+
+    auto setIsSimulated(bool const& isSimulated) -> void;
 };
 
 

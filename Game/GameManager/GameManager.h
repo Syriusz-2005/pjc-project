@@ -22,7 +22,8 @@
  */
 class GameManager : public Savable {
 private:
-    GameStateController gameStateController{this, "../state.splash.json"};
+    GameStateController gameStateController{this, "../"};
+    std::string currentSaveName{};
 
     Scene* testScene;
     Scene* platformMadness;
@@ -43,7 +44,7 @@ private:
         initScenes(initContext);
         currentScene->add(player);
         player->setPos(currentScene->getSpawn());
-        gameStateController.loadIfExists();
+        gameStateController.loadIfExists(currentSaveName);
     };
     std::function<void()> onSwitchScene = [this]() -> void {
         switchScene();
@@ -73,7 +74,9 @@ private:
         // Source: https://en.cppreference.com/w/cpp/regex
         std::regex allowedChars("[^a-zA-Z_]");
         auto sanitisedGameName = std::regex_replace(gameName, allowedChars, "_");
-        fmt::println("{}", sanitisedGameName, gameName);
+        fmt::println("Opening a new game: {}", sanitisedGameName, gameName);
+        currentSaveName = sanitisedGameName;
+        setScene(testScene->getUid());
     };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;

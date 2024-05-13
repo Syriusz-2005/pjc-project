@@ -9,8 +9,12 @@ GameStateController::GameStateController(Savable *savable, std::string fileLocat
 
 }
 
-auto GameStateController::loadIfExists() -> void {
-    auto file = std::ifstream(fileLocation);
+auto GameStateController::getLocation(const std::string &saveName) -> std::string {
+    return fileLocation + saveName + ".splash.json";
+}
+
+auto GameStateController::loadIfExists(std::string const& saveName) -> void {
+    auto file = std::ifstream(getLocation(saveName));
     if (file) {
         nlohmann::json j;
         file >> j;
@@ -20,11 +24,13 @@ auto GameStateController::loadIfExists() -> void {
     file.close();
 }
 
-auto GameStateController::saveToFile() -> void {
-    auto file = std::ofstream(fileLocation);
+auto GameStateController::saveToFile(std::string const& saveName) -> void {
+    if (saveName.size() == 0) return;
+    auto file = std::ofstream(getLocation(saveName));
     fmt::println("File opened");
     auto outJson = savable->save();
     fmt::println("JSON produced");
     file << *outJson;
     file.close();
 }
+

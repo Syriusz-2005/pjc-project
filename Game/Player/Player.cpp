@@ -221,4 +221,9 @@ auto Player::getEnteredText() -> std::string {
     playerInput = "";
 }
 
+auto Player::setIsSimulated(bool const& isSimulated) -> void {
+    isVisible = isSimulated;
+    physicsModule.isImmovable = not isSimulated;
+}
+
 

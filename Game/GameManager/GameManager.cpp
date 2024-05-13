@@ -37,8 +37,9 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     currentScene->add(player);
 
     player->setPos(currentScene->getSpawn());
+    player->setIsSimulated(false);
 
-    gameStateController.loadIfExists();
+    gameStateController.loadIfExists(currentSaveName);
 }
 
 auto GameManager::initScenes(InitContext &initContext) -> void {
@@ -107,7 +108,7 @@ std::unique_ptr<nlohmann::json> GameManager::save() {
 }
 
 auto GameManager::saveGame() -> void {
-    gameStateController.saveToFile();
+    gameStateController.saveToFile(currentSaveName);
 }
 
 auto GameManager::setScene(const std::string &uid) -> void {
@@ -116,7 +117,8 @@ auto GameManager::setScene(const std::string &uid) -> void {
         currentScene = testScene;
     } else if (platformMadness->isUidMatch(uid)) {
         currentScene = platformMadness;
-        currentScene->add(player);
     }
+    currentScene->add(player);
+    player->setIsSimulated(true);
 }
 

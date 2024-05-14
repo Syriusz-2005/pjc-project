@@ -206,5 +206,12 @@ auto initializeGameMenu(InitContext const& ctx) -> Scene* {
     submitNameButton->isVisible = false;
     scene->add(submitNameButton);
 
+    // saves
+    auto chooseSaveTitle = std::make_shared<TextDisplay>("choose_save_title", "Choose save:");
+    chooseSaveTitle->setPos(0, -140);
+    chooseSaveTitle->isSavable = false;
+    chooseSaveTitle->isVisible = false;
+    scene->add(chooseSaveTitle);
+
     return scene;
 }

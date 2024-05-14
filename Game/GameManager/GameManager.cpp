@@ -24,7 +24,8 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 
     defaultFont.loadFromFile("../assets/GochiHand-Regular.ttf");
 
-    auto initContext = InitContext{&textureLoader, window, camera};
+    auto saveNames = gameStateController.listSaveNames();
+    auto initContext = InitContext{&textureLoader, window, camera, saveNames};
 
     initScenes(initContext);
 
@@ -33,6 +34,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
     player->onMicrotask(CREATE_NEW_GAME, onAddNewGame);
     player->onMicrotask(SUBMIT_NEW_GAME_NAME, onSubmitNewGameName);
+    player->onMicrotask(OPEN_SAVE_SELECTOR, onSaveSelectorOpen);
 
     currentScene->add(player);
 

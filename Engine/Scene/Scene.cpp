@@ -112,3 +112,12 @@ auto Scene::getSpawn() -> sf::Vector2f const & {
 auto Scene::getUid() -> std::string const & {
     return uid;
 }
+
+void Scene::forEach(const std::vector<std::string> &uids, std::function<void(Object&)> callback) {
+    for (auto const& object : objects) {
+        auto hasMatch = std::ranges::any_of(uids, [object](std::string const& uid) -> bool { return object->isUidMatch(uid); });
+        if (hasMatch) {
+            callback(*object);
+        }
+    }
+}

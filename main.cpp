@@ -7,7 +7,6 @@
 #include "Engine/Scene/Scene.h"
 #include "Engine/Camera/Camera.h"
 #include "Engine/Renderer/Renderer.h"
-#include "Engine/Rect/Rect.h"
 #include "Game/Player/Player.h"
 #include "Game/GameManager/GameManager.h"
 

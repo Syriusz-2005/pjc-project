@@ -14,6 +14,7 @@ private:
 public:
     explicit GameStateController(Savable* savable, std::string fileLocation);
 
+    auto listSaveNames() -> std::unique_ptr<std::vector<std::string>>;
     auto loadIfExists(std::string const& saveName) -> void;
     auto saveToFile(std::string const& saveName) -> void;
 };

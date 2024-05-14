@@ -39,6 +39,7 @@ public:
         });
         objects.erase(first, last);
     }
+    void forEach(const std::vector<std::string> &uids, std::function<void (Object&)> callback) override;
     auto getUid() -> std::string const&;
     const std::vector<std::shared_ptr<Object>>& getChildren(std::function<bool(Object&)> const& predicate) override;
     const std::vector<std::shared_ptr<Object>>& getChildren() override;

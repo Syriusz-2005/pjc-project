@@ -15,6 +15,7 @@ enum PlayerEventType {
         SWITCH_TO_NEXT_SCENE,
         CREATE_NEW_GAME,
         SUBMIT_NEW_GAME_NAME,
+        OPEN_SAVE_SELECTOR,
 };
 
 namespace inputMode {

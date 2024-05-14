@@ -40,7 +40,8 @@ private:
         delete testScene;
         delete platformMadness;
         delete gameMenu;
-        auto initContext = InitContext{&textureLoader, *window, camera};
+        auto gameNames = gameStateController.listSaveNames();
+        auto initContext = InitContext{&textureLoader, *window, camera, gameNames};
         initScenes(initContext);
         currentScene->add(player);
         player->setPos(currentScene->getSpawn());
@@ -51,13 +52,10 @@ private:
     };
     std::function<void()> onAddNewGame = [this]() -> void {
         fmt::println("Switching to the add game menu");
-        auto mainMenuButtons = gameMenu->getChildren([](Object& o) -> bool {
-            // A more future-proof solution would be to use "groups"
-            return o.isUidMatch("new_game_button") or o.isUidMatch("select_game_button");
-        });
-        for (auto& menuButton : mainMenuButtons) {
-            menuButton->isVisible = false;
-        }
+        gameMenu->forEach(
+                std::vector<std::string>{"new_game_button", "select_game_button"},
+                [](Object& b) { b.isVisible = false; }
+                );
         auto nameGameInputId = std::string{"name_game_field"};
         auto selectGameButtons = gameMenu->getChildren([nameGameInputId](Object& o) -> bool {
             return o.isUidMatch(nameGameInputId) or o.isUidMatch("submit_game_name_button");
@@ -77,6 +75,16 @@ private:
         fmt::println("Opening a new game: {}", sanitisedGameName, gameName);
         currentSaveName = sanitisedGameName;
         setScene(testScene->getUid());
+    };
+    std::function<void()> onSaveSelectorOpen = [this]() -> void {
+        fmt::println("Save selector opened");
+        gameMenu->forEach(
+                std::vector<std::string>{"new_game_button", "select_game_button"},
+                [](Object& b) { b.isVisible = false; }
+        );
+        gameMenu->forEach(
+                std::vector<std::string>{"choose_save_title"},
+                [](Object& b) { b.isVisible = true; });
     };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;

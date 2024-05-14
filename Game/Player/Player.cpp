@@ -47,10 +47,13 @@ auto Player::onButtonPress(sf::Event event) -> void {
     auto mousePos = sf::Vector2f{(float) event.mouseButton.x, (float) event.mouseButton.y} + camera.getPos();
     for (auto& child : parent->getChildren()) {
         if (child->getType() == BUTTON and child->getBoundingBox().contains(mousePos) and child->isVisible) {
+            //TODO: These events should be dispatched by the button children themselves
             if (child->isUidMatch("new_game_button")) {
                 emit(CREATE_NEW_GAME);
             } else if (child->isUidMatch("submit_game_name_button")) {
                 emit(SUBMIT_NEW_GAME_NAME);
+            } else if (child->isUidMatch("select_game_button")) {
+                emit(OPEN_SAVE_SELECTOR);
             }
         }
     }

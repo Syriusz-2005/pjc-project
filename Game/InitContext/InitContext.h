@@ -3,6 +3,7 @@
 #define PJC_PROJECT_INITCONTEXT_H
 
 
+#include <memory>
 #include "../../Engine/TextureLoader/TextureLoader.h"
 #include "../../Engine/Camera/Camera.h"
 
@@ -34,6 +35,7 @@ struct InitContext {
     TextureLoader<TextureId> const* textureLoader;
     sf::RenderWindow const& window;
     Camera const& camera;
+    std::unique_ptr<std::vector<std::string>> const& saveNames;
 };
 
 

@@ -29,12 +29,14 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 
     initScenes(initContext);
 
+    //TODO: Refactor the whole event system to be much, much more flexible
     player = std::make_shared<Player>(initContext, "player0");
     player->onMicrotask(DEATH, onPlayerDeath);
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);
     player->onMicrotask(CREATE_NEW_GAME, onAddNewGame);
     player->onMicrotask(SUBMIT_NEW_GAME_NAME, onSubmitNewGameName);
     player->onMicrotask(OPEN_SAVE_SELECTOR, onSaveSelectorOpen);
+    player->onMicrotask(SAVE_SELECTED, onSaveSelected);
 
     currentScene->add(player);
 
@@ -57,7 +59,7 @@ auto GameManager::startGameLoop() -> void {
     auto tickClock = sf::Clock();
     while (window->isOpen()) {
         auto timeDelta = clock.getElapsedTime();
-//        fmt::println("{}", timeDelta.asMilliseconds());
+        //fmt::println("{}", timeDelta.asMilliseconds());
         tickClock.restart();
         if (currentScene) {
             currentScene->getPhysicsEngine().step(std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
@@ -67,7 +69,7 @@ auto GameManager::startGameLoop() -> void {
             renderer.render(*currentScene, camera);
             window->display();
             auto tickDelta = tickClock.getElapsedTime();
-    //        fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
+            //fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
             player->dispatchEvents(*window);
         }
     }

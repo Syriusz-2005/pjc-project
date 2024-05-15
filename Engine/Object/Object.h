@@ -39,8 +39,8 @@ protected:
     float zDistance{};
 
     CompositeParent<Object, int>* parent;
-    auto getUid() -> std::string const&;
 public:
+    auto getUid() -> std::string const&;
     PhysicsModule physicsModule;
     std::string name;
     bool isVisible{true};
@@ -85,7 +85,7 @@ public:
 
     auto save() -> std::unique_ptr<nlohmann::json> override;
 
-    bool isUidMatch(std::string const&id) const override;
+    bool isUidMatch(std::string const& id) const override;
     auto isTheSame(Object const* o) const -> bool;
 
     virtual ~Object();

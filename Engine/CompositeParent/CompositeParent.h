@@ -1,6 +1,4 @@
-//
-// Created by NOWY on 30.04.2024.
-//
+
 
 #ifndef PJC_PROJECT_COMPOSITEPARENT_H
 #define PJC_PROJECT_COMPOSITEPARENT_H

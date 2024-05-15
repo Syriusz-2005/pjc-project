@@ -54,6 +54,9 @@ auto Player::onButtonPress(sf::Event event) -> void {
                 emit(SUBMIT_NEW_GAME_NAME);
             } else if (child->isUidMatch("select_game_button")) {
                 emit(OPEN_SAVE_SELECTOR);
+            } else if (child->getUid().starts_with("save_enter_button_")) {
+                clickedButtonUid = child->getUid();
+                emit(SAVE_SELECTED);
             }
         }
     }
@@ -63,7 +66,6 @@ auto Player::onTextEntered(sf::Event event) -> void {
     if (inputMode == inputMode::TEXT_INSERT) {
         //Based on: https://en.sfml-dev.org/forums/index.php?topic=19965.0
         playerInput += event.text.unicode;
-        fmt::println("{}", playerInput);
         parent->state.set(FOCUSED_INPUT_TEXT, playerInput);
         return;
     }
@@ -227,6 +229,10 @@ auto Player::getEnteredText() -> std::string {
 auto Player::setIsSimulated(bool const& isSimulated) -> void {
     isVisible = isSimulated;
     physicsModule.isImmovable = not isSimulated;
+}
+
+auto Player::getClickedButtonUid() -> std::string const& {
+    return clickedButtonUid;
 }
 
 

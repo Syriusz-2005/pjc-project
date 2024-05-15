@@ -85,6 +85,16 @@ private:
         gameMenu->forEach(
                 std::vector<std::string>{"choose_save_title"},
                 [](Object& b) { b.isVisible = true; });
+
+        for (auto& enterSaveButton : gameMenu->getChildren([](Object& o) -> bool {return o.getUid().starts_with("save_enter_button_");})) {
+            enterSaveButton->isVisible = true;
+        }
+    };
+    std::function<void()> onSaveSelected = [this]() -> void {
+        auto uid = player->getClickedButtonUid();
+        // Crappy
+        auto saveName = regex_replace(uid, std::regex("save_enter_button_"), "");
+        fmt::println("Save selected: {}", saveName);
     };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;

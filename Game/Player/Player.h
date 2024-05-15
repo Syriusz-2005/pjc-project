@@ -16,6 +16,7 @@ enum PlayerEventType {
         CREATE_NEW_GAME,
         SUBMIT_NEW_GAME_NAME,
         OPEN_SAVE_SELECTOR,
+        SAVE_SELECTED,
 };
 
 namespace inputMode {
@@ -29,6 +30,7 @@ namespace inputMode {
 class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
     std::string playerInput;
+    std::string clickedButtonUid;
     short horizontalMovement{0};
     sf::Sprite sprite;
     sf::Sprite backlight{};
@@ -60,6 +62,7 @@ public:
     auto setSpawnPoint() -> void;
     auto setInputMode(inputMode::InputMode newMode) -> void;
     auto getEnteredText() -> std::string;
+    auto getClickedButtonUid() -> std::string const&;
 
     auto getBoundingBox() -> sf::FloatRect override;
     auto render(Context ctx) -> void override;

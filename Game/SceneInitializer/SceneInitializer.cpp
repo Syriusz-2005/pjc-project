@@ -208,10 +208,22 @@ auto initializeGameMenu(InitContext const& ctx) -> Scene* {
 
     // saves
     auto chooseSaveTitle = std::make_shared<TextDisplay>("choose_save_title", "Choose save:");
-    chooseSaveTitle->setPos(0, -140);
+    chooseSaveTitle->setPos(0, -170);
     chooseSaveTitle->isSavable = false;
     chooseSaveTitle->isVisible = false;
     scene->add(chooseSaveTitle);
+
+    auto i = 0;
+    for (auto const& name : *ctx.saveNames) {
+        auto saveEnterButton = std::make_shared<Button>("save_enter_button_" + name, name);
+        saveEnterButton->isSavable = false;
+        saveEnterButton->isVisible = false;
+        auto width = saveEnterButton->getBoundingBox().width;
+        // I miss my HTML, CSS and the declarative layout...
+        saveEnterButton->setPos(-((float) ctx.saveNames->size() / (float) 2.0) * (width + 10) * (float) i, 0);
+        scene->add(saveEnterButton);
+        i++;
+    }
 
     return scene;
 }

@@ -86,6 +86,9 @@ auto GameManager::switchScene() -> void {
 }
 
 void GameManager::load(const nlohmann::json &json) {
+    if (json.contains("currentSceneId")) {
+        setScene(json["currentSceneId"]);
+    }
     for (auto sceneData: json["scenes"]) {
         auto id = sceneData["uid"].get<std::string>();
         // Could be better? Sure.
@@ -96,9 +99,6 @@ void GameManager::load(const nlohmann::json &json) {
         } else if (gameMenu->isUidMatch(id)) {
             gameMenu->load(sceneData);
         }
-    }
-    if (json.contains("currentSceneId")) {
-        setScene(json["currentSceneId"]);
     }
 }
 

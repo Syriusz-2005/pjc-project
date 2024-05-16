@@ -95,6 +95,8 @@ private:
         // Crappy
         auto saveName = regex_replace(uid, std::regex("save_enter_button_"), "");
         fmt::println("Save selected: {}", saveName);
+        currentSaveName = saveName;
+        gameStateController.loadIfExists(currentSaveName);
     };
     std::shared_ptr<Player> player;
     Scene* currentScene = testScene;

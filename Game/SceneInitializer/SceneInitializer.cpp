@@ -133,6 +133,22 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     floor->isSavable = false;
     scene->add(floor);
 
+    auto spikes1 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_1");
+    spikes1->setPos(600, 980);
+    spikes1->isSavable = false;
+    scene->add(spikes1);
+
+
+    auto spikes2 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_2");
+    spikes2->setPos(850, 980);
+    spikes2->isSavable = false;
+    scene->add(spikes2);
+
+    auto spikes3 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_2");
+    spikes3->setPos(850, 980);
+    spikes3->isSavable = false;
+    scene->add(spikes3);
+
     auto platform1 = std::make_shared<MovingPlatform>("platform_1");
     platform1->setPos1(sf::Vector2f(680, 860));
     platform1->setPos2(sf::Vector2f{880, 860});

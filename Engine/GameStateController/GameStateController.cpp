@@ -14,6 +14,7 @@ auto GameStateController::getLocation(const std::string &saveName) -> std::strin
     return fileLocation + saveName + ".splash.json";
 }
 
+//Source: https://github.com/nlohmann/json
 auto GameStateController::loadIfExists(std::string const& saveName) -> void {
     auto file = std::ifstream(getLocation(saveName));
     if (file) {

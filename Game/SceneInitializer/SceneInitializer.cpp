@@ -88,7 +88,6 @@ auto initializeTestScene(InitContext const& ctx) -> Scene * {
     platform->setPos(sf::Vector2f(2600, 820));
     scene->add(platform);
 
-
     auto wallRight = std::make_shared<Ground>(*ctx.textureLoader, "wall_right");
     wallRight->setPos(sf::Vector2f(3800, 650));
     scene->add(wallRight);
@@ -138,16 +137,20 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     spikes1->isSavable = false;
     scene->add(spikes1);
 
-
     auto spikes2 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_2");
-    spikes2->setPos(850, 980);
+    spikes2->setPos(1000, 980);
     spikes2->isSavable = false;
     scene->add(spikes2);
 
-    auto spikes3 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_2");
-    spikes3->setPos(850, 980);
+    auto spikes3 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_3");
+    spikes3->setPos(1400, 980);
     spikes3->isSavable = false;
     scene->add(spikes3);
+
+    auto spikes4 = std::make_shared<SpikedGround>(*ctx.textureLoader, "spikes_4");
+    spikes4->setPos(1650, 980);
+    spikes4->isSavable = false;
+    scene->add(spikes4);
 
     auto platform1 = std::make_shared<MovingPlatform>("platform_1");
     platform1->setPos1(sf::Vector2f(680, 860));
@@ -179,6 +182,11 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     obstacle1->setPos(1830, 60);
     obstacle1->isSavable = false;
     scene->add(obstacle1);
+
+    auto floor3 = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor3");
+    floor3->setPos(sf::Vector2f(1000, 200));
+    floor3->isSavable = false;
+    scene->add(floor3);
 
     return scene;
 }

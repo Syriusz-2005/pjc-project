@@ -59,7 +59,7 @@ auto GameManager::startGameLoop() -> void {
     auto tickClock = sf::Clock();
     while (window->isOpen()) {
         auto timeDelta = clock.getElapsedTime();
-        //fmt::println("{}", timeDelta.asMilliseconds());
+//        fmt::println("{}", timeDelta.asMilliseconds());
         tickClock.restart();
         if (currentScene) {
             currentScene->getPhysicsEngine().step(std::min(timeDelta.asMicroseconds(), (long long) 1000 * 20));
@@ -69,7 +69,7 @@ auto GameManager::startGameLoop() -> void {
             renderer.render(*currentScene, camera);
             window->display();
             auto tickDelta = tickClock.getElapsedTime();
-            //fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
+//            fmt::println("tick delta: {} ms", (float) tickDelta.asMicroseconds() / 1000);
             player->dispatchEvents(*window);
         }
     }

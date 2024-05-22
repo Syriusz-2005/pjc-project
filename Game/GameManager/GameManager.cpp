@@ -21,6 +21,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     textureLoader.registerTexture(PLAYER_RUNNING_11, "../assets/player_running_11.png");
     textureLoader.registerTexture(BACKLIGHT, "../assets/backlight.png");
     textureLoader.registerTexture(GAME_TITLE, "../assets/title.png");
+    textureLoader.registerTexture(ABILITY, "../assets/ability.png");
 
     defaultFont.loadFromFile("../assets/GochiHand-Regular.ttf");
 

@@ -28,6 +28,7 @@ enum TextureId {
 
     BACKLIGHT,
     GAME_TITLE,
+    ABILITY,
 };
 
 

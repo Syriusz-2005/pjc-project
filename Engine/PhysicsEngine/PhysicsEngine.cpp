@@ -25,6 +25,11 @@ auto PhysicsEngine::step(long long timeElapsed) const -> void {
         applyCollision(object);
         object->onAfterStep();
     }
+
+    const auto [first, last] = std::ranges::remove_if(*objects, [](std::shared_ptr<Object>& val) -> bool {
+        return val->getWillDispose();
+    });
+    objects->erase(first, last);
 }
 
 auto PhysicsEngine::getIntersectionArea(sf::Rect<float> a, sf::Rect<float> b) -> sf::Rect<float>* {

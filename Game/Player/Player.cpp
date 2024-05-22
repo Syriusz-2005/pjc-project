@@ -154,14 +154,27 @@ auto Player::render(Context ctx) -> void {
 }
 
 void Player::onBeforeStep(long long timeElapsed) {
+    auto value = parent->state.get(IS_PICKING_UP_DOUBLE_JUMP_ABILITY);
+    if (std::holds_alternative<bool>(value) and std::get<bool>(value)) {
+        //The whole event system could be made much more flexible. The objects should communicate with each other directly
+        parent->state.set(IS_PICKING_UP_DOUBLE_JUMP_ABILITY, false);
+        abilities[Abilities::DOUBLE_JUMP] = true;
+    }
+
+    if (pos.y > 4000) {
+        applyDamage(20);
+    }
+
     if (willJump) {
         willJump = false;
-        if (physicsModule.isOnGround) {
-            vel.y -= .35;
+        if (physicsModule.isOnGround or (jumpsCount < 1 and abilities[Abilities::DOUBLE_JUMP])) {
+            vel.y = -.35;
+            jumpsCount++;
         }
     }
 
     if (physicsModule.isOnGround) {
+        jumpsCount = 0;
         vel.x = (float) (horizontalMovement * 0.2);
     } else {
         auto finalVel = (double) vel.x;
@@ -187,12 +200,16 @@ void Player::load(nlohmann::json const &json) {
     Object::load(json);
     spawnPoint.x = json["spawnPoint"]["x"];
     spawnPoint.y = json["spawnPoint"]["y"];
+    if (json.contains("abilities")) {
+        abilities = json["abilities"];
+    }
 }
 
 std::unique_ptr<nlohmann::json> Player::save() {
     auto json = Object::save();
     (*json)["spawnPoint"]["x"] = spawnPoint.x;
     (*json)["spawnPoint"]["y"] = spawnPoint.y;
+    (*json)["abilities"] = abilities;
     return json;
 }
 

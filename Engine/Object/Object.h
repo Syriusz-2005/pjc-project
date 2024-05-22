@@ -37,6 +37,7 @@ protected:
     sf::Vector2f vel;
     Layer layer;
     float zDistance{};
+    bool willDispose{false};
 
     CompositeParent<Object, int>* parent;
 public:
@@ -46,6 +47,7 @@ public:
     bool isVisible{true};
 
     auto getType() -> int;
+    auto getWillDispose() -> bool;
 
     auto setParent(CompositeParent<Object, int>* p) -> void;
 

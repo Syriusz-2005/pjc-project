@@ -26,9 +26,18 @@ namespace inputMode {
     };
 }
 
+namespace Abilities {
+    enum Player {
+        DOUBLE_JUMP,
+    };
+}
 
 class Player : public Object, public EventEmitter<PlayerEventType> {
 private:
+    std::map<Abilities::Player, bool> abilities{
+            {Abilities::DOUBLE_JUMP, false}
+    };
+    int jumpsCount{0};
     std::string playerInput;
     std::string clickedButtonUid;
     short horizontalMovement{0};

@@ -11,6 +11,7 @@
 #include "../Button/Button.h"
 #include "../TextField/TextField.h"
 #include "../States/States.h"
+#include "../AbilityPickup/AbilityPickup.h"
 #include <memory>
 #include <random>
 
@@ -187,6 +188,10 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     floor3->setPos(sf::Vector2f(1000, 200));
     floor3->isSavable = false;
     scene->add(floor3);
+
+    auto doubleJumpPickup = std::make_shared<AbilityPickup>(ctx.textureLoader, "double_jump_pickup");
+    doubleJumpPickup->setPos(1100, 0);
+    scene->add(doubleJumpPickup);
 
     return scene;
 }

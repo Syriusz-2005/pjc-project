@@ -204,6 +204,16 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     floor4->isSavable = false;
     scene->add(floor4);
 
+    auto floor5 = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor5");
+    floor5->setPos(sf::Vector2f(-1400, 100));
+    floor5->isSavable = false;
+    scene->add(floor5);
+
+    auto fly2 = std::make_shared<Fly>(*ctx.textureLoader, "fly2");
+    fly2->setPos(-1700, -100);
+    fly2->isSavable = false;
+    scene->add(fly2);
+
     return scene;
 }
 

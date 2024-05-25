@@ -22,6 +22,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
     textureLoader.registerTexture(BACKLIGHT, "../assets/backlight.png");
     textureLoader.registerTexture(GAME_TITLE, "../assets/title.png");
     textureLoader.registerTexture(ABILITY, "../assets/ability.png");
+    textureLoader.registerTexture(FLYING_ENTITY, "../assets/flying_entity.png");
 
     defaultFont.loadFromFile("../assets/GochiHand-Regular.ttf");
 
@@ -30,7 +31,7 @@ GameManager::GameManager(sf::RenderWindow &window) : window(&window), drawContex
 
     initScenes(initContext);
 
-    //TODO: Refactor the whole event system to be much, much more flexible
+    //TODO: Refactor the whole event system to be more flexible
     player = std::make_shared<Player>(initContext, "player0");
     player->onMicrotask(DEATH, onPlayerDeath);
     player->onMicrotask(SWITCH_TO_NEXT_SCENE, onSwitchScene);

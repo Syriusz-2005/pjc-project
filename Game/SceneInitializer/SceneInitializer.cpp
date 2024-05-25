@@ -12,6 +12,7 @@
 #include "../TextField/TextField.h"
 #include "../States/States.h"
 #include "../AbilityPickup/AbilityPickup.h"
+#include "../Fly/Fly.h"
 #include <memory>
 #include <random>
 
@@ -192,6 +193,16 @@ auto initializePlatformMadness(InitContext const& ctx) -> Scene* {
     auto doubleJumpPickup = std::make_shared<AbilityPickup>(ctx.textureLoader, "double_jump_pickup");
     doubleJumpPickup->setPos(1100, 0);
     scene->add(doubleJumpPickup);
+
+    auto fly1 = std::make_shared<Fly>(*ctx.textureLoader, "fly_1");
+    fly1->setPos(300, -360);
+    fly1->isSavable = false;
+    scene->add(fly1);
+
+    auto floor4 = std::make_shared<GroundPlatformSmall>(*ctx.textureLoader, "floor4");
+    floor4->setPos(sf::Vector2f(-200, 200));
+    floor4->isSavable = false;
+    scene->add(floor4);
 
     return scene;
 }

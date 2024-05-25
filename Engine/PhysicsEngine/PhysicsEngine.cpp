@@ -12,8 +12,8 @@ PhysicsEngine::PhysicsEngine(std::vector<std::shared_ptr<Object>> &objects, bool
 auto PhysicsEngine::step(long long timeElapsed) const -> void {
     if (isFrozen) return;
     auto deltaMs = ((float) timeElapsed) / 1000;
-    for (auto it = objects->begin(); it != objects->end(); it++) {
-        const auto object = *it;
+    for (int i = 0; i < objects->size(); i++) {
+        const auto object = objects->at(i);
         object->onBeforeStep(timeElapsed);
         if (object->getLayer() == BACKGROUND) continue;
         auto module = object->physicsModule;

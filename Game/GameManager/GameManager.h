@@ -75,6 +75,7 @@ private:
         fmt::println("Opening a new game: {}", sanitisedGameName, gameName);
         currentSaveName = sanitisedGameName;
         setScene(testScene->getUid());
+        saveGame();
     };
     std::function<void()> onSaveSelectorOpen = [this]() -> void {
         fmt::println("Save selector opened");

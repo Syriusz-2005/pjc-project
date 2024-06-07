@@ -125,6 +125,7 @@ auto GameManager::setScene(const std::string &uid) -> void {
         currentScene = platformMadness;
     }
     currentScene->add(player);
+    player->setPos(currentScene->getSpawn());
     player->setIsSimulated(true);
 }
 

@@ -28,15 +28,18 @@ public:
     auto add(std::shared_ptr<Object> o) -> void override {
         o->setParent(this);
         objects.push_back(o);
+        addToLookup(o->getUid(), o);
     }
     void remove(std::shared_ptr<Object> o) override {
         const auto [first, last] = std::ranges::remove(objects.begin(), objects.end(), o);
         objects.erase(first, last);
+        removeFromLookup(o->getUid());
     }
     void remove(std::string const& uid) override {
         const auto [first, last] = std::ranges::remove_if(objects, [uid](std::shared_ptr<Object>& val) -> bool {
             return val->isUidMatch(uid);
         });
+        removeFromLookup(uid);
         objects.erase(first, last);
     }
     void forEach(const std::vector<std::string> &uids, std::function<void (Object&)> callback) override;

@@ -7,6 +7,7 @@ enum ObjectType {
     ENEMY,
     PLAYER,
     BUTTON,
+    FLY,
 };
 
 

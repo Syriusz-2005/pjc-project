@@ -112,6 +112,11 @@ add_executable(pjc_project main.cpp
         Game/TextField/TextField.h
         Game/AbilityPickup/AbilityPickup.cpp
         Game/AbilityPickup/AbilityPickup.h
+        Game/Fly/Fly.cpp
+        Game/Fly/Fly.h
+        Game/Projectile/Projectile.cpp
+        Game/Projectile/Projectile.h
+        Game/Projectile/Projectile.h
 )
 target_link_libraries(pjc_project PRIVATE sfml-graphics)
 target_link_libraries(pjc_project PRIVATE fmt)
